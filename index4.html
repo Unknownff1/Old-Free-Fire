@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OLD FREE FIRE — Email Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0a0a0f;--elev:#141419;--hover:#1c1c24;--accent:#ff3b30;--text:#f5f5f7;--muted:#8e8e93;--border:#2c2c35;--ok:#22c55e;--warn:#f59e0b}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input{font-family:inherit}
+img{display:block;max-width:100%}
+.grad{background:linear-gradient(135deg,#ff3b30,#ff6b00)}
+.grad-text{background:linear-gradient(135deg,#ff3b30,#ff6b00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.display{font-family:'Orbitron',sans-serif}
+
+/* LAYOUT */
+.page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+
+/* HEADER */
+.brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
+.brand h1{font-size:20px;letter-spacing:2px}
+.sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
+
+/* TABS */
+.tabs{display:flex;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:20px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);text-align:center;transition:.15s;cursor:pointer}
+.tab.on{background:var(--hover);color:var(--text)}
+
+/* FORM */
+.field{margin-bottom:14px}
+.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.field input{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;transition:border-color .2s}
+.field input:focus{border-color:var(--accent)}
+.field input.error{border-color:var(--accent)}
+
+.btn{width:100%;padding:13px;border-radius:11px;font-weight:700;color:#fff;transition:.15s;font-size:14px}
+.btn:active{transform:scale(.98)}
+.btn:hover{opacity:.92}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sec{background:var(--hover);color:var(--text);border:1px solid var(--border)}
+
+.msg{font-size:12.5px;text-align:center;line-height:1.5;padding:10px;border-radius:8px;margin-bottom:14px;display:none}
+.msg.show{display:block}
+.msg.err{color:#ff6b6b;background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.3)}
+.msg.ok{color:#4ade80;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
+.msg.warn{color:#fbbf24;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3)}
+
+/* OTP INPUT */
+.otp-row{display:flex;gap:10px;justify-content:center;margin:20px 0}
+.otp-input{width:48px;height:58px;background:var(--hover);border:2px solid var(--border);border-radius:12px;color:var(--text);font-size:22px;font-weight:700;text-align:center;font-family:'Orbitron',monospace;outline:none;transition:border-color .2s}
+.otp-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,59,48,.15)}
+.otp-input.filled{border-color:var(--accent)}
+
+/* OTP INFO BOX */
+.info-box{background:rgba(255,59,48,.08);border:1px dashed var(--accent);border-radius:12px;padding:14px;margin-bottom:16px;text-align:center}
+.info-box .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.info-box .code{font-family:'Orbitron',monospace;font-size:24px;font-weight:900;letter-spacing:6px;color:var(--accent);margin-bottom:8px}
+.info-box .note{font-size:11px;color:var(--muted);line-height:1.4}
+
+/* RESEND ROW */
+.resend-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:12px;color:var(--muted)}
+.resend-row button{color:var(--accent);font-weight:600;font-size:12px;text-decoration:underline}
+.resend-row button:disabled{color:var(--muted);text-decoration:none;cursor:not-allowed}
+
+/* INBOX (demo delivery) */
+.inbox{position:fixed;bottom:20px;right:20px;background:var(--elev);border:1px solid var(--accent);border-radius:14px;padding:16px;max-width:320px;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:translateX(calc(100% + 40px));transition:transform .4s ease}
+.inbox.show{transform:translateX(0)}
+.inbox-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:13px;font-weight:700;color:var(--accent)}
+.inbox-body{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.inbox-code{background:var(--bg);border-radius:8px;padding:10px;text-align:center;font-family:'Orbitron',monospace;font-size:22px;font-weight:900;letter-spacing:6px;color:var(--accent);cursor:pointer;transition:background .2s}
+.inbox-code:hover{background:var(--hover)}
+.inbox-copy{font-size:10px;color:var(--muted);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+.inbox-close{position:absolute;top:10px;right:10px;color:var(--muted);padding:4px}
+.inbox-close:hover{color:var(--text)}
+
+/* SUCCESS SCREEN */
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--ok);animation:popIn .5s ease-out}
+@keyframes popIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.success-title{text-align:center;font-size:20px;font-weight:700;margin-bottom:8px}
+.success-sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px;line-height:1.5}
+
+/* WELCOME SCREEN (post-login) */
+.welcome-card{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:500px;padding:32px;text-align:center}
+.welcome-card .avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#ff3b30,#ff6b00);padding:3px;margin:0 auto 16px;overflow:hidden}
+.welcome-card .avatar-in{width:100%;height:100%;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:var(--text);border:2px solid var(--elev)}
+.welcome-card h2{font-size:22px;font-weight:800;margin-bottom:4px}
+.welcome-card .at{font-size:13px;color:var(--accent);margin-bottom:6px}
+.welcome-card .email-line{font-size:12px;color:var(--muted);margin-bottom:24px}
+.welcome-card .email-line .verified-badge{display:inline-flex;align-items:center;gap:4px;color:var(--ok);font-weight:600;margin-left:6px}
+.protected-note{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:20px;font-size:12.5px;color:var(--muted);line-height:1.6;text-align:left}
+.protected-note b{color:var(--text)}
+
+/* STEP INDICATOR */
+.steps{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:20px}
+.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s}
+.step-dot.active{background:var(--accent)}
+.step-dot.done{background:var(--ok)}
+.step-line{width:24px;height:2px;background:var(--border);transition:background .3s}
+.step-line.done{background:var(--ok)}
+
+/* COOLDOWN */
+.cooldown{color:var(--muted);font-size:12px;text-align:center;margin-top:8px;display:none}
+.cooldown.show{display:block}
+
+@media(max-width:500px){
+  .card{padding:22px}
+  .otp-input{width:42px;height:52px;font-size:18px}
+  .inbox{left:12px;right:12px;max-width:none}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ======================= SCREEN: AUTH ======================= -->
+  <div class="card" id="authCard">
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <h1 class="display grad-text">OLD FREE FIRE</h1>
+    </div>
+    <p class="sub">Email verification system</p>
+
+    <div class="steps">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3"></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab on" data-mode="login">Sign In</div>
+      <div class="tab" data-mode="register">Register</div>
+    </div>
+
+    <div id="authError" class="msg err"></div>
+    <div id="authSuccess" class="msg ok"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@gmail.com" autocomplete="email" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Your password" autocomplete="current-password">
+      </div>
+      <button class="btn grad" id="loginBtn">Sign In</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="you@gmail.com" autocomplete="email" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="regPass" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input type="password" id="regPass2" placeholder="Re-enter password" autocomplete="new-password">
+      </div>
+      <button class="btn grad" id="registerBtn">Send Verification Code</button>
+      <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5">A 6-digit code will be generated<br>and shown on screen for this demo.</p>
+    </div>
+  </div>
+
+  <!-- ======================= SCREEN: OTP ======================= -->
+  <div class="card" id="otpCard" style="display:none">
+    <div class="brand">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <h1 class="display grad-text">Verify Email</h1>
+    </div>
+    <p class="sub">Enter the 6-digit code sent to<br><b id="otpEmail" style="color:var(--text)"></b></p>
+
+    <div class="steps">
+      <div class="step-dot done" id="dot1b"></div>
+      <div class="step-line done" id="line1b"></div>
+      <div class="step-dot active" id="dot2b"></div>
+      <div class="step-line" id="line2b"></div>
+      <div class="step-dot" id="dot3b"></div>
+    </div>
+
+    <div class="info-box">
+      <div class="lbl">Your OTP Code (Demo)</div>
+      <div class="code" id="otpDisplay">------</div>
+      <div class="note">In production this arrives in your email inbox</div>
+    </div>
+
+    <div id="otpError" class="msg err"></div>
+    <div id="otpSuccess" class="msg ok"></div>
+
+    <div class="otp-row" id="otpRow">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="0">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="1">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="2">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="3">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="4">
+      <input class="otp-input" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" data-idx="5">
+    </div>
+
+    <button class="btn grad" id="verifyBtn">Verify Account</button>
+
+    <div class="resend-row">
+      <span>Didn't get it?</span>
+      <button id="resendBtn">Resend code</button>
+    </div>
+    <div class="cooldown" id="cooldownText"></div>
+
+    <button class="btn sec" id="cancelOtpBtn" style="margin-top:16px;font-size:12px">← Back to Login</button>
+  </div>
+
+  <!-- ======================= SCREEN: SUCCESS ======================= -->
+  <div class="card" id="successCard" style="display:none">
+    <div class="success-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="success-title">Account Verified!</h2>
+    <p class="success-sub">Your email has been successfully verified.<br>You can now sign in to your account.</p>
+    <button class="btn grad" id="goLoginBtn">Sign In Now</button>
+  </div>
+
+  <!-- ======================= SCREEN: WELCOME (logged in) ======================= -->
+  <div class="welcome-card" id="welcomeCard" style="display:none">
+    <div class="avatar"><div class="avatar-in" id="welcomeAvatar">U</div></div>
+    <h2>Welcome!</h2>
+    <div class="at" id="welcomeEmailAt">@user</div>
+    <div class="email-line">
+      <span id="welcomeEmail"></span>
+      <span class="verified-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        Verified
+      </span>
+    </div>
+    <div class="protected-note">
+      <b>🔒 This is a protected area.</b><br>
+      Only users with a <b>verified email</b> can access this screen. Try opening a new browser tab and going back to the auth screen — you'll still be logged in because your session persists.
+    </div>
+    <button class="btn sec" id="logoutBtn">Sign Out</button>
+  </div>
+
+</div>
+
+<!-- Demo "inbox" notification -->
+<div class="inbox" id="inbox">
+  <button class="inbox-close" id="inboxClose">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="inbox-head">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    New Email
+  </div>
+  <div class="inbox-body">
+    <b style="color:var(--text)">OLD FREE FIRE</b><br>
+    Your verification code is below. Tap to copy.
+  </div>
+  <div class="inbox-code" id="inboxCode" onclick="copyInboxCode()">------</div>
+  <div class="inbox-copy" id="inboxCopyHint">Tap code to copy</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ============================================================
+  // STORAGE (works even if localStorage blocked)
+  // ============================================================
+  var mem = {};
+  function store(k, v){
+    try { if (v===undefined) return localStorage.getItem(k); localStorage.setItem(k, v); }
+    catch(e){ if (v===undefined) return mem[k]||null; mem[k]=v; }
+  }
+
+  // ============================================================
+  // DATA MODEL
+  // users: { email, password, otp, otpCreatedAt, verified, createdAt }
+  // ============================================================
+  var DB = { users: [], session: null };
+  var currentMode = "login";
+  var currentOTPEmail = null;
+  var resendCooldownEnd = 0;
+  var cooldownInterval = null;
+
+  var OTP_TTL_MS = 10 * 60 * 1000;      // OTP valid for 10 minutes
+  var RESEND_COOLDOWN_MS = 60 * 1000;   // 60s cooldown between resends
+  var MAX_OTP_ATTEMPTS = 5;
+
+  function save(){ try { store("off_auth_v1", JSON.stringify(DB)); } catch(e){} }
+  function load(){
+    try {
+      var raw = store("off_auth_v1");
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p && Array.isArray(p.users)) {
+          DB.users = p.users;
+          DB.session = p.session || null;
+          return;
+        }
+      }
+    } catch(e){}
+    DB = { users: [], session: null };
+    save();
+  }
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
+  function $(s){ return document.querySelector(s); }
+  function $$(s){ return document.querySelectorAll(s); }
+  function findUser(email){ email=(email||"").toLowerCase().trim(); for(var i=0;i<DB.users.length;i++) if(DB.users[i].email===email) return DB.users[i]; return null; }
+  function now(){ return Date.now(); }
+  function randOTP(){ return String(Math.floor(100000 + Math.random()*900000)); }
+  function isValidEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+  function showError(id, msg){
+    var el = $(id); if (!el) return;
+    el.textContent = msg; el.className = "msg err show";
+  }
+  function showSuccess(id, msg){
+    var el = $(id); if (!el) return;
+    el.textContent = msg; el.className = "msg ok show";
+  }
+  function clearMsg(id){
+    var el = $(id); if (!el) return;
+    el.className = "msg"; el.textContent = "";
+  }
+
+  function showScreen(name){
+    $("#authCard").style.display = name === "auth" ? "block" : "none";
+    $("#otpCard").style.display = name === "otp" ? "block" : "none";
+    $("#successCard").style.display = name === "success" ? "block" : "none";
+    $("#welcomeCard").style.display = name === "welcome" ? "block" : "none";
+    if (name !== "otp") hideInbox();
+  }
+
+  // ============================================================
+  // "INBOX" NOTIFICATION (demo email delivery)
+  // ============================================================
+  function showInbox(code){
+    $("#inboxCode").textContent = code;
+    $("#inboxCopyHint").textContent = "Tap code to copy";
+    $("#inbox").classList.add("show");
+  }
+  function hideInbox(){ $("#inbox").classList.remove("show"); }
+  window.copyInboxCode = function(){
+    var code = $("#inboxCode").textContent;
+    if (!code || code === "------") return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code).then(function(){
+        $("#inboxCopyHint").textContent = "✓ Copied!";
+      }).catch(function(){
+        $("#inboxCopyHint").textContent = "Select and copy manually";
+      });
+    } else {
+      $("#inboxCopyHint").textContent = "Select and copy manually";
+    }
+  };
+
+  // ============================================================
+  // TABS
+  // ============================================================
+  function setMode(mode){
+    currentMode = mode;
+    $$(".tab").forEach(function(t){ t.classList.toggle("on", t.getAttribute("data-mode") === mode); });
+    $("#loginForm").style.display = mode === "login" ? "block" : "none";
+    $("#registerForm").style.display = mode === "register" ? "block" : "none";
+    clearMsg("#authError");
+    clearMsg("#authSuccess");
+  }
+
+  // ============================================================
+  // REGISTER — send OTP
+  // ============================================================
+  function handleRegister(){
+    clearMsg("#authError");
+    clearMsg("#authSuccess");
+
+    var email = ($("#regEmail").value||"").trim().toLowerCase();
+    var pass  = $("#regPass").value||"";
+    var pass2 = $("#regPass2").value||"";
+
+    if (!isValidEmail(email)) {
+      return showError("#authError", "Enter a valid email address (e.g. you@gmail.com).");
+    }
+    if (pass.length < 6) {
+      return showError("#authError", "Password must be at least 6 characters.");
+    }
+    if (pass !== pass2) {
+      return showError("#authError", "Passwords do not match.");
+    }
+
+    var existing = findUser(email);
+    if (existing) {
+      if (existing.verified) {
+        return showError("#authError", "This email is already registered. Please sign in.");
+      }
+      // Unverified — resend OTP
+      var otp = randOTP();
+      existing.otp = otp;
+      existing.otpCreatedAt = now();
+      existing.otpAttempts = 0;
+      save();
+      openOTPScreen(email, otp);
+      showInbox(otp);
+      return;
+    }
+
+    // New user
+    var newUser = {
+      email: email,
+      password: pass,
+      otp: randOTP(),
+      otpCreatedAt: now(),
+      otpAttempts: 0,
+      verified: false,
+      createdAt: now()
+    };
+    DB.users.push(newUser);
+    save();
+    openOTPScreen(email, newUser.otp);
+    showInbox(newUser.otp);
+  }
+
+  // ============================================================
+  // LOGIN
+  // ============================================================
+  function handleLogin(){
+    clearMsg("#authError");
+    clearMsg("#authSuccess");
+
+    var email = ($("#loginEmail").value||"").trim().toLowerCase();
+    var pass  = $("#loginPass").value||"";
+
+    if (!isValidEmail(email)) {
+      return showError("#authError", "Enter a valid email address.");
+    }
+    if (!pass) {
+      return showError("#authError", "Enter your password.");
+    }
+
+    var user = findUser(email);
+    if (!user) {
+      return showError("#authError", "No account with this email. Please register first.");
+    }
+    if (!user.verified) {
+      // Resend OTP and force verification
+      var otp = randOTP();
+      user.otp = otp;
+      user.otpCreatedAt = now();
+      user.otpAttempts = 0;
+      save();
+      openOTPScreen(email, otp);
+      showInbox(otp);
+      return showError("#otpError", "Your account is not verified. Please enter the new OTP.");
+    }
+    if (user.password !== pass) {
+      return showError("#authError", "Incorrect password. Please try again.");
+    }
+
+    // Success — create session
+    DB.session = { email: email, loginAt: now() };
+    save();
+    openWelcomeScreen(user);
+  }
+
+  // ============================================================
+  // OTP SCREEN
+  // ============================================================
+  function openOTPScreen(email, otp){
+    currentOTPEmail = email;
+    $("#otpEmail").textContent = email;
+    $("#otpDisplay").textContent = otp;
+    clearOTPInputs();
+    clearMsg("#otpError");
+    clearMsg("#otpSuccess");
+    showScreen("otp");
+    setTimeout(function(){ focusOTPInput(0); }, 150);
+    updateCooldownDisplay();
+  }
+
+  function clearOTPInputs(){
+    $$(".otp-input").forEach(function(inp){ inp.value = ""; inp.classList.remove("filled"); });
+  }
+  function focusOTPInput(idx){
+    var inputs = $$(".otp-input");
+    if (inputs[idx]) inputs[idx].focus();
+  }
+  function getOTPValue(){
+    var v = "";
+    $$(".otp-input").forEach(function(inp){ v += inp.value || ""; });
+    return v;
+  }
+
+  function handleOTPInput(e){
+    var input = e.target;
+    var val = input.value.replace(/[^0-9]/g, "");
+    input.value = val.slice(-1);
+    input.classList.toggle("filled", input.value.length > 0);
+    var idx = parseInt(input.getAttribute("data-idx"), 10);
+    if (input.value && idx < 5) focusOTPInput(idx + 1);
+  }
+
+  function handleOTPKeydown(e){
+    var input = e.target;
+    var idx = parseInt(input.getAttribute("data-idx"), 10);
+    if (e.key === "Backspace" && !input.value && idx > 0) {
+      focusOTPInput(idx - 1);
+      var prev = $$(".otp-input")[idx-1];
+      if (prev) { prev.value = ""; prev.classList.remove("filled"); }
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      handleVerifyOTP();
+    } else if (e.key === "ArrowLeft" && idx > 0) {
+      focusOTPInput(idx - 1);
+    } else if (e.key === "ArrowRight" && idx < 5) {
+      focusOTPInput(idx + 1);
+    }
+  }
+
+  function handleOTPPaste(e){
+    e.preventDefault();
+    var text = (e.clipboardData || window.clipboardData).getData("text") || "";
+    var digits = text.replace(/[^0-9]/g, "").slice(0, 6);
+    var inputs = $$(".otp-input");
+    for (var i = 0; i < 6; i++) {
+      inputs[i].value = digits[i] || "";
+      inputs[i].classList.toggle("filled", !!digits[i]);
+    }
+    if (digits.length === 6) focusOTPInput(5);
+    else focusOTPInput(digits.length);
+  }
+
+  // ============================================================
+  // VERIFY OTP
+  // ============================================================
+  function handleVerifyOTP(){
+    clearMsg("#otpError");
+    clearMsg("#otpSuccess");
+
+    if (!currentOTPEmail) {
+      return showError("#otpError", "Session lost. Please register again.");
+    }
+    var entered = getOTPValue();
+    if (entered.length !== 6) {
+      return showError("#otpError", "Enter all 6 digits of the OTP.");
+    }
+
+    var user = findUser(currentOTPEmail);
+    if (!user) {
+      return showError("#otpError", "Account not found.");
+    }
+    if (user.verified) {
+      return showError("#otpError", "This account is already verified. Please sign in.");
+    }
+
+    // Check expiry
+    if (now() - user.otpCreatedAt > OTP_TTL_MS) {
+      user.otpAttempts = 0;
+      save();
+      return showError("#otpError", "OTP has expired. Tap 'Resend code' to get a new one.");
+    }
+
+    // Check attempts
+    if (user.otpAttempts >= MAX_OTP_ATTEMPTS) {
+      return showError("#otpError", "Too many incorrect attempts. Tap 'Resend code' for a new OTP.");
+    }
+
+    // Check correctness
+    if (entered !== user.otp) {
+      user.otpAttempts++;
+      save();
+      return showError("#otpError", "Incorrect OTP. " + (MAX_OTP_ATTEMPTS - user.otpAttempts) + " attempts left.");
+    }
+
+    // SUCCESS
+    user.verified = true;
+    user.otp = null;
+    user.otpCreatedAt = null;
+    user.otpAttempts = 0;
+    user.verifiedAt = now();
+    DB.session = { email: user.email, loginAt: now() };
+    save();
+
+    hideInbox();
+    showScreen("success");
+    setTimeout(function(){
+      // Auto-advance to welcome after 2s
+      openWelcomeScreen(user);
+    }, 2000);
+  }
+
+  // ============================================================
+  // RESEND OTP
+  // ============================================================
+  function handleResend(){
+    if (!currentOTPEmail) return;
+    var t = now();
+    if (t < resendCooldownEnd) return;  // still cooling down
+
+    var user = findUser(currentOTPEmail);
+    if (!user) return;
+
+    var newOtp = randOTP();
+    user.otp = newOtp;
+    user.otpCreatedAt = now();
+    user.otpAttempts = 0;
+    save();
+
+    $("#otpDisplay").textContent = newOtp;
+    clearOTPInputs();
+    clearMsg("#otpError");
+    showSuccess("#otpSuccess", "New OTP generated. Check below.");
+    showInbox(newOtp);
+
+    resendCooldownEnd = now() + RESEND_COOLDOWN_MS;
+    updateCooldownDisplay();
+    focusOTPInput(0);
+  }
+
+  function updateCooldownDisplay(){
+    clearInterval(cooldownInterval);
+    var btn = $("#resendBtn");
+    var txt = $("#cooldownText");
+
+    function tick(){
+      var remaining = Math.max(0, Math.ceil((resendCooldownEnd - now()) / 1000));
+      if (remaining > 0) {
+        btn.disabled = true;
+        btn.textContent = "Resend in " + remaining + "s";
+        txt.classList.remove("show");
+      } else {
+        btn.disabled = false;
+        btn.textContent = "Resend code";
+        clearInterval(cooldownInterval);
+      }
+    }
+    tick();
+    cooldownInterval = setInterval(tick, 500);
+  }
+
+  // ============================================================
+  // CANCEL OTP
+  // ============================================================
+  function cancelOTP(){
+    currentOTPEmail = null;
+    clearOTPInputs();
+    clearMsg("#otpError");
+    clearMsg("#otpSuccess");
+    hideInbox();
+    clearInterval(cooldownInterval);
+    showScreen("auth");
+    setMode("login");
+  }
+
+  // ============================================================
+  // WELCOME SCREEN
+  // ============================================================
+  function openWelcomeScreen(user){
+    if (!user) {
+      var sess = DB.session;
+      if (!sess) { showScreen("auth"); return; }
+      user = findUser(sess.email);
+      if (!user || !user.verified) { showScreen("auth"); return; }
+    }
+    var email = user.email;
+    var localPart = email.split("@")[0];
+    $("#welcomeAvatar").textContent = localPart[0].toUpperCase();
+    $("#welcomeEmailAt").textContent = "@" + localPart;
+    $("#welcomeEmail").textContent = email;
+    showScreen("welcome");
+  }
+
+  function logout(){
+    DB.session = null;
+    save();
+    $("#loginPass").value = "";
+    showScreen("auth");
+    setMode("login");
+  }
+
+  // ============================================================
+  // BOOT
+  // ============================================================
+  function boot(){
+    load();
+
+    // Tab clicks
+    $$(".tab").forEach(function(t){
+      t.addEventListener("click", function(){ setMode(t.getAttribute("data-mode")); });
+    });
+
+    // Auth buttons
+    $("#loginBtn").addEventListener("click", handleLogin);
+    $("#registerBtn").addEventListener("click", handleRegister);
+
+    // Enter key
+    ["loginEmail","loginPass","regEmail","regPass","regPass2"].forEach(function(id){
+      var el = $("#" + id);
+      if (el) el.addEventListener("keydown", function(e){
+        if (e.key === "Enter") {
+          if (currentMode === "login") handleLogin();
+          else handleRegister();
+        }
+      });
+    });
+
+    // OTP inputs
+    $$(".otp-input").forEach(function(inp){
+      inp.addEventListener("input", handleOTPInput);
+      inp.addEventListener("keydown", handleOTPKeydown);
+      inp.addEventListener("paste", handleOTPPaste);
+    });
+
+    // OTP buttons
+    $("#verifyBtn").addEventListener("click", handleVerifyOTP);
+    $("#resendBtn").addEventListener("click", handleResend);
+    $("#cancelOtpBtn").addEventListener("click", cancelOTP);
+    $("#inboxClose").addEventListener("click", hideInbox);
+
+    // Success → login
+    $("#goLoginBtn").addEventListener("click", function(){
+      showScreen("auth");
+      setMode("login");
+      $("#loginEmail").value = currentOTPEmail || "";
+    });
+
+    // Logout
+    $("#logoutBtn").addEventListener("click", logout);
+
+    // Auto-login if session persists
+    if (DB.session && DB.session.email) {
+      var user = findUser(DB.session.email);
+      if (user && user.verified) {
+        openWelcomeScreen(user);
+        return;
+      }
+    }
+    setMode("login");
+    showScreen("auth");
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+})();
+</script>
+</body>
+</html>
