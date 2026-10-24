@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#0a0a0f;--elev:#141419;--hover:#1c1c24;--accent:#ff3b30;--accent2:#ff6b00;--text:#f5f5f7;--muted:#8e8e93;--border:#2c2c35}
+:root{--bg:#0a0a0f;--elev:#141419;--hover:#1c1c24;--accent:#ff3b30;--text:#f5f5f7;--muted:#8e8e93;--border:#2c2c35}
 body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,textarea,select{font-family:inherit}
@@ -18,8 +18,8 @@ img{display:block;max-width:100%}
 .display{font-family:'Orbitron',sans-serif}
 
 /* AUTH */
-#auth{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg)}
-.auth-box{width:100%;max-width:380px}
+#auth{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg);overflow-y:auto}
+.auth-box{width:100%;max-width:400px;margin:auto}
 .auth-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
 .auth-logo h1{font-size:22px;letter-spacing:2px}
 .auth-tag{text-align:center;color:var(--muted);font-size:13px;margin-bottom:20px}
@@ -30,11 +30,13 @@ img{display:block;max-width:100%}
 .form label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
 .form input{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none}
 .form input:focus{border-color:var(--accent)}
-.btn{width:100%;padding:12px;border-radius:11px;font-weight:700;color:#fff;transition:.15s}
+.btn{width:100%;padding:12px;border-radius:11px;font-weight:700;color:#fff;transition:.15s;font-size:14px}
 .btn:active{transform:scale(.98)}
 .btn:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:not-allowed}
 .btn.sec{background:var(--hover);color:var(--text)}
-.err{color:var(--accent);font-size:12px;min-height:16px}
+.err{color:var(--accent);font-size:12px;min-height:16px;text-align:center}
+.msg{color:#22c55e;font-size:12px;min-height:16px;text-align:center}
 .hint{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;padding:10px;background:var(--elev);border-radius:8px;border:1px solid var(--border)}
 
 /* APP */
@@ -53,12 +55,10 @@ img{display:block;max-width:100%}
 .container{max-width:640px;margin:0 auto;padding:22px 16px}
 .botnav{display:none}
 
-/* HEADERS */
 .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .hdr h2{font-size:22px;font-weight:800}
 .hdr .sub{font-size:12px;color:var(--muted)}
 
-/* POST */
 .post{background:var(--elev);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;animation:up .35s}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .ph{display:flex;align-items:center;gap:12px;padding:14px 16px}
@@ -89,7 +89,6 @@ img{display:block;max-width:100%}
 .pcl{font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer;display:inline-block}
 .pcl:hover{color:var(--text)}
 
-/* EXPLORE */
 .search{position:relative;margin-bottom:18px}
 .search input{width:100%;background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 14px 12px 40px;color:var(--text);font-size:14px;outline:none}
 .search input:focus{border-color:var(--accent)}
@@ -102,18 +101,6 @@ img{display:block;max-width:100%}
 .eitem:hover .ov{opacity:1}
 .eov{display:flex;align-items:center;gap:5px}
 
-.stitle{font-size:15px;font-weight:700;margin:22px 0 12px}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
-.pcard{background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center;transition:.2s}
-.pcard:hover{border-color:var(--accent)}
-.pcard .av{margin:0 auto 10px}
-.pcard .nm{font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer}
-.pcard .rk{font-size:11px;color:var(--muted);margin-bottom:10px}
-.fbtn{width:100%;padding:8px;border-radius:7px;font-size:12px;font-weight:700;background:var(--hover);transition:.15s}
-.fbtn:hover{opacity:.85}
-.fbtn.fg{background:var(--border);color:var(--muted)}
-
-/* CREATE */
 .ccard{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
 .upload{border:2px dashed var(--border);border-radius:13px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
 .upload:hover{border-color:var(--accent);background:var(--hover)}
@@ -124,7 +111,6 @@ img{display:block;max-width:100%}
 .cap{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;resize:vertical;min-height:80px}
 .cap:focus{border-color:var(--accent)}
 
-/* PROFILE */
 .phead{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:18px;flex-wrap:wrap}
 .pav{border-radius:50%;padding:3px;background:linear-gradient(135deg,#ff3b30,#ff6b00);flex-shrink:0;overflow:hidden}
 .pav .av-in{font-size:32px}
@@ -139,25 +125,13 @@ img{display:block;max-width:100%}
 .ptabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
 .ptab{flex:1;padding:12px;text-align:center;font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--accent)}
 .pgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-
-/* EDIT PROFILE BUTTON */
 .edit-btn{padding:8px 18px;border-radius:9px;font-size:13px;font-weight:700;background:var(--hover);border:1px solid var(--border);transition:.15s;margin-top:10px}
 .edit-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-/* SQUADS */
-.scard{background:var(--elev);border:1px solid var(--border);border-radius:15px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;transition:.2s}
-.scard:hover{border-color:var(--accent)}
-.sico{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0}
-.sinfo{flex:1}
-.sinfo h3{font-size:15px;font-weight:700;margin-bottom:2px}
-.sinfo p{font-size:12px;color:var(--muted)}
-
-/* EMPTY */
 .empty{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty svg{margin-bottom:12px;opacity:.5}
 .empty p{font-size:14px}
 
-/* DRAWER */
 .bd{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none}
 .bd.on{display:block}
 .drawer{position:fixed;bottom:0;left:0;right:0;z-index:201;background:var(--elev);border-top-left-radius:20px;border-top-right-radius:20px;max-height:75vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s}
@@ -178,10 +152,9 @@ img{display:block;max-width:100%}
 .dinput input:focus{border-color:var(--accent)}
 .dinput button{background:var(--accent);color:#fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-/* EDIT PROFILE MODAL */
-.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
 .modal-bd.on{display:flex}
-.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;animation:mIn .25s ease}
+.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;animation:mIn .25s ease;margin:auto}
 @keyframes mIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
 .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--elev);z-index:1}
 .modal-head h3{font-size:16px;font-weight:700}
@@ -199,10 +172,10 @@ img{display:block;max-width:100%}
 .modal-foot{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--elev)}
 .modal-foot .btn{flex:1}
 
-/* TOAST */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 20px;font-size:13px;font-weight:600;z-index:500;transition:transform .3s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw}
 .toast.on{transform:translateX(-50%) translateY(0)}
 .toast.acc{border-color:var(--accent)}
+.toast.ok{border-color:#22c55e}
 
 @media(max-width:768px){
   .side{display:none}
@@ -224,7 +197,7 @@ img{display:block;max-width:100%}
 <body>
 
 <!-- AUTH -->
-<div id="auth">
+<div id="auth" style="display:flex">
   <div class="auth-box">
     <div class="auth-logo">
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
@@ -236,10 +209,6 @@ img{display:block;max-width:100%}
       <div class="tab" data-mode="register">Create Account</div>
     </div>
     <div class="form">
-      <div data-field="login">
-        <label>Username</label>
-        <input type="text" id="li-user" placeholder="booyah_king" autocomplete="username">
-      </div>
       <div data-field="register" style="display:none">
         <label>Username</label>
         <input type="text" id="rg-user" placeholder="pro_gamer99" autocomplete="username">
@@ -249,13 +218,18 @@ img{display:block;max-width:100%}
         <input type="text" id="rg-name" placeholder="Pro Gamer" autocomplete="name">
       </div>
       <div>
+        <label>Email</label>
+        <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div>
         <label>Password</label>
-        <input type="password" id="li-pass" placeholder="••••••••">
+        <input type="password" id="pass" placeholder="At least 4 characters" autocomplete="current-password">
       </div>
       <p class="err" id="err"></p>
+      <p class="msg" id="msg"></p>
       <button class="btn grad" id="submitBtn">Sign In</button>
     </div>
-    <div class="hint">Demo: <b>booyah_king</b> / <b>pass</b></div>
+    <div class="hint">First time? Click <b>Create Account</b> above</div>
   </div>
 </div>
 
@@ -291,11 +265,10 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<!-- EDIT PROFILE MODAL -->
+<!-- EDIT MODAL -->
 <div class="modal-bd" id="editModal">
   <div class="modal">
-    <div class="modal-head">
-      <h3>Edit Profile</h3>
+    <div class="modal-head"><h3>Edit Profile</h3>
       <button id="closeEdit"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body">
@@ -306,31 +279,14 @@ img{display:block;max-width:100%}
         </div>
         <input type="file" id="avatarFile" accept="image/*" style="display:none">
         <button class="edit-btn" id="changeAvatarBtn" style="margin-top:0;font-size:12px;padding:6px 14px">Change Photo</button>
-        <p style="font-size:11px;color:var(--muted)">Tap the avatar to upload</p>
       </div>
-      <div class="field">
-        <label>Username</label>
-        <input type="text" id="editUsername" placeholder="username">
-      </div>
-      <div class="field">
-        <label>Display Name</label>
-        <input type="text" id="editDisplay" placeholder="Your name">
-      </div>
-      <div class="field">
-        <label>Bio</label>
-        <textarea id="editBio" placeholder="Tell us about yourself..."></textarea>
-      </div>
-      <div class="field">
-        <label>Rank</label>
+      <div class="field"><label>Username</label><input type="text" id="editUsername"></div>
+      <div class="field"><label>Display Name</label><input type="text" id="editDisplay"></div>
+      <div class="field"><label>Bio</label><textarea id="editBio"></textarea></div>
+      <div class="field"><label>Rank</label>
         <select id="editRank">
-          <option value="Bronze">Bronze</option>
-          <option value="Silver">Silver</option>
-          <option value="Gold">Gold</option>
-          <option value="Platinum">Platinum</option>
-          <option value="Diamond">Diamond</option>
-          <option value="Master">Master</option>
-          <option value="Heroic">Heroic</option>
-          <option value="Grandmaster">Grandmaster</option>
+          <option>Bronze</option><option>Silver</option><option>Gold</option><option>Platinum</option>
+          <option>Diamond</option><option>Master</option><option>Heroic</option><option>Grandmaster</option>
         </select>
       </div>
       <p class="err" id="editErr"></p>
@@ -348,131 +304,170 @@ img{display:block;max-width:100%}
 (function(){
   "use strict";
 
-  // ---------- safe storage ----------
-  var mem = {};
-  function store(k,v){
-    try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }
-    catch(e){ if(v===undefined) return mem[k]||null; mem[k]=v; }
-  }
+  // ============================================================
+  // SAFE STORAGE (works even if localStorage is blocked)
+  // ============================================================
+  var memStore = {};
+  var storage = {
+    get: function(k){
+      try { return localStorage.getItem(k); }
+      catch(e){ return memStore[k] || null; }
+    },
+    set: function(k,v){
+      try { localStorage.setItem(k,v); }
+      catch(e){ memStore[k]=v; }
+    }
+  };
 
-  // ---------- state ----------
-  var DB = { users:[], posts:[], likes:[], comments:[], follows:[], squads:[], me:null };
+  // ============================================================
+  // STATE
+  // ============================================================
+  var DB = {
+    users: [],     // { id, username, display_name, email, password, avatar_url, bio, rank }
+    posts: [],     // { id, user_id, media_url, caption, like_count, comment_count, created_at }
+    likes: [],     // { user_id, post_id }
+    comments: [],  // { id, user_id, post_id, content, created_at }
+    me: null       // current user id
+  };
   var authMode = "login";
   var currentView = "feed";
   var activePost = null;
   var pendingImg = null;
   var pendingAvatar = null;
 
-  // ---------- seed ----------
-  function seed(){
-    DB.users = [
-      {id:"u1",username:"booyah_king",display_name:"Booyah King",avatar_url:null,bio:"Headshot machine 🔥",rank:"Grandmaster",password:"pass"},
-      {id:"u2",username:"chrono_sniper",display_name:"Chrono Sniper",avatar_url:null,bio:"Sniping from the shadows 🎯",rank:"Heroic",password:"pass"},
-      {id:"u3",username:"fire_panda",display_name:"Fire Panda",avatar_url:null,bio:"Rushing with the squad 💥",rank:"Diamond",password:"pass"},
-      {id:"u4",username:"shadow_fury",display_name:"Shadow Fury",avatar_url:null,bio:"Clutch or bust 🏆",rank:"Master",password:"pass"},
-      {id:"u5",username:"elite_reaper",display_name:"Elite Reaper",avatar_url:null,bio:"Solo vs squad specialist",rank:"Gold",password:"pass"}
-    ];
-    var i=function(q){return "https://images.unsplash.com/"+q+"?w=800&auto=format&fit=crop"};
-    DB.posts = [
-      {id:"p1",user_id:"u1",media_url:i("photo-1542751371-adc38448a05e"),caption:"BOOYAH! 24 kills solo vs squad 🔥 #FreeFire",like_count:1243,comment_count:0,created_at:Date.now()-3600000},
-      {id:"p2",user_id:"u2",media_url:i("photo-1511512578047-dfb367046420"),caption:"Sniping from the ridge all game 🎯 #Headshot",like_count:892,comment_count:0,created_at:Date.now()-7200000},
-      {id:"p3",user_id:"u3",media_url:i("photo-1550745165-9bc0b252726f"),caption:"Squad wipes hit different when you rush together 💥",like_count:654,comment_count:0,created_at:Date.now()-14400000},
-      {id:"p4",user_id:"u4",media_url:i("photo-1538481199705-c710c4e965fc"),caption:"Last circle clutch 🏆 Never give up.",like_count:2101,comment_count:0,created_at:Date.now()-28800000},
-      {id:"p5",user_id:"u5",media_url:i("photo-1552820728-8b83bb6b773f"),caption:"New record: 31 kills! 🚀 #Grind",like_count:1587,comment_count:0,created_at:Date.now()-43200000},
-      {id:"p6",user_id:"u1",media_url:i("photo-1616588589676-62b3bd4ff6d2"),caption:"Ranked grind continues 💪",like_count:743,comment_count:0,created_at:Date.now()-57600000}
-    ];
-    DB.comments = [
-      {id:"c1",user_id:"u2",post_id:"p1",content:"Insane play bro! 🔥",created_at:Date.now()-3000000},
-      {id:"c2",user_id:"u3",post_id:"p1",content:"Teach me your ways 🙏",created_at:Date.now()-2400000},
-      {id:"c3",user_id:"u4",post_id:"p4",content:"CLUTCH GOD 👑",created_at:Date.now()-20000000}
-    ];
-    DB.comments.forEach(function(c){ var p=findPost(c.post_id); if(p)p.comment_count++; });
-    DB.likes=[];
-    DB.follows=[{follower_id:"u1",following_id:"u2"},{follower_id:"u2",following_id:"u1"}];
-    DB.squads=[
-      {id:"s1",name:"Fire Nation",description:"Top 100 squad · ranked grind",owner_id:"u1"},
-      {id:"s2",name:"Shadow Assassins",description:"Snipers only. Precision wins.",owner_id:"u2"},
-      {id:"s3",name:"Booyah Bros",description:"Chill squad · tournaments",owner_id:"u3"},
-      {id:"s4",name:"Elite Warriors",description:"Competitive · tryouts open",owner_id:"u4"}
-    ];
-    save();
+  // ============================================================
+  // PERSISTENCE
+  // ============================================================
+  function save(){
+    try { storage.set("off_data_v5", JSON.stringify(DB)); } catch(e){}
   }
-
-  function save(){ try{ store("off_v4", JSON.stringify(DB)); }catch(e){} }
   function load(){
-    try{
-      var raw = store("off_v4");
-      if(raw){ var p=JSON.parse(raw); for(var k in p){ if(p[k]!==undefined) DB[k]=p[k]; } if(DB.users.length) return; }
-    }catch(e){}
+    try {
+      var raw = storage.get("off_data_v5");
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p.users && p.users.length) {
+          DB.users = p.users || [];
+          DB.posts = p.posts || [];
+          DB.likes = p.likes || [];
+          DB.comments = p.comments || [];
+          DB.me = p.me || null;
+          return;
+        }
+      }
+    } catch(e){}
     seed();
   }
 
-  // ---------- helpers ----------
+  // ============================================================
+  // SEED (only first time)
+  // ============================================================
+  function seed(){
+    var now = Date.now();
+    DB.users = [
+      { id:"u1", email:"king@demo.com", password:"pass", username:"booyah_king", display_name:"Booyah King", avatar_url:null, bio:"Headshot machine 🔥", rank:"Grandmaster" },
+      { id:"u2", email:"sniper@demo.com", password:"pass", username:"chrono_sniper", display_name:"Chrono Sniper", avatar_url:null, bio:"Sniping from the shadows 🎯", rank:"Heroic" },
+      { id:"u3", email:"panda@demo.com", password:"pass", username:"fire_panda", display_name:"Fire Panda", avatar_url:null, bio:"Rushing with the squad 💥", rank:"Diamond" }
+    ];
+    function img(q){ return "https://images.unsplash.com/"+q+"?w=800&auto=format&fit=crop"; }
+    DB.posts = [
+      { id:"p1", user_id:"u1", media_url:img("photo-1542751371-adc38448a05e"), caption:"BOOYAH! 24 kills solo vs squad 🔥 #FreeFire", like_count:1243, comment_count:1, created_at:now-3600000 },
+      { id:"p2", user_id:"u2", media_url:img("photo-1511512578047-dfb367046420"), caption:"Sniping from the ridge all game 🎯 #Headshot", like_count:892, comment_count:0, created_at:now-7200000 },
+      { id:"p3", user_id:"u3", media_url:img("photo-1550745165-9bc0b252726f"), caption:"Squad wipes hit different when you rush together 💥", like_count:654, comment_count:0, created_at:now-14400000 }
+    ];
+    DB.comments = [
+      { id:"c1", user_id:"u2", post_id:"p1", content:"Insane play bro! 🔥", created_at:now-3000000 }
+    ];
+    DB.likes = [];
+    DB.me = null;
+    save();
+  }
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
   function $(s){ return document.querySelector(s); }
   function $$(s){ return document.querySelectorAll(s); }
   function findUser(id){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].id===id) return DB.users[i]; return null; }
   function findPost(id){ for(var i=0;i<DB.posts.length;i++) if(DB.posts[i].id===id) return DB.posts[i]; return null; }
-  function findUserByName(n){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].username===n) return DB.users[i]; return null; }
+  function findByEmail(e){ e=(e||"").toLowerCase().trim(); for(var i=0;i<DB.users.length;i++) if(DB.users[i].email===e) return DB.users[i]; return null; }
+  function findByName(n){ n=(n||"").toLowerCase().trim(); for(var i=0;i<DB.users.length;i++) if(DB.users[i].username===n) return DB.users[i]; return null; }
+  function me(){ return findUser(DB.me); }
   function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];}); }
   function ago(ts){ var s=Math.floor((Date.now()-ts)/1000); if(s<60)return s+"s"; if(s<3600)return Math.floor(s/60)+"m"; if(s<86400)return Math.floor(s/3600)+"h"; if(s<604800)return Math.floor(s/86400)+"d"; return new Date(ts).toLocaleDateString(); }
   function isLiked(pid){ for(var i=0;i<DB.likes.length;i++) if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) return true; return false; }
-  function isFollow(uid){ for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid) return true; return false; }
   function avatar(u,size){
     size=size||40;
-    var ch = (u && (u.display_name||u.username) || "?")[0].toUpperCase();
     var inner = (u && u.avatar_url)
       ? '<img src="'+esc(u.avatar_url)+'" alt="">'
-      : esc(ch);
+      : esc(((u && (u.display_name||u.username)) || "?").toUpperCase()[0]);
     return '<div class="av" style="width:'+size+'px;height:'+size+'px"><div class="av-in" style="width:'+(size-4)+'px;height:'+(size-4)+'px;font-size:'+Math.round(size*0.4)+'px">'+inner+'</div></div>';
   }
-  function toast(msg,accent){
+  function toast(msg,type){
     var t=$("#toast"); if(!t)return;
-    t.textContent=msg; t.className="toast on"+(accent?" acc":"");
-    clearTimeout(t._tm); t._tm=setTimeout(function(){t.classList.remove("on");},2200);
+    t.textContent=msg;
+    t.className="toast on"+(type==="ok"?" ok":type==="acc"?" acc":"");
+    clearTimeout(t._tm);
+    t._tm=setTimeout(function(){t.classList.remove("on");},2400);
   }
   function emptyState(msg){
     return '<div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><p>'+esc(msg)+'</p></div>';
   }
 
-  // ================================================================
+  // ============================================================
   // AUTH
-  // ================================================================
+  // ============================================================
   function setAuthMode(mode){
     authMode = mode;
     $$(".tab").forEach(function(t){ t.classList.toggle("on", t.getAttribute("data-mode")===mode); });
-    $$("[data-field]").forEach(function(el){
-      var f = el.getAttribute("data-field");
-      if(f==="login") el.style.display = mode==="login"?"block":"none";
-      else if(f==="register") el.style.display = mode==="register"?"block":"none";
-    });
+    $$("[data-field='register']").forEach(function(el){ el.style.display = mode==="register"?"block":"none"; });
     $("#err").textContent = "";
+    $("#msg").textContent = "";
     $("#submitBtn").textContent = mode==="login" ? "Sign In" : "Create Account";
-    $("#li-pass").setAttribute("autocomplete", mode==="login"?"current-password":"new-password");
   }
 
-  function submitAuth(){
-    var errEl = $("#err");
-    errEl.textContent = "";
-    if(authMode==="login"){
-      var u = ($("#li-user").value||"").trim().toLowerCase();
-      var p = $("#li-pass").value||"";
-      if(!u||!p) return errEl.textContent = "Enter username and password.";
-      var user = findUserByName(u);
-      if(!user) return errEl.textContent = "User not found. Create an account?";
-      if(user.password && user.password!==p) return errEl.textContent = "Wrong password.";
-      DB.me = user.id; save(); enterApp();
+  function doAuth(){
+    var email = ($("#email").value||"").trim().toLowerCase();
+    var pass  = $("#pass").value||"";
+    var errEl = $("#err"); errEl.textContent = "";
+    var msgEl = $("#msg"); msgEl.textContent = "";
+
+    if (authMode === "login") {
+      if (!email) return errEl.textContent = "Enter your email.";
+      if (!pass)  return errEl.textContent = "Enter your password.";
+      var user = findByEmail(email);
+      if (!user) return errEl.textContent = "No account with this email. Click 'Create Account'.";
+      if (user.password !== pass) return errEl.textContent = "Wrong password. Try again.";
+      DB.me = user.id;
+      save();
+      enterApp();
+      toast("Welcome back, " + user.username + "! 🔥", "ok");
     } else {
-      var ru = ($("#rg-user").value||"").trim().toLowerCase().replace(/\s/g,"");
-      var rn = ($("#rg-name").value||"").trim();
-      var rp = $("#li-pass").value||"";
-      if(ru.length<3) return errEl.textContent = "Username needs 3+ characters.";
-      if(findUserByName(ru)) return errEl.textContent = "Username already taken.";
-      if(!rn) return errEl.textContent = "Enter a display name.";
-      if(rp.length<4) return errEl.textContent = "Password needs 4+ characters.";
-      var nu = {id:"u"+Date.now(), username:ru, display_name:rn, avatar_url:null, bio:"New Free Fire player 🔥", rank:"Bronze", password:rp};
-      DB.users.push(nu);
-      DB.me = nu.id;
-      save(); enterApp();
+      var username = ($("#rg-user").value||"").trim().toLowerCase().replace(/\s/g,"");
+      var display  = ($("#rg-name").value||"").trim();
+      if (username.length < 3) return errEl.textContent = "Username needs 3+ characters.";
+      if (!display) return errEl.textContent = "Enter a display name.";
+      if (!email) return errEl.textContent = "Enter your email.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errEl.textContent = "Enter a valid email address.";
+      if (pass.length < 4) return errEl.textContent = "Password needs 4+ characters.";
+      if (findByEmail(email)) return errEl.textContent = "This email is already registered. Try Sign In.";
+      if (findByName(username)) return errEl.textContent = "Username already taken.";
+
+      var newUser = {
+        id: "u" + Date.now(),
+        email: email,
+        password: pass,
+        username: username,
+        display_name: display,
+        avatar_url: null,
+        bio: "New Free Fire player 🔥",
+        rank: "Bronze"
+      };
+      DB.users.push(newUser);
+      DB.me = newUser.id;
+      save();
+      enterApp();
+      toast("Account created! Welcome to OLD FREE FIRE 🔥", "ok");
     }
   }
 
@@ -484,22 +479,26 @@ img{display:block;max-width:100%}
   }
 
   function logout(){
-    DB.me = null; save();
+    DB.me = null;
+    save();
     $("#app").classList.remove("on");
     $("#auth").style.display = "flex";
-    $("#li-user").value = ""; $("#li-pass").value = ""; $("#rg-user").value=""; $("#rg-name").value="";
+    $("#email").value = "";
+    $("#pass").value = "";
+    $("#rg-user").value = "";
+    $("#rg-name").value = "";
     setAuthMode("login");
+    toast("Signed out");
   }
 
-  // ================================================================
+  // ============================================================
   // NAV
-  // ================================================================
+  // ============================================================
   function renderNav(){
     var items = [
       {id:"feed", label:"Home", icon:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
       {id:"explore", label:"Explore", icon:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
       {id:"create", label:"Create", icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'},
-      {id:"squads", label:"Squads", icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
       {id:"profile", label:"Profile", icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'}
     ];
     function svg(p){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
@@ -511,36 +510,35 @@ img{display:block;max-width:100%}
     });
   }
   function setActiveNav(id){
-    $$("[data-nav]").forEach(function(el){
-      el.classList.toggle("on", el.getAttribute("data-nav")===id);
-    });
+    $$("[data-nav]").forEach(function(el){ el.classList.toggle("on", el.getAttribute("data-nav")===id); });
   }
 
-  // ================================================================
+  // ============================================================
   // ROUTER
-  // ================================================================
+  // ============================================================
   function go(view, param){
     currentView = view;
     setActiveNav(view);
     var c = $("#content");
-    if(view==="feed") c.innerHTML = viewFeed();
-    else if(view==="explore") c.innerHTML = viewExplore();
-    else if(view==="create") c.innerHTML = viewCreate();
-    else if(view==="squads") c.innerHTML = viewSquads();
-    else if(view==="profile") c.innerHTML = viewProfile(param || DB.me);
+    if (view==="feed") c.innerHTML = viewFeed();
+    else if (view==="explore") c.innerHTML = viewExplore();
+    else if (view==="create") c.innerHTML = viewCreate();
+    else if (view==="profile") c.innerHTML = viewProfile(param || DB.me);
+    bindProfileClicks();
     window.scrollTo(0,0);
   }
 
-  // ================================================================
-  // FEED
-  // ================================================================
+  // ============================================================
+  // FEED (GLOBAL — shows all users' posts)
+  // ============================================================
   function viewFeed(){
-    var posts = DB.posts.slice().sort(function(a,b){ return b.created_at-a.created_at; });
-    if(!posts.length) return emptyState("No posts yet. Be the first to post!");
-    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 Latest from the squad</span></div>' + posts.map(postCard).join("");
+    var posts = DB.posts.slice().sort(function(a,b){ return b.created_at - a.created_at; });
+    if (!posts.length) return emptyState("No posts yet. Be the first to share!");
+    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 Global feed · '+posts.length+' posts</span></div>' + posts.map(postCard).join("");
   }
+
   function postCard(p){
-    var u = findUser(p.user_id); if(!u) return "";
+    var u = findUser(p.user_id); if (!u) return "";
     var liked = isLiked(p.id);
     return '<article class="post">'+
       '<div class="ph">'+avatar(u,40)+'<div class="pu"><div class="nm" data-profile="'+u.id+'">'+esc(u.username)+'</div><div class="mt">'+esc(u.rank||"Bronze")+' · '+ago(p.created_at)+'</div></div></div>'+
@@ -558,199 +556,196 @@ img{display:block;max-width:100%}
     '</article>';
   }
 
-  // ================================================================
+  // ============================================================
   // EXPLORE
-  // ================================================================
+  // ============================================================
   function viewExplore(){
-    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count-a.like_count; });
-    var players = DB.users.filter(function(u){ return u.id!==DB.me; });
+    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count - a.like_count; });
+    var others = DB.users.filter(function(u){ return u.id !== DB.me; });
     return '<div class="hdr"><h2>Explore</h2></div>'+
       '<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="searchInput" placeholder="Search players..."></div>'+
-      '<div class="egrid">'+posts.map(function(p){
+      (posts.length ? '<div class="egrid">'+posts.map(function(p){
         return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"><div class="ov"><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'+p.like_count+'</div><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'+p.comment_count+'</div></div></div>';
-      }).join("")+'</div>'+
-      '<h3 class="stitle">Players to follow</h3>'+
-      '<div class="pgrid" id="pgrid">'+players.map(playerCard).join("")+'</div>';
-  }
-  function playerCard(u){
-    var fg = isFollow(u.id);
-    return '<div class="pcard">'+avatar(u,56)+'<div class="nm" data-profile="'+u.id+'">'+esc(u.username)+'</div><div class="rk">'+esc(u.rank||"Bronze")+'</div><button class="fbtn '+(fg?"fg":"")+'" data-follow="'+u.id+'">'+(fg?"Following":"Follow")+'</button></div>';
+      }).join("")+'</div>' : emptyState("No public posts yet"))+
+      '<h3 style="font-size:15px;font-weight:700;margin:22px 0 12px">Players</h3>'+
+      '<div class="egrid" id="pgrid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">'+others.map(function(u){
+        return '<div style="background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center"><div style="display:flex;justify-content:center;margin-bottom:10px">'+avatar(u,56)+'</div><div style="font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer" data-profile="'+u.id+'">'+esc(u.username)+'</div><div style="font-size:11px;color:var(--muted)">'+esc(u.rank||"Bronze")+'</div></div>';
+      }).join("")+'</div>';
   }
 
-  // ================================================================
+  // ============================================================
   // CREATE
-  // ================================================================
+  // ============================================================
   function viewCreate(){
     pendingImg = null;
     return '<div class="hdr"><h2>Create Post</h2></div>'+
       '<div class="ccard">'+
-        '<div class="upload" id="uploadArea"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Upload a screenshot or clip</p><span>Click to browse · JPG/PNG</span></div>'+
+        '<div class="upload" id="uploadArea"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Upload a screenshot or clip</p><span>Click to browse · JPG / PNG</span></div>'+
         '<input type="file" id="fileInput" accept="image/*" style="display:none">'+
         '<div id="prevWrap"></div>'+
         '<textarea class="cap" id="capInput" placeholder="Write a caption... #FreeFire #Booyah"></textarea>'+
-        '<button class="btn grad" id="shareBtn">Share Post</button>'+
+        '<button class="btn grad" id="shareBtn">Share to Global Feed</button>'+
       '</div>';
   }
 
-  // ================================================================
-  // SQUADS
-  // ================================================================
-  function viewSquads(){
-    var colors = ["#ff3b30","#ff6b00","#a855f7","#22c55e"];
-    return '<div class="hdr"><h2>Squads</h2></div>'+
-      DB.squads.map(function(s,idx){
-        var owner = findUser(s.owner_id);
-        var c = colors[idx % colors.length];
-        return '<div class="scard"><div class="sico" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'55">'+esc(s.name[0])+'</div><div class="sinfo"><h3>'+esc(s.name)+'</h3><p>'+esc(s.description||"")+' · by '+esc(owner?owner.username:"?")+'</p></div></div>';
-      }).join("")+
-      emptyState("Squad creation coming soon");
+  function onFileChange(e){
+    var f = e.target.files[0]; if (!f) return;
+    if (f.size > 5 * 1024 * 1024) { toast("Image too large (max 5MB)", "acc"); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      pendingImg = ev.target.result;
+      var w = $("#prevWrap");
+      if (w) w.innerHTML = '<img src="'+pendingImg+'" class="prev" alt="Preview">';
+    };
+    reader.readAsDataURL(f);
   }
 
-  // ================================================================
-  // PROFILE (with Edit button)
-  // ================================================================
-  function viewProfile(uid){
-    var u = findUser(uid); if(!u) return emptyState("User not found");
-    var isMe = u.id===DB.me;
-    var myPosts = DB.posts.filter(function(p){return p.user_id===u.id;}).sort(function(a,b){return b.created_at-a.created_at;});
-    var followers=0, following=0;
-    DB.follows.forEach(function(f){ if(f.following_id===u.id)followers++; if(f.follower_id===u.id)following++; });
-    var fg = isFollow(u.id);
+  function submitPost(){
+    if (!pendingImg) return toast("Please upload an image first", "acc");
+    var cap = ($("#capInput") && $("#capInput").value || "").trim();
+    DB.posts.push({
+      id: "p" + Date.now(),
+      user_id: DB.me,
+      media_url: pendingImg,
+      caption: cap,
+      like_count: 0,
+      comment_count: 0,
+      created_at: Date.now()
+    });
+    save();
+    toast("Post shared to global feed! 🔥", "ok");
+    go("feed");
+  }
 
-    var avatarContent = u.avatar_url
+  // ============================================================
+  // PROFILE
+  // ============================================================
+  function viewProfile(uid){
+    var u = findUser(uid); if (!u) return emptyState("User not found");
+    var isMe = u.id === DB.me;
+    var userPosts = DB.posts.filter(function(p){ return p.user_id === u.id; }).sort(function(a,b){ return b.created_at - a.created_at; });
+    var avContent = u.avatar_url
       ? '<img src="'+esc(u.avatar_url)+'" alt="">'
-      : esc((u.display_name||u.username||"?")[0].toUpperCase());
+      : esc((u.display_name||u.username||"?").toUpperCase()[0]);
 
     return '<div class="phead">'+
-        '<div class="pav" style="width:96px;height:96px"><div class="av-in" style="width:92px;height:92px;font-size:32px">'+avatarContent+'</div></div>'+
+        '<div class="pav" style="width:96px;height:96px"><div class="av-in" style="width:92px;height:92px;font-size:32px">'+avContent+'</div></div>'+
         '<div class="pinfo"><h2>'+esc(u.username)+'</h2><span class="rbadge grad">'+esc(u.rank||"Bronze")+'</span><div class="bio">'+esc(u.bio||"")+'</div>'+
-        '<div class="pstats"><div class="pstat"><div class="n">'+myPosts.length+'</div><div class="l">Posts</div></div><div class="pstat"><div class="n">'+followers+'</div><div class="l">Followers</div></div><div class="pstat"><div class="n">'+following+'</div><div class="l">Following</div></div></div></div>'+
-        (isMe
-          ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>'
-          : '<button class="btn grad" style="width:auto;padding:8px 20px;margin-top:12px" data-follow="'+u.id+'">'+(fg?"Following":"Follow")+'</button>')+
+        '<div class="pstats"><div class="pstat"><div class="n">'+userPosts.length+'</div><div class="l">Posts</div></div><div class="pstat"><div class="n">0</div><div class="l">Followers</div></div><div class="pstat"><div class="n">0</div><div class="l">Following</div></div></div></div>'+
+        (isMe ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>' : '')+
       '</div>'+
       '<div class="ptabs"><div class="ptab">Posts</div></div>'+
-      (myPosts.length ? '<div class="pgrid2">'+myPosts.map(function(p){
+      (userPosts.length ? '<div class="pgrid2">'+userPosts.map(function(p){
         return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"></div>';
       }).join("")+'</div>' : emptyState("No posts yet"));
   }
 
-  // ================================================================
+  // ============================================================
   // EDIT PROFILE
-  // ================================================================
+  // ============================================================
   function openEditProfile(){
-    var u = findUser(DB.me); if(!u) return;
+    var u = me(); if (!u) return;
     pendingAvatar = null;
     $("#editUsername").value = u.username || "";
     $("#editDisplay").value = u.display_name || "";
     $("#editBio").value = u.bio || "";
     $("#editRank").value = u.rank || "Bronze";
     $("#editErr").textContent = "";
-    // avatar preview
     var inEl = $("#editAvatarIn");
-    if(u.avatar_url){
-      inEl.innerHTML = '<img src="'+esc(u.avatar_url)+'" alt="">';
-    } else {
-      inEl.textContent = (u.display_name||u.username||"?").toUpperCase()[0];
-    }
+    if (u.avatar_url) inEl.innerHTML = '<img src="'+esc(u.avatar_url)+'" alt="">';
+    else inEl.textContent = ((u.display_name||u.username||"?")).toUpperCase()[0];
     $("#editModal").classList.add("on");
   }
-
   function closeEditProfile(){
     $("#editModal").classList.remove("on");
     pendingAvatar = null;
   }
-
   function onAvatarChange(e){
-    var f = e.target.files[0]; if(!f) return;
-    if(f.size > 2 * 1024 * 1024) return toast("Image too large (max 2MB)");
-    var r = new FileReader();
-    r.onload = function(ev){
+    var f = e.target.files[0]; if (!f) return;
+    if (f.size > 2 * 1024 * 1024) { toast("Image too large (max 2MB)", "acc"); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){
       pendingAvatar = ev.target.result;
       $("#editAvatarIn").innerHTML = '<img src="'+pendingAvatar+'" alt="">';
     };
-    r.readAsDataURL(f);
+    reader.readAsDataURL(f);
   }
-
   function saveProfile(){
-    var u = findUser(DB.me); if(!u) return;
+    var u = me(); if (!u) return;
     var newUsername = ($("#editUsername").value||"").trim().toLowerCase().replace(/\s/g,"");
-    var newDisplay = ($("#editDisplay").value||"").trim();
-    var newBio = ($("#editBio").value||"").trim();
-    var newRank = $("#editRank").value;
-    var errEl = $("#editErr");
-    errEl.textContent = "";
+    var newDisplay  = ($("#editDisplay").value||"").trim();
+    var newBio      = ($("#editBio").value||"").trim();
+    var newRank     = $("#editRank").value;
+    var errEl = $("#editErr"); errEl.textContent = "";
 
-    if(newUsername.length < 3) return errEl.textContent = "Username needs 3+ characters.";
-    // Check uniqueness (excluding self)
-    for(var i=0;i<DB.users.length;i++){
-      if(DB.users[i].id !== u.id && DB.users[i].username === newUsername){
+    if (newUsername.length < 3) return errEl.textContent = "Username needs 3+ characters.";
+    for (var i=0; i<DB.users.length; i++){
+      if (DB.users[i].id !== u.id && DB.users[i].username === newUsername){
         return errEl.textContent = "Username already taken.";
       }
     }
-    if(!newDisplay) return errEl.textContent = "Display name can't be empty.";
+    if (!newDisplay) return errEl.textContent = "Display name can't be empty.";
 
     u.username = newUsername;
     u.display_name = newDisplay;
     u.bio = newBio;
     u.rank = newRank;
-    if(pendingAvatar) u.avatar_url = pendingAvatar;
-
+    if (pendingAvatar) u.avatar_url = pendingAvatar;
     save();
     closeEditProfile();
-    toast("Profile updated ✅", true);
-    // Refresh current view
+    toast("Profile updated ✅", "ok");
     go("profile", u.id);
   }
 
-  // ================================================================
-  // INTERACTIONS
-  // ================================================================
+  // ============================================================
+  // LIKE / SHARE
+  // ============================================================
   function doLike(pid){
-    var post = findPost(pid); if(!post) return;
+    var post = findPost(pid); if (!post) return;
     var idx = -1;
-    for(var i=0;i<DB.likes.length;i++){ if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me){ idx=i; break; } }
-    if(idx===-1){ DB.likes.push({post_id:pid, user_id:DB.me}); post.like_count++; }
-    else { DB.likes.splice(idx,1); post.like_count=Math.max(0, post.like_count-1); }
+    for (var i=0; i<DB.likes.length; i++){
+      if (DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) { idx=i; break; }
+    }
+    if (idx === -1){
+      DB.likes.push({ user_id: DB.me, post_id: pid });
+      post.like_count++;
+    } else {
+      DB.likes.splice(idx, 1);
+      post.like_count = Math.max(0, post.like_count - 1);
+    }
     save();
     var btn = document.getElementById("lk-"+pid);
     var cnt = document.getElementById("cnt-"+pid);
     var nowLiked = isLiked(pid);
-    if(btn){ btn.classList.toggle("lk", nowLiked); var sv=btn.querySelector("svg"); if(sv) sv.setAttribute("fill", nowLiked?"currentColor":"none"); }
-    if(cnt) cnt.textContent = post.like_count.toLocaleString()+" likes";
-  }
-  function doDouble(pid){
-    if(!isLiked(pid)) doLike(pid);
-    var b = document.getElementById("burst-"+pid);
-    if(b){ b.classList.remove("go"); void b.offsetWidth; b.classList.add("go"); }
-  }
-  function doFollow(uid, btn){
-    var idx = -1;
-    for(var i=0;i<DB.follows.length;i++){ if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid){ idx=i; break; } }
-    if(idx===-1){ DB.follows.push({follower_id:DB.me, following_id:uid}); toast("Following", true); }
-    else { DB.follows.splice(idx,1); toast("Unfollowed"); }
-    save();
-    var fg = isFollow(uid);
-    if(btn){ btn.textContent = fg?"Following":"Follow"; btn.classList.toggle("fg", fg); }
-    if(currentView==="profile") go("profile", uid);
-    if(currentView==="explore") go("explore");
-  }
-  function doShare(pid){
-    var url = location.href.split("#")[0]+"#post-"+pid;
-    if(navigator.share){ navigator.share({title:"OLD FREE FIRE",url:url}).catch(function(){}); }
-    else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){toast("Link copied!",true);}).catch(function(){toast("Copy failed");}); }
-    else { toast("Share: "+url); }
+    if (btn) {
+      btn.classList.toggle("lk", nowLiked);
+      btn.querySelector("svg").setAttribute("fill", nowLiked ? "currentColor" : "none");
+    }
+    if (cnt) cnt.textContent = post.like_count.toLocaleString() + " likes";
   }
 
-  // ================================================================
+  function doDouble(pid){
+    if (!isLiked(pid)) doLike(pid);
+    var b = document.getElementById("burst-"+pid);
+    if (b) { b.classList.remove("go"); void b.offsetWidth; b.classList.add("go"); }
+  }
+
+  function doShare(pid){
+    var url = location.origin + location.pathname + "#post-" + pid;
+    if (navigator.share) navigator.share({ title: "OLD FREE FIRE", url: url }).catch(function(){});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function(){ toast("Link copied!", "ok"); }).catch(function(){});
+    else toast("Post link: " + url);
+  }
+
+  // ============================================================
   // COMMENTS
-  // ================================================================
+  // ============================================================
   function openComments(pid){
     activePost = pid;
     renderComments();
     $("#bd").classList.add("on");
     $("#drawer").classList.add("on");
-    setTimeout(function(){ var i=$("#cInput"); if(i)i.focus(); },300);
+    setTimeout(function(){ $("#cInput").focus(); }, 300);
   }
   function closeComments(){
     activePost = null;
@@ -759,136 +754,120 @@ img{display:block;max-width:100%}
   }
   function renderComments(){
     var list = $("#cList");
-    var cs = DB.comments.filter(function(c){ return c.post_id===activePost; }).sort(function(a,b){return a.created_at-b.created_at;});
-    if(!cs.length){ list.innerHTML = '<div class="empty" style="padding:30px 0"><p>No comments yet. Be the first!</p></div>'; return; }
+    var cs = DB.comments.filter(function(c){ return c.post_id === activePost; }).sort(function(a,b){ return a.created_at - b.created_at; });
+    if (!cs.length) { list.innerHTML = '<div class="empty" style="padding:30px 0"><p>No comments yet. Be the first!</p></div>'; return; }
     list.innerHTML = cs.map(function(c){
-      var u = findUser(c.user_id); if(!u) return "";
+      var u = findUser(c.user_id); if (!u) return "";
       return '<div class="cmt">'+avatar(u,32)+'<div class="cmt-c"><span class="cn" data-profile="'+u.id+'">'+esc(u.username)+'</span>'+esc(c.content)+'<div class="cm">'+ago(c.created_at)+'</div></div></div>';
     }).join("");
+    bindProfileClicks();
   }
   function sendComment(){
     var input = $("#cInput");
     var txt = (input.value||"").trim();
-    if(!txt || !activePost) return;
-    DB.comments.push({id:"c"+Date.now(), user_id:DB.me, post_id:activePost, content:txt, created_at:Date.now()});
-    var p = findPost(activePost); if(p) p.comment_count++;
+    if (!txt || !activePost) return;
+    DB.comments.push({
+      id: "c" + Date.now(),
+      user_id: DB.me,
+      post_id: activePost,
+      content: txt,
+      created_at: Date.now()
+    });
+    var post = findPost(activePost);
+    if (post) post.comment_count++;
     input.value = "";
     save();
     renderComments();
-    if(currentView==="feed") go("feed");
-    else if(currentView==="explore") go("explore");
+    if (currentView === "feed") go("feed");
   }
 
-  // ================================================================
-  // FILE UPLOAD (post)
-  // ================================================================
-  function onFileChange(e){
-    var f = e.target.files[0]; if(!f) return;
-    var r = new FileReader();
-    r.onload = function(ev){
-      pendingImg = ev.target.result;
-      var w = $("#prevWrap");
-      if(w) w.innerHTML = '<img src="'+pendingImg+'" class="prev" alt="Preview">';
-    };
-    r.readAsDataURL(f);
-  }
-  function submitPost(){
-    if(!pendingImg) return toast("Please upload an image first");
-    var cap = ($("#capInput") && $("#capInput").value || "").trim();
-    DB.posts.push({id:"p"+Date.now(), user_id:DB.me, media_url:pendingImg, caption:cap, like_count:0, comment_count:0, created_at:Date.now()});
-    save();
-    toast("Post shared! 🔥", true);
-    go("feed");
+  // ============================================================
+  // BINDING
+  // ============================================================
+  function bindProfileClicks(){
+    $$("[data-profile]").forEach(function(el){
+      el.onclick = function(){ go("profile", el.getAttribute("data-profile")); };
+    });
   }
 
-  // ================================================================
-  // GLOBAL EVENT DELEGATION
-  // ================================================================
-  function bindGlobal(){
-    // Tabs
+  function bindAll(){
     $$(".tab").forEach(function(t){
-      t.onclick = function(){ setAuthMode(this.getAttribute("data-mode")); };
+      t.onclick = function(){ setAuthMode(t.getAttribute("data-mode")); };
     });
-    // Auth submit
-    $("#submitBtn").onclick = submitAuth;
-    ["li-user","li-pass","rg-user","rg-name"].forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.addEventListener("keydown", function(e){ if(e.key==="Enter") submitAuth(); });
-    });
-    // Logout
+    $("#submitBtn").onclick = doAuth;
+    $("#email").addEventListener("keydown", function(e){ if (e.key==="Enter") doAuth(); });
+    $("#pass").addEventListener("keydown", function(e){ if (e.key==="Enter") doAuth(); });
+
     $("#logoutBtn").onclick = logout;
-    // Drawer close
     $("#closeDrawer").onclick = closeComments;
     $("#bd").onclick = closeComments;
     $("#sendC").onclick = sendComment;
-    $("#cInput").addEventListener("keydown", function(e){ if(e.key==="Enter") sendComment(); });
+    $("#cInput").addEventListener("keydown", function(e){ if (e.key==="Enter") sendComment(); });
 
-    // Edit profile modal bindings
     $("#closeEdit").onclick = closeEditProfile;
     $("#cancelEdit").onclick = closeEditProfile;
     $("#saveEdit").onclick = saveProfile;
     $("#changeAvatarBtn").onclick = function(){ $("#avatarFile").click(); };
     $("#editAvatar").onclick = function(){ $("#avatarFile").click(); };
     $("#avatarFile").addEventListener("change", onAvatarChange);
-    $("#editModal").addEventListener("click", function(e){ if(e.target.id==="editModal") closeEditProfile(); });
+    $("#editModal").addEventListener("click", function(e){ if (e.target.id==="editModal") closeEditProfile(); });
 
-    // Global click delegation
     document.body.addEventListener("click", function(e){
       var t;
-      t = e.target.closest("[data-edit-profile]");
-      if(t) return openEditProfile();
-      t = e.target.closest("[data-like]");
-      if(t) return doLike(t.getAttribute("data-like"));
-      t = e.target.closest("[data-comment]");
-      if(t) return openComments(t.getAttribute("data-comment"));
-      t = e.target.closest("[data-share]");
-      if(t) return doShare(t.getAttribute("data-share"));
-      t = e.target.closest("[data-follow]");
-      if(t) return doFollow(t.getAttribute("data-follow"), t);
-      t = e.target.closest("[data-profile]");
-      if(t) return go("profile", t.getAttribute("data-profile"));
-      if(e.target.closest("#uploadArea")){ var fi=$("#fileInput"); if(fi) fi.click(); return; }
-      if(e.target.closest("#shareBtn")) return submitPost();
+      if ((t = e.target.closest("[data-edit-profile]"))) return openEditProfile();
+      if ((t = e.target.closest("[data-like]"))) return doLike(t.getAttribute("data-like"));
+      if ((t = e.target.closest("[data-comment]"))) return openComments(t.getAttribute("data-comment"));
+      if ((t = e.target.closest("[data-share]"))) return doShare(t.getAttribute("data-share"));
+      if ((t = e.target.closest("[data-profile]"))) return go("profile", t.getAttribute("data-profile"));
+      if (e.target.closest("#uploadArea")) { var fi=$("#fileInput"); if (fi) fi.click(); return; }
+      if (e.target.closest("#shareBtn")) return submitPost();
     });
 
-    // Double-tap
     document.body.addEventListener("dblclick", function(e){
       var t = e.target.closest("[data-dbl]");
-      if(t) doDouble(t.getAttribute("data-dbl"));
+      if (t) doDouble(t.getAttribute("data-dbl"));
     });
 
-    // File change
     document.body.addEventListener("change", function(e){
-      if(e.target.id==="fileInput") onFileChange(e);
+      if (e.target.id === "fileInput") onFileChange(e);
     });
 
-    // Search
     document.body.addEventListener("input", function(e){
-      if(e.target.id==="searchInput"){
-        var q = e.target.value.toLowerCase();
-        var players = DB.users.filter(function(u){ return u.id!==DB.me && (u.username.indexOf(q)>=0 || (u.display_name||"").toLowerCase().indexOf(q)>=0); });
+      if (e.target.id === "searchInput") {
+        var q = e.target.value.toLowerCase().trim();
+        var others = DB.users.filter(function(u){
+          return u.id !== DB.me && (u.username.indexOf(q)>=0 || (u.display_name||"").toLowerCase().indexOf(q)>=0);
+        });
         var g = $("#pgrid");
-        if(g) g.innerHTML = players.length ? players.map(playerCard).join("") : '<p style="color:var(--muted);font-size:13px">No players found.</p>';
+        if (g) g.innerHTML = others.length ? others.map(function(u){
+          return '<div style="background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center"><div style="display:flex;justify-content:center;margin-bottom:10px">'+avatar(u,56)+'</div><div style="font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer" data-profile="'+u.id+'">'+esc(u.username)+'</div><div style="font-size:11px;color:var(--muted)">'+esc(u.rank||"Bronze")+'</div></div>';
+        }).join("") : '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">No players found.</p>';
+        bindProfileClicks();
       }
     });
   }
 
-  // ================================================================
+  // ============================================================
   // BOOT
-  // ================================================================
+  // ============================================================
   function boot(){
-    try{
+    try {
       load();
       setAuthMode("login");
-      bindGlobal();
-      if(DB.me && findUser(DB.me)) enterApp();
-    }catch(err){
-      console.error("BOOT ERROR:", err);
-      document.body.innerHTML = '<div style="padding:30px;color:#ff3b30;font-family:monospace"><h2>Startup error</h2><pre>'+esc(err && err.stack || err)+'</pre></div>';
+      bindAll();
+      if (DB.me && findUser(DB.me)) {
+        enterApp();
+      } else {
+        DB.me = null;
+        save();
+      }
+    } catch (err) {
+      console.error("Boot error:", err);
+      document.body.innerHTML = '<div style="padding:30px;color:#ff3b30;font-family:monospace"><h2>Startup Error</h2><pre>' + String(err) + '</pre></div>';
     }
   }
 
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 
 })();
