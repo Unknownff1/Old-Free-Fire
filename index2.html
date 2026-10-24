@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OLD FREE FIRE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0a0a0f;--elev:#141419;--hover:#1c1c24;--accent:#ff3b30;--text:#f5f5f7;--muted:#8e8e93;--border:#2c2c35;--ok:#22c55e;--warn:#f59e0b}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+a{color:inherit;text-decoration:none;cursor:pointer}
+img{display:block;max-width:100%}
+.grad{background:linear-gradient(135deg,#ff3b30,#ff6b00)}
+.grad-text{background:linear-gradient(135deg,#ff3b30,#ff6b00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.display{font-family:'Orbitron',sans-serif}
+
+/* AUTH */
+#auth{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg);overflow-y:auto}
+.auth-box{width:100%;max-width:420px;margin:auto}
+.auth-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.auth-logo h1{font-size:22px;letter-spacing:2px}
+.auth-tag{text-align:center;color:var(--muted);font-size:13px;margin-bottom:20px}
+.tabs{display:flex;background:var(--elev);border-radius:12px;padding:4px;margin-bottom:14px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);text-align:center;transition:.15s}
+.tab.on{background:var(--hover);color:var(--text)}
+.form{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.form label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.form input{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none}
+.form input:focus{border-color:var(--accent)}
+.btn{width:100%;padding:12px;border-radius:11px;font-weight:700;color:#fff;transition:.15s;font-size:14px}
+.btn:active{transform:scale(.98)}
+.btn:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sec{background:var(--hover);color:var(--text)}
+.err{color:var(--accent);font-size:12px;min-height:16px;text-align:center;line-height:1.4}
+.msg{color:var(--ok);font-size:12px;min-height:16px;text-align:center;line-height:1.4}
+.hint{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;padding:10px;background:var(--elev);border-radius:8px;border:1px solid var(--border);line-height:1.5}
+
+/* VERIFY SCREEN */
+.verify-box{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:24px;text-align:center}
+.verify-icon{width:64px;height:64px;border-radius:50%;background:rgba(255,59,48,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--accent)}
+.verify-box h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.verify-box p{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+.verify-box p b{color:var(--text)}
+.code-box{background:var(--hover);border:1px dashed var(--accent);border-radius:11px;padding:16px;margin-bottom:14px}
+.code-box .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.code-box .code{font-family:'Orbitron',monospace;font-size:26px;font-weight:900;letter-spacing:6px;color:var(--accent)}
+.code-box .note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4}
+.code-input{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:14px;color:var(--text);font-size:20px;text-align:center;letter-spacing:8px;font-family:'Orbitron',monospace;outline:none;text-transform:uppercase;margin-bottom:12px}
+.code-input:focus{border-color:var(--accent)}
+
+/* APP */
+#app{display:none}
+#app.on{display:block}
+.side{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--elev);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:40}
+.brand{padding:22px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.brand h1{font-size:12px;letter-spacing:1.5px}
+.brand p{font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:11px;padding:12px;border-radius:11px;font-size:14px;font-weight:500;transition:.15s;cursor:pointer;border-left:2px solid transparent}
+.nav-item:hover{background:var(--hover)}
+.nav-item.on{background:var(--hover);color:var(--accent);border-left-color:var(--accent)}
+.side-foot{padding:10px;border-top:1px solid var(--border)}
+.main{margin-left:240px;min-height:100vh;padding-bottom:40px}
+.container{max-width:640px;margin:0 auto;padding:22px 16px}
+.botnav{display:none}
+
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.hdr h2{font-size:22px;font-weight:800}
+.hdr .sub{font-size:12px;color:var(--muted)}
+
+.post{background:var(--elev);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;animation:up .35s}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ph{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.av{border-radius:50%;padding:2px;flex-shrink:0;background:linear-gradient(135deg,#ff3b30,#ff6b00);overflow:hidden}
+.av-in{width:100%;height:100%;border-radius:50%;background:var(--elev);display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--elev);overflow:hidden}
+.av-in img{width:100%;height:100%;object-fit:cover}
+.pu{flex:1;min-width:0}
+.pu .nm{font-size:14px;font-weight:600;cursor:pointer}
+.pu .nm:hover{color:var(--accent)}
+.pu .mt{font-size:11px;color:var(--muted);margin-top:2px}
+.pm{position:relative;aspect-ratio:1;background:#000;cursor:pointer;user-select:none;-webkit-user-select:none}
+.pm img{width:100%;height:100%;object-fit:cover}
+.burst{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0}
+.burst.go{animation:pop .6s ease-out}
+@keyframes pop{0%{opacity:0;transform:scale(0)}30%{opacity:1;transform:scale(1.3)}100%{opacity:0;transform:scale(1.5)}}
+.burst svg{width:100px;height:100px;fill:#ff3b30;color:#ff3b30;filter:drop-shadow(0 0 20px rgba(255,59,48,.7))}
+.pa{display:flex;align-items:center;gap:14px;padding:12px 16px 4px}
+.act{display:flex;transition:transform .1s}
+.act:active{transform:scale(.85)}
+.act.lk svg{fill:var(--accent);color:var(--accent)}
+.act:hover svg{color:var(--accent)}
+.act svg{transition:color .2s}
+.pb{padding:0 16px 16px}
+.pl{font-size:14px;font-weight:600;margin-bottom:6px}
+.pc{font-size:14px;line-height:1.5}
+.pc .un{font-weight:600;margin-right:6px;cursor:pointer}
+.pc .un:hover{color:var(--accent)}
+.pcl{font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer;display:inline-block}
+.pcl:hover{color:var(--text)}
+
+/* SEARCH */
+.search-form{position:relative;margin-bottom:12px;display:flex;gap:8px}
+.search-form .input-wrap{position:relative;flex:1}
+.search-form input{width:100%;background:var(--elev);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 46px;color:var(--text);font-size:15px;outline:none;transition:.2s}
+.search-form input:focus{border-color:var(--accent)}
+.search-form .icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);padding:6px;display:none;border-radius:50%}
+.search-clear:hover{color:var(--text);background:var(--hover)}
+.search-clear.on{display:block}
+.search-btn{padding:0 22px;border-radius:12px;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;transition:.15s}
+.search-btn:hover{opacity:.9}
+.search-btn:active{transform:scale(.97)}
+
+.stitle{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:20px 0 12px}
+.ulist{display:flex;flex-direction:column;gap:8px}
+.ucard{display:flex;align-items:center;gap:14px;background:var(--elev);border:1px solid var(--border);border-radius:14px;padding:14px 16px;transition:.2s;cursor:pointer}
+.ucard:hover{border-color:var(--accent)}
+.ucard .av{margin:0}
+.uinfo{flex:1;min-width:0}
+.uinfo .nm{font-weight:600;font-size:14px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uinfo .un{font-size:12px;color:var(--accent);margin-bottom:4px}
+.uinfo .bio{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbtn{padding:8px 18px;border-radius:9px;font-size:12px;font-weight:700;background:var(--accent);color:white;flex-shrink:0;transition:.15s;white-space:nowrap}
+.fbtn:hover{opacity:.85}
+.fbtn.fg{background:var(--hover);color:var(--muted);border:1px solid var(--border)}
+
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.eitem{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--elev)}
+.eitem img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.eitem:hover img{transform:scale(1.05)}
+.eitem .ov{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:14px;opacity:0;transition:.2s;color:#fff;font-weight:600;font-size:13px}
+.eitem:hover .ov{opacity:1}
+.eov{display:flex;align-items:center;gap:5px}
+
+.ccard{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.upload{border:2px dashed var(--border);border-radius:13px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
+.upload:hover{border-color:var(--accent);background:var(--hover)}
+.upload svg{color:var(--muted);margin-bottom:8px}
+.upload p{font-size:14px;font-weight:600;margin-bottom:4px}
+.upload span{font-size:12px;color:var(--muted)}
+.prev{width:100%;border-radius:13px;max-height:400px;object-fit:contain;background:#000}
+.cap{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;resize:vertical;min-height:80px}
+.cap:focus{border-color:var(--accent)}
+
+.phead{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:18px;flex-wrap:wrap}
+.pav{border-radius:50%;padding:3px;background:linear-gradient(135deg,#ff3b30,#ff6b00);flex-shrink:0;overflow:hidden}
+.pav .av-in{font-size:32px}
+.pinfo{flex:1;min-width:200px}
+.pinfo h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.pinfo .uname-at{font-size:13px;color:var(--accent);margin-bottom:8px}
+.rbadge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:8px;color:#fff}
+.pinfo .bio{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.pstats{display:flex;gap:22px}
+.pstat{text-align:center}
+.pstat .n{font-weight:700;font-size:16px}
+.pstat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ptabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
+.ptab{flex:1;padding:12px;text-align:center;font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--accent)}
+.pgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.edit-btn{padding:8px 18px;border-radius:9px;font-size:13px;font-weight:700;background:var(--hover);border:1px solid var(--border);transition:.15s;margin-top:10px}
+.edit-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty svg{margin-bottom:12px;opacity:.5}
+.empty p{font-size:14px}
+.empty p b{color:var(--text)}
+
+.bd{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none}
+.bd.on{display:block}
+.drawer{position:fixed;bottom:0;left:0;right:0;z-index:201;background:var(--elev);border-top-left-radius:20px;border-top-right-radius:20px;max-height:75vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s}
+.drawer.on{transform:none}
+@media(min-width:768px){.drawer{max-width:500px;margin:0 auto;border-radius:20px;bottom:20px}}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--border)}
+.dhead h3{font-size:15px;font-weight:700}
+.dbody{flex:1;overflow-y:auto;padding:16px}
+.cmt{display:flex;gap:12px;margin-bottom:14px}
+.cmt .av{width:32px;height:32px}
+.cmt .av-in{font-size:11px}
+.cmt-c{flex:1;font-size:13px;line-height:1.5}
+.cmt-c .cn{font-weight:600;margin-right:6px;cursor:pointer}
+.cmt-c .cn:hover{color:var(--accent)}
+.cmt-c .cm{font-size:11px;color:var(--muted);margin-top:4px}
+.dinput{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.dinput input{flex:1;background:var(--hover);border:1px solid var(--border);border-radius:24px;padding:10px 16px;color:var(--text);font-size:13px;outline:none}
+.dinput input:focus{border-color:var(--accent)}
+.dinput button{background:var(--accent);color:#fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
+.modal-bd.on{display:flex}
+.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;margin:auto;overflow:hidden;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.mhead{height:100px;background:linear-gradient(135deg,#ff3b30,#ff6b00);position:relative}
+.mclose{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.5);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:white}
+.mbody{padding:0 24px 24px;text-align:center;margin-top:-50px}
+.mbody .av{margin:0 auto 12px;border:4px solid var(--elev)}
+.mname{font-size:20px;font-weight:800;margin-bottom:4px}
+.muname{font-size:13px;color:var(--accent);margin-bottom:10px}
+.mgaming{display:inline-block;background:var(--hover);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:11px;color:var(--muted);margin:4px 4px 12px}
+.mbio{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:16px;padding:0 8px}
+.mstats{display:flex;justify-content:center;gap:32px;margin-bottom:18px}
+.mstat .n{font-weight:800;font-size:18px}
+.mstat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.mfollow{width:100%;padding:12px;border-radius:11px;font-size:14px;font-weight:700;transition:.15s}
+
+.edit-modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;margin:auto}
+.edit-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--elev);z-index:1}
+.edit-head h3{font-size:16px;font-weight:700}
+.edit-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+.avatar-edit{display:flex;flex-direction:column;align-items:center;gap:10px}
+.avatar-edit .av{width:96px;height:96px;cursor:pointer;position:relative}
+.avatar-edit .av-in{font-size:32px}
+.avatar-edit .av-overlay{position:absolute;inset:2px;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;color:#fff}
+.avatar-edit .av:hover .av-overlay{opacity:1}
+.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field textarea,.field select{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-size:14px;outline:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:70px}
+.field select{cursor:pointer}
+.edit-foot{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--elev)}
+.edit-foot .btn{flex:1}
+
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 20px;font-size:13px;font-weight:600;z-index:500;transition:transform .3s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.toast.acc{border-color:var(--accent)}
+.toast.ok{border-color:var(--ok)}
+
+.loading{text-align:center;padding:40px;color:var(--muted)}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:768px){
+  .side{display:none}
+  .main{margin-left:0;padding-bottom:76px}
+  .container{padding:16px 12px}
+  .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--elev);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
+  .botnav .nav-item{flex:1;flex-direction:column;padding:8px 4px;gap:3px;border-left:none;border-top:2px solid transparent;border-radius:0;font-size:9px;justify-content:center;align-items:center}
+  .botnav .nav-item.on{border-top-color:var(--accent);border-left:none;background:transparent}
+  .botnav .nav-item:hover{background:transparent}
+  .phead{gap:16px}
+  .pav{width:72px !important;height:72px !important}
+  .pav .av-in{font-size:24px}
+  .pstats{gap:16px}
+  .egrid{gap:2px}
+  .toast{bottom:72px}
+  .search-btn{padding:0 16px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth" style="display:flex">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <h1 class="display grad-text">OLD FREE FIRE</h1>
+    </div>
+    <p class="auth-tag">The Gamer Social Network</p>
+    <div id="authMain">
+      <div class="tabs">
+        <div class="tab on" data-mode="login">Sign In</div>
+        <div class="tab" data-mode="register">Create Account</div>
+      </div>
+      <div class="form">
+        <div data-field="register" style="display:none">
+          <label>Username (unique)</label>
+          <input type="text" id="rg-user" placeholder="sakib123" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="20">
+        </div>
+        <div data-field="register" style="display:none">
+          <label>Display Name</label>
+          <input type="text" id="rg-name" placeholder="Sakib Ahmed" autocomplete="name">
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="email" autocapitalize="off" spellcheck="false">
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" id="pass" placeholder="At least 6 characters" autocomplete="current-password">
+        </div>
+        <p class="err" id="err"></p>
+        <p class="msg" id="msg"></p>
+        <button class="btn grad" id="submitBtn">Sign In</button>
+      </div>
+      <div class="hint">Demo: <b>king@demo.com</b> / <b>pass</b> · <b>sakib@demo.com</b> / <b>pass</b></div>
+    </div>
+
+    <!-- VERIFY SCREEN -->
+    <div id="verifyScreen" style="display:none">
+      <div class="verify-box">
+        <div class="verify-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>Verify Your Email</h3>
+        <p>We sent a verification code to<br><b id="verifyEmail"></b></p>
+        <div class="code-box">
+          <div class="lbl">Your Verification Code</div>
+          <div class="code" id="verifyCode">------</div>
+          <div class="note">⚠️ This demo shows the code on-screen. Real email delivery needs a backend (Supabase + SMTP).</div>
+        </div>
+        <input type="text" class="code-input" id="codeInput" placeholder="------" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+        <p class="err" id="verifyErr"></p>
+        <button class="btn grad" id="verifyBtn" style="margin-bottom:8px">Verify Account</button>
+        <button class="btn sec" id="resendBtn">Resend Code</button>
+        <button class="btn sec" id="cancelVerifyBtn" style="margin-top:8px;background:transparent;color:var(--muted);font-size:12px">← Back to Sign In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <aside class="side">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <div><h1 class="display grad-text">OLD FREE FIRE</h1><p>GAMER NETWORK</p></div>
+    </div>
+    <nav class="nav" id="sideNav"></nav>
+    <div class="side-foot">
+      <div class="nav-item" id="logoutBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </div>
+    </div>
+  </aside>
+  <main class="main"><div class="container" id="content"></div></main>
+  <nav class="botnav" id="botNav"></nav>
+</div>
+
+<!-- DRAWER -->
+<div class="bd" id="bd"></div>
+<div class="drawer" id="drawer">
+  <div class="dhead"><h3>Comments</h3>
+    <button id="closeDrawer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="dbody" id="cList"></div>
+  <div class="dinput">
+    <input type="text" id="cInput" placeholder="Add a comment...">
+    <button id="sendC"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-bd" id="profileModal">
+  <div class="modal">
+    <div class="mhead"><button class="mclose" id="profileClose"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mbody" id="profileBody"></div>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal-bd" id="editModal">
+  <div class="edit-modal">
+    <div class="edit-head"><h3>Edit Profile</h3>
+      <button id="editClose"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="edit-body">
+      <div class="avatar-edit">
+        <div class="av" id="editAvatar" style="width:96px;height:96px">
+          <div class="av-in" id="editAvatarIn" style="width:92px;height:92px;font-size:32px"></div>
+          <div class="av-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        </div>
+        <input type="file" id="avatarFile" accept="image/*" style="display:none">
+        <button class="edit-btn" id="changeAvatarBtn" style="margin-top:0;font-size:12px;padding:6px 14px">Change Photo</button>
+      </div>
+      <div class="field"><label>Username (unique)</label><input type="text" id="editUsername" autocapitalize="off" spellcheck="false" maxlength="20"></div>
+      <div class="field"><label>Display Name</label><input type="text" id="editDisplay"></div>
+      <div class="field"><label>Bio</label><textarea id="editBio"></textarea></div>
+      <div class="field"><label>Gaming UID</label><input type="text" id="editUid" placeholder="123456789" inputmode="numeric"></div>
+      <div class="field"><label>Guild Name</label><input type="text" id="editGuild" placeholder="Fire Nation"></div>
+      <div class="field"><label>Rank</label>
+        <select id="editRank">
+          <option>Bronze</option><option>Silver</option><option>Gold</option><option>Platinum</option>
+          <option>Diamond</option><option>Master</option><option>Heroic</option><option>Grandmaster</option>
+        </select>
+      </div>
+      <p class="err" id="editErr"></p>
+    </div>
+    <div class="edit-foot">
+      <button class="btn sec" id="editCancel">Cancel</button>
+      <button class="btn grad" id="editSave">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ============ SAFE STORAGE ============
+  var memStore = {};
+  var storage = {
+    get: function(k){ try{return localStorage.getItem(k);}catch(e){return memStore[k]||null;} },
+    set: function(k,v){ try{localStorage.setItem(k,v);}catch(e){memStore[k]=v;} }
+  };
+
+  // ============ STATE ============
+  var DB = { users: [], posts: [], likes: [], comments: [], follows: [], me: null };
+  var authMode = "login";
+  var currentView = "feed";
+  var activePost = null;
+  var pendingImg = null;
+  var pendingAvatar = null;
+  var currentModalUser = null;
+  var searchTimeout = null;
+  var lastSearchQuery = null;
+  var pendingVerification = null; // { userId, code }
+
+  // ============ PERSISTENCE ============
+  function save(){ try{ storage.set("off_data_v8", JSON.stringify(DB)); }catch(e){} }
+  function load(){
+    try {
+      var raw = storage.get("off_data_v8");
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p.users && p.users.length) {
+          DB.users = p.users || [];
+          DB.posts = p.posts || [];
+          DB.likes = p.likes || [];
+          DB.comments = p.comments || [];
+          DB.follows = p.follows || [];
+          DB.me = p.me || null;
+          return;
+        }
+      }
+    } catch(e){}
+    seed();
+  }
+
+  // ============ SEED ============
+  function seed(){
+    var now = Date.now();
+    DB.users = [
+      { id:"u1", email:"king@demo.com", password:"pass", username:"booyah_king", display_name:"Booyah King", avatar_url:null, bio:"Headshot machine 🔥", rank:"Grandmaster", gaming_uid:"111111111", guild_name:"Fire Nation", created_at:now-86400000*30, verified:true },
+      { id:"u2", email:"sniper@demo.com", password:"pass", username:"chrono_sniper", display_name:"Chrono Sniper", avatar_url:null, bio:"Sniping from the shadows 🎯", rank:"Heroic", gaming_uid:"222222222", guild_name:"Shadow Assassins", created_at:now-86400000*20, verified:true },
+      { id:"u3", email:"panda@demo.com", password:"pass", username:"fire_panda", display_name:"Fire Panda", avatar_url:null, bio:"Rushing with the squad 💥", rank:"Diamond", gaming_uid:"333333333", guild_name:"Booyah Bros", created_at:now-86400000*10, verified:true },
+      { id:"u4", email:"fury@demo.com", password:"pass", username:"shadow_fury", display_name:"Shadow Fury", avatar_url:null, bio:"Clutch or bust 🏆", rank:"Master", gaming_uid:"444444444", guild_name:"Elite Warriors", created_at:now-86400000*5, verified:true },
+      { id:"u5", email:"sakib@demo.com", password:"pass", username:"sakib123", display_name:"Sakib Ahmed", avatar_url:null, bio:"Free Fire is life 💯", rank:"Diamond", gaming_uid:"555555555", guild_name:"Fire Nation", created_at:now-86400000*3, verified:true }
+    ];
+    function img(q){ return "https://images.unsplash.com/"+q+"?w=800&auto=format&fit=crop"; }
+    DB.posts = [
+      { id:"p1", user_id:"u1", media_url:img("photo-1542751371-adc38448a05e"), caption:"BOOYAH! 24 kills solo vs squad 🔥 #FreeFire", like_count:1243, comment_count:1, created_at:now-3600000 },
+      { id:"p2", user_id:"u2", media_url:img("photo-1511512578047-dfb367046420"), caption:"Sniping from the ridge all game 🎯 #Headshot", like_count:892, comment_count:0, created_at:now-7200000 },
+      { id:"p3", user_id:"u3", media_url:img("photo-1550745165-9bc0b252726f"), caption:"Squad wipes hit different when you rush together 💥", like_count:654, comment_count:0, created_at:now-14400000 }
+    ];
+    DB.comments = [
+      { id:"c1", user_id:"u2", post_id:"p1", content:"Insane play bro! 🔥", created_at:now-3000000 }
+    ];
+    DB.likes = [];
+    DB.follows = [
+      { follower_id:"u1", following_id:"u2" },
+      { follower_id:"u2", following_id:"u1" }
+    ];
+    DB.me = null;
+    save();
+  }
+
+  // ============ HELPERS ============
+  function $(s){ return document.querySelector(s); }
+  function $$(s){ return document.querySelectorAll(s); }
+  function findUser(id){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].id===id) return DB.users[i]; return null; }
+  function findPost(id){ for(var i=0;i<DB.posts.length;i++) if(DB.posts[i].id===id) return DB.posts[i]; return null; }
+  function findByEmail(e){ e=(e||"").toLowerCase().trim(); for(var i=0;i<DB.users.length;i++) if(DB.users[i].email===e) return DB.users[i]; return null; }
+  function findByName(n){ n=(n||"").toLowerCase().trim(); for(var i=0;i<DB.users.length;i++) if(DB.users[i].username.toLowerCase()===n) return DB.users[i]; return null; }
+  function me(){ return findUser(DB.me); }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];}); }
+  function ago(ts){ var s=Math.floor((Date.now()-ts)/1000); if(s<60)return s+"s"; if(s<3600)return Math.floor(s/60)+"m"; if(s<86400)return Math.floor(s/3600)+"h"; if(s<604800)return Math.floor(s/86400)+"d"; return new Date(ts).toLocaleDateString(); }
+  function isLiked(pid){ for(var i=0;i<DB.likes.length;i++) if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) return true; return false; }
+  function isFollowing(uid){ for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid) return true; return false; }
+  function followerCount(uid){ var c=0; for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].following_id===uid) c++; return c; }
+  function followingCount(uid){ var c=0; for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===uid) c++; return c; }
+  function avatar(u,size){
+    size=size||40;
+    var inner = (u && u.avatar_url)
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc(((u && (u.display_name||u.username)) || "?").toUpperCase()[0]);
+    return '<div class="av" style="width:'+size+'px;height:'+size+'px"><div class="av-in" style="width:'+(size-4)+'px;height:'+(size-4)+'px;font-size:'+Math.round(size*0.4)+'px">'+inner+'</div></div>';
+  }
+  function toast(msg,type){
+    var t=$("#toast"); if(!t)return;
+    t.textContent=msg;
+    t.className="toast on"+(type==="ok"?" ok":type==="acc"?" acc":"");
+    clearTimeout(t._tm);
+    t._tm=setTimeout(function(){t.classList.remove("on");},2400);
+  }
+  function emptyState(msg){
+    return '<div class="empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>'+esc(msg)+'</p></div>';
+  }
+  function loadingState(msg){
+    return '<div class="loading"><div class="spinner"></div><p>'+esc(msg||"Loading...")+'</p></div>';
+  }
+  function generateCode(){ return String(Math.floor(100000 + Math.random()*900000)); }
+
+  // ============ AUTH ============
+  function setAuthMode(mode){
+    authMode = mode;
+    $$(".tab").forEach(function(t){ t.classList.toggle("on", t.getAttribute("data-mode")===mode); });
+    $$("[data-field='register']").forEach(function(el){ el.style.display = mode==="register"?"block":"none"; });
+    $("#err").textContent = "";
+    $("#msg").textContent = "";
+    $("#submitBtn").textContent = mode==="login" ? "Sign In" : "Create Account";
+  }
+
+  function showVerifyScreen(email, code, userId){
+    pendingVerification = { userId: userId, code: code, email: email };
+    $("#authMain").style.display = "none";
+    $("#verifyScreen").style.display = "block";
+    $("#verifyEmail").textContent = email;
+    $("#verifyCode").textContent = code;
+    $("#codeInput").value = "";
+    $("#verifyErr").textContent = "";
+    setTimeout(function(){ $("#codeInput").focus(); }, 200);
+  }
+
+  function hideVerifyScreen(){
+    $("#authMain").style.display = "block";
+    $("#verifyScreen").style.display = "none";
+    pendingVerification = null;
+  }
+
+  function doAuth(){
+    var email = ($("#email").value||"").trim().toLowerCase();
+    var pass  = $("#pass").value||"";
+    var errEl = $("#err"); errEl.textContent = "";
+    var msgEl = $("#msg"); msgEl.textContent = "";
+
+    if (authMode === "login") {
+      if (!email) return errEl.textContent = "Enter your email.";
+      if (!pass)  return errEl.textContent = "Enter your password.";
+      var user = findByEmail(email);
+      if (!user) return errEl.textContent = "No account with this email. Click 'Create Account'.";
+      if (!user.verified) {
+        // Re-show verification
+        var newCode = generateCode();
+        showVerifyScreen(user.email, newCode, user.id);
+        toast("Account not verified. New code generated.", "acc");
+        return;
+      }
+      if (user.password !== pass) return errEl.textContent = "Wrong password. Try again.";
+      DB.me = user.id;
+      save();
+      enterApp();
+      toast("Welcome back, @" + user.username + "! 🔥", "ok");
+    } else {
+      // REGISTER
+      var username = ($("#rg-user").value||"").trim().toLowerCase().replace(/^@/, "").replace(/\s/g,"");
+      var display  = ($("#rg-name").value||"").trim();
+      if (username.length < 3) return errEl.textContent = "Username needs 3+ characters.";
+      if (username.length > 20) return errEl.textContent = "Username max 20 characters.";
+      if (!/^[a-z0-9_]+$/.test(username)) return errEl.textContent = "Username: only lowercase letters, numbers, underscores.";
+      if (!display) return errEl.textContent = "Enter a display name.";
+      if (!email) return errEl.textContent = "Enter your email.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errEl.textContent = "Enter a valid email address.";
+      if (pass.length < 6) return errEl.textContent = "Password needs 6+ characters.";
+      if (findByEmail(email)) return errEl.textContent = "This email is already registered. Try Sign In.";
+      if (findByName(username)) return errEl.textContent = "Username @" + username + " is already taken.";
+
+      // Create user with verified=false
+      var newUser = {
+        id: "u" + Date.now(),
+        email: email,
+        password: pass,
+        username: username,
+        display_name: display,
+        avatar_url: null,
+        bio: "New Free Fire player 🔥",
+        rank: "Bronze",
+        gaming_uid: null,
+        guild_name: null,
+        created_at: Date.now(),
+        verified: false
+      };
+      DB.users.push(newUser);
+      save();
+
+      // Generate code and show verification screen
+      var code = generateCode();
+      showVerifyScreen(email, code, newUser.id);
+      toast("Account created! Verify your email to continue.", "ok");
+    }
+  }
+
+  function verifyAccount(){
+    if (!pendingVerification) return;
+    var entered = ($("#codeInput").value||"").trim();
+    var errEl = $("#verifyErr"); errEl.textContent = "";
+
+    if (!entered) return errEl.textContent = "Enter the 6-digit code.";
+    if (entered !== pendingVerification.code) return errEl.textContent = "Incorrect code. Please try again.";
+
+    var user = findUser(pendingVerification.userId);
+    if (!user) return errEl.textContent = "Account not found.";
+    user.verified = true;
+    save();
+    hideVerifyScreen();
+    toast("✓ Email verified! You can now sign in.", "ok");
+    setAuthMode("login");
+    $("#pass").value = "";
+    $("#email").value = user.email;
+  }
+
+  function resendCode(){
+    if (!pendingVerification) return;
+    var newCode = generateCode();
+    pendingVerification.code = newCode;
+    $("#verifyCode").textContent = newCode;
+    $("#codeInput").value = "";
+    $("#verifyErr").textContent = "";
+    toast("New code generated", "ok");
+  }
+
+  function enterApp(){
+    $("#auth").style.display = "none";
+    $("#app").classList.add("on");
+    renderNav();
+    go("feed");
+  }
+
+  function logout(){
+    DB.me = null;
+    save();
+    $("#app").classList.remove("on");
+    $("#auth").style.display = "flex";
+    hideVerifyScreen();
+    $("#email").value = "";
+    $("#pass").value = "";
+    $("#rg-user").value = "";
+    $("#rg-name").value = "";
+    setAuthMode("login");
+    toast("Signed out");
+  }
+
+  // ============ NAV ============
+  function renderNav(){
+    var items = [
+      {id:"feed", label:"Home", icon:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
+      {id:"search", label:"Search", icon:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
+      {id:"explore", label:"Explore", icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'},
+      {id:"create", label:"Create", icon:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'},
+      {id:"profile", label:"Profile", icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'}
+    ];
+    function svg(p){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
+    var html = items.map(function(i){ return '<div class="nav-item" data-nav="'+i.id+'">'+svg(i.icon)+'<span>'+i.label+'</span></div>'; }).join("");
+    $("#sideNav").innerHTML = html;
+    $("#botNav").innerHTML = html;
+    $$("[data-nav]").forEach(function(el){
+      el.onclick = function(){ go(el.getAttribute("data-nav")); };
+    });
+  }
+  function setActiveNav(id){
+    $$("[data-nav]").forEach(function(el){ el.classList.toggle("on", el.getAttribute("data-nav")===id); });
+  }
+
+  // ============ ROUTER ============
+  function go(view, param){
+    currentView = view;
+    setActiveNav(view);
+    var c = $("#content");
+    if (view==="feed") c.innerHTML = viewFeed();
+    else if (view==="search") c.innerHTML = viewSearch();
+    else if (view==="explore") c.innerHTML = viewExplore();
+    else if (view==="create") c.innerHTML = viewCreate();
+    else if (view==="profile") c.innerHTML = viewProfile(param || DB.me);
+    bindProfileClicks();
+    window.scrollTo(0,0);
+    if (view === "search") {
+      setTimeout(function(){
+        var s = $("#searchInput");
+        if (s) s.focus();
+        renderSearchResults("");
+      }, 80);
+    }
+  }
+
+  // ============ FEED ============
+  function viewFeed(){
+    var posts = DB.posts.slice().sort(function(a,b){ return b.created_at - a.created_at; });
+    if (!posts.length) return emptyState("No posts yet. Be the first to share!");
+    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 '+posts.length+' posts</span></div>' + posts.map(postCard).join("");
+  }
+
+  function postCard(p){
+    var u = findUser(p.user_id); if (!u) return "";
+    var liked = isLiked(p.id);
+    return '<article class="post">'+
+      '<div class="ph">'+avatar(u,40)+'<div class="pu"><div class="nm" data-profile="'+u.id+'">@'+esc(u.username)+'</div><div class="mt">'+esc(u.rank||"Bronze")+' · '+ago(p.created_at)+'</div></div></div>'+
+      '<div class="pm" data-dbl="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="Post" loading="lazy"><div class="burst" id="burst-'+p.id+'"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div>'+
+      '<div class="pa">'+
+        '<button class="act '+(liked?"lk":"")+'" data-like="'+p.id+'" id="lk-'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="'+(liked?"currentColor":"none")+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>'+
+        '<button class="act" data-comment="'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>'+
+        '<button class="act" data-share="'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>'+
+      '</div>'+
+      '<div class="pb">'+
+        '<div class="pl" id="cnt-'+p.id+'">'+p.like_count.toLocaleString()+' likes</div>'+
+        '<div class="pc"><span class="un" data-profile="'+u.id+'">@'+esc(u.username)+'</span>'+esc(p.caption||"")+'</div>'+
+        (p.comment_count>0?'<div class="pcl" data-comment="'+p.id+'">View all '+p.comment_count+' comments</div>':'')+
+      '</div>'+
+    '</article>';
+  }
+
+  // ============ SEARCH ============
+  function viewSearch(){
+    return '<div class="hdr"><h2>Search Players</h2></div>'+
+      '<form class="search-form" id="searchForm" onsubmit="return false" autocomplete="off">'+
+        '<div class="input-wrap">'+
+          '<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'+
+          '<input type="search" id="searchInput" placeholder="Search by username..." '+
+            'inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="off" spellcheck="false" '+
+            'aria-label="Search users">'+
+          '<button type="button" class="search-clear" id="searchClear" aria-label="Clear search">'+
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'+
+          '</button>'+
+        '</div>'+
+        '<button type="submit" class="search-btn grad" id="searchBtn">Search</button>'+
+      '</form>'+
+      '<div id="searchResults"></div>';
+  }
+
+  function renderSearchResults(query){
+    var area = $("#searchResults"); if (!area) return;
+    var q = (query||"").trim().toLowerCase().replace(/^@/, "");
+    lastSearchQuery = q;
+
+    if (!q) {
+      var users = DB.users.filter(function(u){ return u.id !== DB.me; });
+      users.sort(function(a,b){ return (b.created_at||0) - (a.created_at||0); });
+      if (!users.length) { area.innerHTML = emptyState("No other players yet. Invite your squad!"); return; }
+      area.innerHTML = '<div class="stitle">Discover Players · Recently Joined</div>'+
+        '<div class="ulist">' + users.map(userRow).join("") + '</div>';
+      bindUserRows();
+      return;
+    }
+
+    area.innerHTML = loadingState("Searching...");
+
+    setTimeout(function(){
+      if (lastSearchQuery !== q) return;
+
+      // Partial match, case-insensitive
+      var matches = DB.users.filter(function(u){
+        if (u.id === DB.me) return false;
+        return u.username.toLowerCase().indexOf(q) >= 0;
+      });
+
+      // Sort: exact first, then starts-with, then partial
+      matches.sort(function(a, b){
+        var au = a.username.toLowerCase(), bu = b.username.toLowerCase();
+        if (au === q && bu !== q) return -1;
+        if (bu === q && au !== q) return 1;
+        if (au.indexOf(q) === 0 && bu.indexOf(q) !== 0) return -1;
+        if (bu.indexOf(q) === 0 && au.indexOf(q) !== 0) return 1;
+        return au.localeCompare(bu);
+      });
+
+      if (!matches.length) {
+        area.innerHTML =
+          '<div class="empty">'+
+            '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">'+
+              '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'+
+              '<line x1="8" y1="8" x2="14" y2="14" stroke-linecap="round"/>'+
+            '</svg>'+
+            '<p><b>User Not Found</b></p>'+
+            '<p style="margin-top:8px;font-size:12px;line-height:1.5">No account with username <b>@'+esc(q)+'</b>.<br>Please check the username and try again.</p>'+
+          '</div>';
+        return;
+      }
+
+      var heading = matches.length === 1 ? 'Found 1 player' : matches.length + ' results';
+      area.innerHTML = '<div class="stitle">'+heading+'</div>'+
+        '<div class="ulist">' + matches.map(userRow).join("") + '</div>';
+      bindUserRows();
+    }, 120);
+  }
+
+  function userRow(u){
+    var following = isFollowing(u.id);
+    return '<div class="ucard" data-user-id="'+u.id+'">'+
+      avatar(u, 52) +
+      '<div class="uinfo">'+
+        '<div class="nm">'+esc(u.display_name || u.username)+'</div>'+
+        '<div class="un">@'+esc(u.username)+'</div>'+
+        '<div class="bio">'+esc(u.bio || "Free Fire player")+'</div>'+
+      '</div>'+
+      '<button class="fbtn '+(following?"fg":"")+'" data-follow-btn="'+u.id+'">'+(following?"Following":"Follow")+'</button>'+
+    '</div>';
+  }
+
+  function bindUserRows(){
+    $$("[data-user-id]").forEach(function(el){
+      el.onclick = function(e){
+        if (e.target.closest("[data-follow-btn]")) return;
+        openProfileModal(el.getAttribute("data-user-id"));
+      };
+    });
+    $$("[data-follow-btn]").forEach(function(btn){
+      btn.onclick = function(e){
+        e.stopPropagation();
+        toggleFollow(btn.getAttribute("data-follow-btn"), btn);
+      };
+    });
+  }
+
+  // ============ FOLLOW ============
+  function toggleFollow(uid, btn){
+    if (uid === DB.me) return toast("You can't follow yourself", "acc");
+    var idx = -1;
+    for (var i=0; i<DB.follows.length; i++){
+      if (DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid){ idx=i; break; }
+    }
+    if (idx === -1) {
+      DB.follows.push({ follower_id: DB.me, following_id: uid });
+      toast("Following!", "ok");
+    } else {
+      DB.follows.splice(idx, 1);
+      toast("Unfollowed");
+    }
+    save();
+    var nowFollowing = isFollowing(uid);
+    if (btn) {
+      btn.textContent = nowFollowing ? "Following" : "Follow";
+      btn.classList.toggle("fg", nowFollowing);
+    }
+    if (currentModalUser && currentModalUser.id === uid) openProfileModal(uid);
+    if (currentView === "profile") go("profile", uid);
+  }
+
+  // ============ PROFILE MODAL ============
+  function openProfileModal(uid){
+    var u = findUser(uid); if (!u) return;
+    currentModalUser = u;
+    var isMe = uid === DB.me;
+    var following = isFollowing(uid);
+    var postsCount = DB.posts.filter(function(p){ return p.user_id === uid; }).length;
+    var avContent = u.avatar_url
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc((u.display_name||u.username||"?").toUpperCase()[0]);
+
+    $("#profileBody").innerHTML =
+      '<div class="av" style="width:100px;height:100px"><div class="av-in" style="width:96px;height:96px;font-size:36px">'+avContent+'</div></div>'+
+      '<div class="mname">'+esc(u.display_name || u.username)+'</div>'+
+      '<div class="muname">@'+esc(u.username)+'</div>'+
+      (u.gaming_uid ? '<div class="mgaming">🎮 UID: '+esc(u.gaming_uid)+'</div>' : '')+
+      (u.guild_name ? '<div class="mgaming">🏆 '+esc(u.guild_name)+'</div>' : '')+
+      '<div class="mbio">'+esc(u.bio || "This player hasn't added a bio yet.")+'</div>'+
+      '<div class="mstats">'+
+        '<div class="mstat"><div class="n">'+postsCount+'</div><div class="l">Posts</div></div>'+
+        '<div class="mstat"><div class="n">'+followerCount(uid)+'</div><div class="l">Followers</div></div>'+
+        '<div class="mstat"><div class="n">'+followingCount(uid)+'</div><div class="l">Following</div></div>'+
+      '</div>'+
+      (isMe
+        ? '<button class="mfollow grad" disabled style="opacity:.5;color:white">This is you</button>'
+        : '<button class="mfollow '+(following?"fbtn fg":"grad")+'" id="modalFollowBtn">'+(following?"Following":"Follow")+'</button>');
+
+    $("#profileModal").classList.add("on");
+
+    var mf = document.getElementById("modalFollowBtn");
+    if (mf) mf.onclick = function(){ toggleFollow(uid, mf); };
+  }
+
+  function closeProfileModal(){
+    $("#profileModal").classList.remove("on");
+    currentModalUser = null;
+  }
+
+  // ============ EXPLORE ============
+  function viewExplore(){
+    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count - a.like_count; });
+    return '<div class="hdr"><h2>Explore</h2></div>'+
+      (posts.length ? '<div class="egrid">'+posts.map(function(p){
+        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"><div class="ov"><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'+p.like_count+'</div><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'+p.comment_count+'</div></div></div>';
+      }).join("")+'</div>' : emptyState("No posts yet"));
+  }
+
+  // ============ CREATE ============
+  function viewCreate(){
+    pendingImg = null;
+    return '<div class="hdr"><h2>Create Post</h2></div>'+
+      '<div class="ccard">'+
+        '<div class="upload" id="uploadArea"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Upload a screenshot or clip</p><span>Click to browse · JPG / PNG</span></div>'+
+        '<input type="file" id="fileInput" accept="image/*" style="display:none">'+
+        '<div id="prevWrap"></div>'+
+        '<textarea class="cap" id="capInput" placeholder="Write a caption... #FreeFire #Booyah"></textarea>'+
+        '<button class="btn grad" id="shareBtn">Share Post</button>'+
+      '</div>';
+  }
+
+  function onFileChange(e){
+    var f = e.target.files[0]; if (!f) return;
+    if (f.size > 5 * 1024 * 1024) { toast("Image too large (max 5MB)", "acc"); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      pendingImg = ev.target.result;
+      var w = $("#prevWrap");
+      if (w) w.innerHTML = '<img src="'+pendingImg+'" class="prev" alt="Preview">';
+    };
+    reader.readAsDataURL(f);
+  }
+
+  function submitPost(){
+    if (!pendingImg) return toast("Please upload an image first", "acc");
+    var cap = ($("#capInput") && $("#capInput").value || "").trim();
+    DB.posts.push({
+      id: "p" + Date.now(),
+      user_id: DB.me,
+      media_url: pendingImg,
+      caption: cap,
+      like_count: 0,
+      comment_count: 0,
+      created_at: Date.now()
+    });
+    save();
+    toast("Post shared! 🔥", "ok");
+    go("feed");
+  }
+
+  // ============ PROFILE ============
+  function viewProfile(uid){
+    var u = findUser(uid); if (!u) return emptyState("User not found");
+    var isMe = u.id === DB.me;
+    var userPosts = DB.posts.filter(function(p){ return p.user_id === u.id; }).sort(function(a,b){ return b.created_at - a.created_at; });
+    var followers = followerCount(u.id);
+    var following = followingCount(u.id);
+    var avContent = u.avatar_url
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc((u.display_name||u.username||"?").toUpperCase()[0]);
+    var followingUser = isFollowing(u.id);
+
+    return '<div class="phead">'+
+        '<div class="pav" style="width:96px;height:96px"><div class="av-in" style="width:92px;height:92px;font-size:32px">'+avContent+'</div></div>'+
+        '<div class="pinfo"><h2>'+esc(u.display_name || u.username)+'</h2>'+
+          '<div class="uname-at">@'+esc(u.username)+'</div>'+
+          '<span class="rbadge grad">'+esc(u.rank||"Bronze")+'</span>'+
+          (u.gaming_uid ? '<div style="font-size:11px;color:var(--muted);margin-bottom:6px">🎮 UID: '+esc(u.gaming_uid)+'</div>' : '')+
+          (u.guild_name ? '<div style="font-size:11px;color:var(--muted);margin-bottom:6px">🏆 '+esc(u.guild_name)+'</div>' : '')+
+          '<div class="bio">'+esc(u.bio||"")+'</div>'+
+          '<div class="pstats">'+
+            '<div class="pstat"><div class="n">'+userPosts.length+'</div><div class="l">Posts</div></div>'+
+            '<div class="pstat"><div class="n">'+followers+'</div><div class="l">Followers</div></div>'+
+            '<div class="pstat"><div class="n">'+following+'</div><div class="l">Following</div></div>'+
+          '</div>'+
+        '</div>'+
+        (isMe
+          ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>'
+          : '<button class="fbtn '+(followingUser?"fg":"")+'" style="padding:10px 22px;font-size:13px" data-follow-btn="'+u.id+'">'+(followingUser?"Following":"Follow")+'</button>')+
+      '</div>'+
+      '<div class="ptabs"><div class="ptab">Posts</div></div>'+
+      (userPosts.length ? '<div class="pgrid2">'+userPosts.map(function(p){
+        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"></div>';
+      }).join("")+'</div>' : emptyState("No posts yet"));
+  }
+
+  // ============ EDIT PROFILE ============
+  function openEditProfile(){
+    var u = me(); if (!u) return;
+    pendingAvatar = null;
+    $("#editUsername").value = u.username || "";
+    $("#editDisplay").value = u.display_name || "";
+    $("#editBio").value = u.bio || "";
+    $("#editUid").value = u.gaming_uid || "";
+    $("#editGuild").value = u.guild_name || "";
+    $("#editRank").value = u.rank || "Bronze";
+    $("#editErr").textContent = "";
+    var inEl = $("#editAvatarIn");
+    if (u.avatar_url) inEl.innerHTML = '<img src="'+esc(u.avatar_url)+'" alt="">';
+    else inEl.textContent = ((u.display_name||u.username||"?")).toUpperCase()[0];
+    $("#editModal").classList.add("on");
+  }
+  function closeEditProfile(){ $("#editModal").classList.remove("on"); pendingAvatar = null; }
+  function onAvatarChange(e){
+    var f = e.target.files[0]; if (!f) return;
+    if (f.size > 2 * 1024 * 1024) { toast("Image too large (max 2MB)", "acc"); return; }
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      pendingAvatar = ev.target.result;
+      $("#editAvatarIn").innerHTML = '<img src="'+pendingAvatar+'" alt="">';
+    };
+    reader.readAsDataURL(f);
+  }
+  function saveProfile(){
+    var u = me(); if (!u) return;
+    var newUsername = ($("#editUsername").value||"").trim().toLowerCase().replace(/^@/, "").replace(/\s/g,"");
+    var newDisplay  = ($("#editDisplay").value||"").trim();
+    var newBio      = ($("#editBio").value||"").trim();
+    var newUid      = ($("#editUid").value||"").trim();
+    var newGuild    = ($("#editGuild").value||"").trim();
+    var newRank     = $("#editRank").value;
+    var errEl = $("#editErr"); errEl.textContent = "";
+
+    if (newUsername.length < 3) return errEl.textContent = "Username needs 3+ characters.";
+    if (newUsername.length > 20) return errEl.textContent = "Username max 20 characters.";
+    if (!/^[a-z0-9_]+$/.test(newUsername)) return errEl.textContent = "Only lowercase letters, numbers, underscores.";
+    for (var i=0; i<DB.users.length; i++){
+      if (DB.users[i].id !== u.id && DB.users[i].username.toLowerCase() === newUsername){
+        return errEl.textContent = "Username @" + newUsername + " is already taken.";
+      }
+    }
+    if (!newDisplay) return errEl.textContent = "Display name can't be empty.";
+
+    u.username = newUsername;
+    u.display_name = newDisplay;
+    u.bio = newBio;
+    u.gaming_uid = newUid || null;
+    u.guild_name = newGuild || null;
+    u.rank = newRank;
+    if (pendingAvatar) u.avatar_url = pendingAvatar;
+    save();
+    closeEditProfile();
+    toast("Profile updated ✅", "ok");
+    go("profile", u.id);
+  }
+
+  // ============ LIKE / SHARE ============
+  function doLike(pid){
+    var post = findPost(pid); if (!post) return;
+    var idx = -1;
+    for (var i=0; i<DB.likes.length; i++){
+      if (DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me){ idx=i; break; }
+    }
+    if (idx === -1){ DB.likes.push({ user_id: DB.me, post_id: pid }); post.like_count++; }
+    else { DB.likes.splice(idx,1); post.like_count = Math.max(0, post.like_count-1); }
+    save();
+    var btn = document.getElementById("lk-"+pid);
+    var cnt = document.getElementById("cnt-"+pid);
+    var nowLiked = isLiked(pid);
+    if (btn) { btn.classList.toggle("lk", nowLiked); btn.querySelector("svg").setAttribute("fill", nowLiked?"currentColor":"none"); }
+    if (cnt) cnt.textContent = post.like_count.toLocaleString() + " likes";
+  }
+
+  function doDouble(pid){
+    if (!isLiked(pid)) doLike(pid);
+    var b = document.getElementById("burst-"+pid);
+    if (b) { b.classList.remove("go"); void b.offsetWidth; b.classList.add("go"); }
+  }
+
+  function doShare(pid){
+    var url = location.origin + location.pathname + "#post-" + pid;
+    if (navigator.share) navigator.share({ title: "OLD FREE FIRE", url: url }).catch(function(){});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(function(){ toast("Link copied!", "ok"); }).catch(function(){});
+    else toast("Post link: " + url);
+  }
+
+  // ============ COMMENTS ============
+  function openComments(pid){
+    activePost = pid;
+    renderComments();
+    $("#bd").classList.add("on");
+    $("#drawer").classList.add("on");
+    setTimeout(function(){ $("#cInput").focus(); }, 300);
+  }
+  function closeComments(){
+    activePost = null;
+    $("#bd").classList.remove("on");
+    $("#drawer").classList.remove("on");
+  }
+  function renderComments(){
+    var list = $("#cList");
+    var cs = DB.comments.filter(function(c){ return c.post_id === activePost; }).sort(function(a,b){ return a.created_at - b.created_at; });
+    if (!cs.length) { list.innerHTML = '<div class="empty" style="padding:30px 0"><p>No comments yet. Be the first!</p></div>'; return; }
+    list.innerHTML = cs.map(function(c){
+      var u = findUser(c.user_id); if (!u) return "";
+      return '<div class="cmt">'+avatar(u,32)+'<div class="cmt-c"><span class="cn" data-profile="'+u.id+'">@'+esc(u.username)+'</span>'+esc(c.content)+'<div class="cm">'+ago(c.created_at)+'</div></div></div>';
+    }).join("");
+    bindProfileClicks();
+  }
+  function sendComment(){
+    var input = $("#cInput");
+    var txt = (input.value||"").trim();
+    if (!txt || !activePost) return;
+    DB.comments.push({ id:"c"+Date.now(), user_id: DB.me, post_id: activePost, content: txt, created_at: Date.now() });
+    var post = findPost(activePost);
+    if (post) post.comment_count++;
+    input.value = "";
+    save();
+    renderComments();
+    if (currentView === "feed") go("feed");
+  }
+
+  // ============ BINDING ============
+  function bindProfileClicks(){
+    $$("[data-profile]").forEach(function(el){
+      el.onclick = function(){ go("profile", el.getAttribute("data-profile")); };
+    });
+  }
+
+  function bindAll(){
+    $$(".tab").forEach(function(t){
+      t.onclick = function(){ setAuthMode(t.getAttribute("data-mode")); };
+    });
+    $("#submitBtn").onclick = doAuth;
+    $("#email").addEventListener("keydown", function(e){ if (e.key==="Enter") doAuth(); });
+    $("#pass").addEventListener("keydown", function(e){ if (e.key==="Enter") doAuth(); });
+
+    // Verify screen buttons
+    $("#verifyBtn").onclick = verifyAccount;
+    $("#resendBtn").onclick = resendCode;
+    $("#cancelVerifyBtn").onclick = function(){ hideVerifyScreen(); setAuthMode("login"); };
+    $("#codeInput").addEventListener("keydown", function(e){ if (e.key==="Enter") verifyAccount(); });
+
+    $("#logoutBtn").onclick = logout;
+    $("#closeDrawer").onclick = closeComments;
+    $("#bd").onclick = closeComments;
+    $("#sendC").onclick = sendComment;
+    $("#cInput").addEventListener("keydown", function(e){ if (e.key==="Enter") sendComment(); });
+
+    $("#profileClose").onclick = closeProfileModal;
+    $("#profileModal").addEventListener("click", function(e){ if (e.target.id==="profileModal") closeProfileModal(); });
+
+    $("#editClose").onclick = closeEditProfile;
+    $("#editCancel").onclick = closeEditProfile;
+    $("#editSave").onclick = saveProfile;
+    $("#changeAvatarBtn").onclick = function(){ $("#avatarFile").click(); };
+    $("#editAvatar").onclick = function(){ $("#avatarFile").click(); };
+    $("#avatarFile").addEventListener("change", onAvatarChange);
+    $("#editModal").addEventListener("click", function(e){ if (e.target.id==="editModal") closeEditProfile(); });
+
+    // Search: input (live typing)
+    document.body.addEventListener("input", function(e){
+      if (e.target.id === "searchInput") {
+        var q = e.target.value;
+        var clearBtn = $("#searchClear");
+        if (clearBtn) clearBtn.classList.toggle("on", q.length > 0);
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function(){ renderSearchResults(q); }, 200);
+      }
+    });
+
+    // Search: submit (mobile keyboard Go/Search/Enter + Search button)
+    document.body.addEventListener("submit", function(e){
+      if (e.target.id === "searchForm") {
+        e.preventDefault();
+        e.stopPropagation();
+        var input = $("#searchInput");
+        var q = input ? input.value : "";
+        clearTimeout(searchTimeout);
+        renderSearchResults(q);
+        if (input) input.blur();
+      }
+    });
+
+    // Search: keydown fallback
+    document.body.addEventListener("keydown", function(e){
+      if (e.target.id === "searchInput" && e.key === "Enter") {
+        e.preventDefault();
+        e.stopPropagation();
+        var q = e.target.value;
+        clearTimeout(searchTimeout);
+        renderSearchResults(q);
+        e.target.blur();
+      }
+    });
+
+    // Search: clear
+    document.body.addEventListener("click", function(e){
+      if (e.target.closest("#searchClear")) {
+        var s = $("#searchInput");
+        if (s) { s.value = ""; s.focus(); }
+        var cb = $("#searchClear");
+        if (cb) cb.classList.remove("on");
+        renderSearchResults("");
+        return;
+      }
+    });
+
+    // Global click delegation
+    document.body.addEventListener("click", function(e){
+      var t;
+      if ((t = e.target.closest("[data-edit-profile]"))) return openEditProfile();
+      if ((t = e.target.closest("[data-like]"))) return doLike(t.getAttribute("data-like"));
+      if ((t = e.target.closest("[data-comment]"))) return openComments(t.getAttribute("data-comment"));
+      if ((t = e.target.closest("[data-share]"))) return doShare(t.getAttribute("data-share"));
+      if ((t = e.target.closest("[data-profile]"))) return go("profile", t.getAttribute("data-profile"));
+      if (e.target.closest("#uploadArea")) { var fi=$("#fileInput"); if (fi) fi.click(); return; }
+      if (e.target.closest("#shareBtn")) return submitPost();
+    });
+
+    document.body.addEventListener("dblclick", function(e){
+      var t = e.target.closest("[data-dbl]");
+      if (t) doDouble(t.getAttribute("data-dbl"));
+    });
+
+    document.body.addEventListener("change", function(e){
+      if (e.target.id === "fileInput") onFileChange(e);
+    });
+  }
+
+  // ============ BOOT ============
+  function boot(){
+    try {
+      load();
+      setAuthMode("login");
+      bindAll();
+      if (DB.me) {
+        var u = findUser(DB.me);
+        if (u && u.verified) {
+          enterApp();
+        } else {
+          DB.me = null;
+          save();
+        }
+      }
+    } catch (err) {
+      console.error("Boot error:", err);
+      document.body.innerHTML = '<div style="padding:30px;color:#ff3b30;font-family:monospace"><h2>Startup Error</h2><pre>' + String(err) + '</pre></div>';
+    }
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+})();
+</script>
+</body>
+</html>
