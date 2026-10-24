@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OLD FREE FIRE</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0a0a0f;--elev:#141419;--hover:#1c1c24;--accent:#ff3b30;--accent2:#ff6b00;--text:#f5f5f7;--muted:#8e8e93;--border:#2c2c35}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+a{color:inherit;text-decoration:none;cursor:pointer}
+img{display:block;max-width:100%}
+.grad{background:linear-gradient(135deg,#ff3b30,#ff6b00)}
+.grad-text{background:linear-gradient(135deg,#ff3b30,#ff6b00);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.display{font-family:'Orbitron',sans-serif}
+
+/* AUTH */
+#auth{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--bg)}
+.auth-box{width:100%;max-width:380px}
+.auth-logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px}
+.auth-logo h1{font-size:22px;letter-spacing:2px}
+.auth-tag{text-align:center;color:var(--muted);font-size:13px;margin-bottom:20px}
+.tabs{display:flex;background:var(--elev);border-radius:12px;padding:4px;margin-bottom:14px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);text-align:center;transition:.15s}
+.tab.on{background:var(--hover);color:var(--text)}
+.form{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.form label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.form input{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none}
+.form input:focus{border-color:var(--accent)}
+.btn{width:100%;padding:12px;border-radius:11px;font-weight:700;color:#fff;transition:.15s}
+.btn:active{transform:scale(.98)}
+.btn:hover{opacity:.9}
+.btn.sec{background:var(--hover);color:var(--text)}
+.err{color:var(--accent);font-size:12px;min-height:16px}
+.hint{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;padding:10px;background:var(--elev);border-radius:8px;border:1px solid var(--border)}
+
+/* APP */
+#app{display:none}
+#app.on{display:block}
+.side{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--elev);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:40}
+.brand{padding:22px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.brand h1{font-size:12px;letter-spacing:1.5px}
+.brand p{font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+.nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:12px;border-radius:11px;font-size:14px;font-weight:500;transition:.15s;cursor:pointer;border-left:2px solid transparent}
+.nav-item:hover{background:var(--hover)}
+.nav-item.on{background:var(--hover);color:var(--accent);border-left-color:var(--accent)}
+.side-foot{padding:10px;border-top:1px solid var(--border)}
+.main{margin-left:240px;min-height:100vh;padding-bottom:40px}
+.container{max-width:640px;margin:0 auto;padding:22px 16px}
+.botnav{display:none}
+
+/* HEADERS */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.hdr h2{font-size:22px;font-weight:800}
+.hdr .sub{font-size:12px;color:var(--muted)}
+
+/* POST */
+.post{background:var(--elev);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;animation:up .35s}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.ph{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.av{border-radius:50%;padding:2px;flex-shrink:0;background:linear-gradient(135deg,#ff3b30,#ff6b00);overflow:hidden}
+.av-in{width:100%;height:100%;border-radius:50%;background:var(--elev);display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--elev);overflow:hidden}
+.av-in img{width:100%;height:100%;object-fit:cover}
+.pu{flex:1;min-width:0}
+.pu .nm{font-size:14px;font-weight:600;cursor:pointer}
+.pu .nm:hover{color:var(--accent)}
+.pu .mt{font-size:11px;color:var(--muted);margin-top:2px}
+.pm{position:relative;aspect-ratio:1;background:#000;cursor:pointer;user-select:none;-webkit-user-select:none}
+.pm img{width:100%;height:100%;object-fit:cover}
+.burst{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0}
+.burst.go{animation:pop .6s ease-out}
+@keyframes pop{0%{opacity:0;transform:scale(0)}30%{opacity:1;transform:scale(1.3)}100%{opacity:0;transform:scale(1.5)}}
+.burst svg{width:100px;height:100px;fill:#ff3b30;color:#ff3b30;filter:drop-shadow(0 0 20px rgba(255,59,48,.7))}
+.pa{display:flex;align-items:center;gap:14px;padding:12px 16px 4px}
+.act{display:flex;transition:transform .1s}
+.act:active{transform:scale(.85)}
+.act.lk svg{fill:var(--accent);color:var(--accent)}
+.act:hover svg{color:var(--accent)}
+.act svg{transition:color .2s}
+.pb{padding:0 16px 16px}
+.pl{font-size:14px;font-weight:600;margin-bottom:6px}
+.pc{font-size:14px;line-height:1.5}
+.pc .un{font-weight:600;margin-right:6px;cursor:pointer}
+.pc .un:hover{color:var(--accent)}
+.pcl{font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer;display:inline-block}
+.pcl:hover{color:var(--text)}
+
+/* EXPLORE */
+.search{position:relative;margin-bottom:18px}
+.search input{width:100%;background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 14px 12px 40px;color:var(--text);font-size:14px;outline:none}
+.search input:focus{border-color:var(--accent)}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.eitem{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--elev)}
+.eitem img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.eitem:hover img{transform:scale(1.05)}
+.eitem .ov{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:14px;opacity:0;transition:.2s;color:#fff;font-weight:600;font-size:13px}
+.eitem:hover .ov{opacity:1}
+.eov{display:flex;align-items:center;gap:5px}
+
+.stitle{font-size:15px;font-weight:700;margin:22px 0 12px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.pcard{background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center;transition:.2s}
+.pcard:hover{border-color:var(--accent)}
+.pcard .av{margin:0 auto 10px}
+.pcard .nm{font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer}
+.pcard .rk{font-size:11px;color:var(--muted);margin-bottom:10px}
+.fbtn{width:100%;padding:8px;border-radius:7px;font-size:12px;font-weight:700;background:var(--hover);transition:.15s}
+.fbtn:hover{opacity:.85}
+.fbtn.fg{background:var(--border);color:var(--muted)}
+
+/* CREATE */
+.ccard{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.upload{border:2px dashed var(--border);border-radius:13px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
+.upload:hover{border-color:var(--accent);background:var(--hover)}
+.upload svg{color:var(--muted);margin-bottom:8px}
+.upload p{font-size:14px;font-weight:600;margin-bottom:4px}
+.upload span{font-size:12px;color:var(--muted)}
+.prev{width:100%;border-radius:13px;max-height:400px;object-fit:contain;background:#000}
+.cap{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;resize:vertical;min-height:80px}
+.cap:focus{border-color:var(--accent)}
+
+/* PROFILE */
+.phead{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:18px;flex-wrap:wrap}
+.pav{border-radius:50%;padding:3px;background:linear-gradient(135deg,#ff3b30,#ff6b00);flex-shrink:0;overflow:hidden}
+.pav .av-in{font-size:32px}
+.pinfo{flex:1;min-width:200px}
+.pinfo h2{font-size:20px;font-weight:700;margin-bottom:6px}
+.rbadge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:8px;color:#fff}
+.pinfo .bio{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.pstats{display:flex;gap:22px}
+.pstat{text-align:center}
+.pstat .n{font-weight:700;font-size:16px}
+.pstat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.ptabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
+.ptab{flex:1;padding:12px;text-align:center;font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--accent)}
+.pgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+
+/* EDIT PROFILE BUTTON */
+.edit-btn{padding:8px 18px;border-radius:9px;font-size:13px;font-weight:700;background:var(--hover);border:1px solid var(--border);transition:.15s;margin-top:10px}
+.edit-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* SQUADS */
+.scard{background:var(--elev);border:1px solid var(--border);border-radius:15px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;transition:.2s}
+.scard:hover{border-color:var(--accent)}
+.sico{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0}
+.sinfo{flex:1}
+.sinfo h3{font-size:15px;font-weight:700;margin-bottom:2px}
+.sinfo p{font-size:12px;color:var(--muted)}
+
+/* EMPTY */
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty svg{margin-bottom:12px;opacity:.5}
+.empty p{font-size:14px}
+
+/* DRAWER */
+.bd{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none}
+.bd.on{display:block}
+.drawer{position:fixed;bottom:0;left:0;right:0;z-index:201;background:var(--elev);border-top-left-radius:20px;border-top-right-radius:20px;max-height:75vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s}
+.drawer.on{transform:none}
+@media(min-width:768px){.drawer{max-width:500px;margin:0 auto;border-radius:20px;bottom:20px}}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--border)}
+.dhead h3{font-size:15px;font-weight:700}
+.dbody{flex:1;overflow-y:auto;padding:16px}
+.cmt{display:flex;gap:12px;margin-bottom:14px}
+.cmt .av{width:32px;height:32px}
+.cmt .av-in{font-size:11px}
+.cmt-c{flex:1;font-size:13px;line-height:1.5}
+.cmt-c .cn{font-weight:600;margin-right:6px;cursor:pointer}
+.cmt-c .cn:hover{color:var(--accent)}
+.cmt-c .cm{font-size:11px;color:var(--muted);margin-top:4px}
+.dinput{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border)}
+.dinput input{flex:1;background:var(--hover);border:1px solid var(--border);border-radius:24px;padding:10px 16px;color:var(--text);font-size:13px;outline:none}
+.dinput input:focus{border-color:var(--accent)}
+.dinput button{background:var(--accent);color:#fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* EDIT PROFILE MODAL */
+.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bd.on{display:flex}
+.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;animation:mIn .25s ease}
+@keyframes mIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--elev);z-index:1}
+.modal-head h3{font-size:16px;font-weight:700}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+.avatar-edit{display:flex;flex-direction:column;align-items:center;gap:10px}
+.avatar-edit .av{width:96px;height:96px;cursor:pointer;position:relative}
+.avatar-edit .av-in{font-size:32px}
+.avatar-edit .av-overlay{position:absolute;inset:2px;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:.2s;color:#fff}
+.avatar-edit .av:hover .av-overlay{opacity:1}
+.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field textarea,.field select{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-size:14px;outline:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:70px}
+.field select{cursor:pointer}
+.modal-foot{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--elev)}
+.modal-foot .btn{flex:1}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 20px;font-size:13px;font-weight:600;z-index:500;transition:transform .3s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw}
+.toast.on{transform:translateX(-50%) translateY(0)}
+.toast.acc{border-color:var(--accent)}
+
+@media(max-width:768px){
+  .side{display:none}
+  .main{margin-left:0;padding-bottom:76px}
+  .container{padding:16px 12px}
+  .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--elev);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
+  .botnav .nav-item{flex:1;flex-direction:column;padding:8px 4px;gap:3px;border-left:none;border-top:2px solid transparent;border-radius:0;font-size:9px;justify-content:center}
+  .botnav .nav-item.on{border-top-color:var(--accent);border-left:none;background:transparent}
+  .botnav .nav-item:hover{background:transparent}
+  .phead{gap:16px}
+  .pav{width:72px !important;height:72px !important}
+  .pav .av-in{font-size:24px}
+  .pstats{gap:16px}
+  .egrid{gap:2px}
+  .toast{bottom:72px}
+}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth">
+  <div class="auth-box">
+    <div class="auth-logo">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <h1 class="display grad-text">OLD FREE FIRE</h1>
+    </div>
+    <p class="auth-tag">The Gamer Social Network</p>
+    <div class="tabs">
+      <div class="tab on" data-mode="login">Sign In</div>
+      <div class="tab" data-mode="register">Create Account</div>
+    </div>
+    <div class="form">
+      <div data-field="login">
+        <label>Username</label>
+        <input type="text" id="li-user" placeholder="booyah_king" autocomplete="username">
+      </div>
+      <div data-field="register" style="display:none">
+        <label>Username</label>
+        <input type="text" id="rg-user" placeholder="pro_gamer99" autocomplete="username">
+      </div>
+      <div data-field="register" style="display:none">
+        <label>Display Name</label>
+        <input type="text" id="rg-name" placeholder="Pro Gamer" autocomplete="name">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" id="li-pass" placeholder="••••••••">
+      </div>
+      <p class="err" id="err"></p>
+      <button class="btn grad" id="submitBtn">Sign In</button>
+    </div>
+    <div class="hint">Demo: <b>booyah_king</b> / <b>pass</b></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <aside class="side">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+      <div><h1 class="display grad-text">OLD FREE FIRE</h1><p>GAMER NETWORK</p></div>
+    </div>
+    <nav class="nav" id="sideNav"></nav>
+    <div class="side-foot">
+      <div class="nav-item" id="logoutBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </div>
+    </div>
+  </aside>
+  <main class="main"><div class="container" id="content"></div></main>
+  <nav class="botnav" id="botNav"></nav>
+</div>
+
+<!-- DRAWER -->
+<div class="bd" id="bd"></div>
+<div class="drawer" id="drawer">
+  <div class="dhead"><h3>Comments</h3>
+    <button id="closeDrawer"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="dbody" id="cList"></div>
+  <div class="dinput">
+    <input type="text" id="cInput" placeholder="Add a comment...">
+    <button id="sendC"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal-bd" id="editModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Edit Profile</h3>
+      <button id="closeEdit"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="avatar-edit">
+        <div class="av" id="editAvatar" style="width:96px;height:96px">
+          <div class="av-in" id="editAvatarIn" style="width:92px;height:92px;font-size:32px"></div>
+          <div class="av-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        </div>
+        <input type="file" id="avatarFile" accept="image/*" style="display:none">
+        <button class="edit-btn" id="changeAvatarBtn" style="margin-top:0;font-size:12px;padding:6px 14px">Change Photo</button>
+        <p style="font-size:11px;color:var(--muted)">Tap the avatar to upload</p>
+      </div>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="editUsername" placeholder="username">
+      </div>
+      <div class="field">
+        <label>Display Name</label>
+        <input type="text" id="editDisplay" placeholder="Your name">
+      </div>
+      <div class="field">
+        <label>Bio</label>
+        <textarea id="editBio" placeholder="Tell us about yourself..."></textarea>
+      </div>
+      <div class="field">
+        <label>Rank</label>
+        <select id="editRank">
+          <option value="Bronze">Bronze</option>
+          <option value="Silver">Silver</option>
+          <option value="Gold">Gold</option>
+          <option value="Platinum">Platinum</option>
+          <option value="Diamond">Diamond</option>
+          <option value="Master">Master</option>
+          <option value="Heroic">Heroic</option>
+          <option value="Grandmaster">Grandmaster</option>
+        </select>
+      </div>
+      <p class="err" id="editErr"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn sec" id="cancelEdit">Cancel</button>
+      <button class="btn grad" id="saveEdit">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- safe storage ----------
+  var mem = {};
+  function store(k,v){
+    try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }
+    catch(e){ if(v===undefined) return mem[k]||null; mem[k]=v; }
+  }
+
+  // ---------- state ----------
+  var DB = { users:[], posts:[], likes:[], comments:[], follows:[], squads:[], me:null };
+  var authMode = "login";
+  var currentView = "feed";
+  var activePost = null;
+  var pendingImg = null;
+  var pendingAvatar = null;
+
+  // ---------- seed ----------
+  function seed(){
+    DB.users = [
+      {id:"u1",username:"booyah_king",display_name:"Booyah King",avatar_url:null,bio:"Headshot machine 🔥",rank:"Grandmaster",password:"pass"},
+      {id:"u2",username:"chrono_sniper",display_name:"Chrono Sniper",avatar_url:null,bio:"Sniping from the shadows 🎯",rank:"Heroic",password:"pass"},
+      {id:"u3",username:"fire_panda",display_name:"Fire Panda",avatar_url:null,bio:"Rushing with the squad 💥",rank:"Diamond",password:"pass"},
+      {id:"u4",username:"shadow_fury",display_name:"Shadow Fury",avatar_url:null,bio:"Clutch or bust 🏆",rank:"Master",password:"pass"},
+      {id:"u5",username:"elite_reaper",display_name:"Elite Reaper",avatar_url:null,bio:"Solo vs squad specialist",rank:"Gold",password:"pass"}
+    ];
+    var i=function(q){return "https://images.unsplash.com/"+q+"?w=800&auto=format&fit=crop"};
+    DB.posts = [
+      {id:"p1",user_id:"u1",media_url:i("photo-1542751371-adc38448a05e"),caption:"BOOYAH! 24 kills solo vs squad 🔥 #FreeFire",like_count:1243,comment_count:0,created_at:Date.now()-3600000},
+      {id:"p2",user_id:"u2",media_url:i("photo-1511512578047-dfb367046420"),caption:"Sniping from the ridge all game 🎯 #Headshot",like_count:892,comment_count:0,created_at:Date.now()-7200000},
+      {id:"p3",user_id:"u3",media_url:i("photo-1550745165-9bc0b252726f"),caption:"Squad wipes hit different when you rush together 💥",like_count:654,comment_count:0,created_at:Date.now()-14400000},
+      {id:"p4",user_id:"u4",media_url:i("photo-1538481199705-c710c4e965fc"),caption:"Last circle clutch 🏆 Never give up.",like_count:2101,comment_count:0,created_at:Date.now()-28800000},
+      {id:"p5",user_id:"u5",media_url:i("photo-1552820728-8b83bb6b773f"),caption:"New record: 31 kills! 🚀 #Grind",like_count:1587,comment_count:0,created_at:Date.now()-43200000},
+      {id:"p6",user_id:"u1",media_url:i("photo-1616588589676-62b3bd4ff6d2"),caption:"Ranked grind continues 💪",like_count:743,comment_count:0,created_at:Date.now()-57600000}
+    ];
+    DB.comments = [
+      {id:"c1",user_id:"u2",post_id:"p1",content:"Insane play bro! 🔥",created_at:Date.now()-3000000},
+      {id:"c2",user_id:"u3",post_id:"p1",content:"Teach me your ways 🙏",created_at:Date.now()-2400000},
+      {id:"c3",user_id:"u4",post_id:"p4",content:"CLUTCH GOD 👑",created_at:Date.now()-20000000}
+    ];
+    DB.comments.forEach(function(c){ var p=findPost(c.post_id); if(p)p.comment_count++; });
+    DB.likes=[];
+    DB.follows=[{follower_id:"u1",following_id:"u2"},{follower_id:"u2",following_id:"u1"}];
+    DB.squads=[
+      {id:"s1",name:"Fire Nation",description:"Top 100 squad · ranked grind",owner_id:"u1"},
+      {id:"s2",name:"Shadow Assassins",description:"Snipers only. Precision wins.",owner_id:"u2"},
+      {id:"s3",name:"Booyah Bros",description:"Chill squad · tournaments",owner_id:"u3"},
+      {id:"s4",name:"Elite Warriors",description:"Competitive · tryouts open",owner_id:"u4"}
+    ];
+    save();
+  }
+
+  function save(){ try{ store("off_v4", JSON.stringify(DB)); }catch(e){} }
+  function load(){
+    try{
+      var raw = store("off_v4");
+      if(raw){ var p=JSON.parse(raw); for(var k in p){ if(p[k]!==undefined) DB[k]=p[k]; } if(DB.users.length) return; }
+    }catch(e){}
+    seed();
+  }
+
+  // ---------- helpers ----------
+  function $(s){ return document.querySelector(s); }
+  function $$(s){ return document.querySelectorAll(s); }
+  function findUser(id){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].id===id) return DB.users[i]; return null; }
+  function findPost(id){ for(var i=0;i<DB.posts.length;i++) if(DB.posts[i].id===id) return DB.posts[i]; return null; }
+  function findUserByName(n){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].username===n) return DB.users[i]; return null; }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];}); }
+  function ago(ts){ var s=Math.floor((Date.now()-ts)/1000); if(s<60)return s+"s"; if(s<3600)return Math.floor(s/60)+"m"; if(s<86400)return Math.floor(s/3600)+"h"; if(s<604800)return Math.floor(s/86400)+"d"; return new Date(ts).toLocaleDateString(); }
+  function isLiked(pid){ for(var i=0;i<DB.likes.length;i++) if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) return true; return false; }
+  function isFollow(uid){ for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid) return true; return false; }
+  function avatar(u,size){
+    size=size||40;
+    var ch = (u && (u.display_name||u.username) || "?")[0].toUpperCase();
+    var inner = (u && u.avatar_url)
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc(ch);
+    return '<div class="av" style="width:'+size+'px;height:'+size+'px"><div class="av-in" style="width:'+(size-4)+'px;height:'+(size-4)+'px;font-size:'+Math.round(size*0.4)+'px">'+inner+'</div></div>';
+  }
+  function toast(msg,accent){
+    var t=$("#toast"); if(!t)return;
+    t.textContent=msg; t.className="toast on"+(accent?" acc":"");
+    clearTimeout(t._tm); t._tm=setTimeout(function(){t.classList.remove("on");},2200);
+  }
+  function emptyState(msg){
+    return '<div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><p>'+esc(msg)+'</p></div>';
+  }
+
+  // ================================================================
+  // AUTH
+  // ================================================================
+  function setAuthMode(mode){
+    authMode = mode;
+    $$(".tab").forEach(function(t){ t.classList.toggle("on", t.getAttribute("data-mode")===mode); });
+    $$("[data-field]").forEach(function(el){
+      var f = el.getAttribute("data-field");
+      if(f==="login") el.style.display = mode==="login"?"block":"none";
+      else if(f==="register") el.style.display = mode==="register"?"block":"none";
+    });
+    $("#err").textContent = "";
+    $("#submitBtn").textContent = mode==="login" ? "Sign In" : "Create Account";
+    $("#li-pass").setAttribute("autocomplete", mode==="login"?"current-password":"new-password");
+  }
+
+  function submitAuth(){
+    var errEl = $("#err");
+    errEl.textContent = "";
+    if(authMode==="login"){
+      var u = ($("#li-user").value||"").trim().toLowerCase();
+      var p = $("#li-pass").value||"";
+      if(!u||!p) return errEl.textContent = "Enter username and password.";
+      var user = findUserByName(u);
+      if(!user) return errEl.textContent = "User not found. Create an account?";
+      if(user.password && user.password!==p) return errEl.textContent = "Wrong password.";
+      DB.me = user.id; save(); enterApp();
+    } else {
+      var ru = ($("#rg-user").value||"").trim().toLowerCase().replace(/\s/g,"");
+      var rn = ($("#rg-name").value||"").trim();
+      var rp = $("#li-pass").value||"";
+      if(ru.length<3) return errEl.textContent = "Username needs 3+ characters.";
+      if(findUserByName(ru)) return errEl.textContent = "Username already taken.";
+      if(!rn) return errEl.textContent = "Enter a display name.";
+      if(rp.length<4) return errEl.textContent = "Password needs 4+ characters.";
+      var nu = {id:"u"+Date.now(), username:ru, display_name:rn, avatar_url:null, bio:"New Free Fire player 🔥", rank:"Bronze", password:rp};
+      DB.users.push(nu);
+      DB.me = nu.id;
+      save(); enterApp();
+    }
+  }
+
+  function enterApp(){
+    $("#auth").style.display = "none";
+    $("#app").classList.add("on");
+    renderNav();
+    go("feed");
+  }
+
+  function logout(){
+    DB.me = null; save();
+    $("#app").classList.remove("on");
+    $("#auth").style.display = "flex";
+    $("#li-user").value = ""; $("#li-pass").value = ""; $("#rg-user").value=""; $("#rg-name").value="";
+    setAuthMode("login");
+  }
+
+  // ================================================================
+  // NAV
+  // ================================================================
+  function renderNav(){
+    var items = [
+      {id:"feed", label:"Home", icon:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
+      {id:"explore", label:"Explore", icon:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
+      {id:"create", label:"Create", icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'},
+      {id:"squads", label:"Squads", icon:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
+      {id:"profile", label:"Profile", icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'}
+    ];
+    function svg(p){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
+    var html = items.map(function(i){ return '<div class="nav-item" data-nav="'+i.id+'">'+svg(i.icon)+'<span>'+i.label+'</span></div>'; }).join("");
+    $("#sideNav").innerHTML = html;
+    $("#botNav").innerHTML = html;
+    $$("[data-nav]").forEach(function(el){
+      el.onclick = function(){ go(el.getAttribute("data-nav")); };
+    });
+  }
+  function setActiveNav(id){
+    $$("[data-nav]").forEach(function(el){
+      el.classList.toggle("on", el.getAttribute("data-nav")===id);
+    });
+  }
+
+  // ================================================================
+  // ROUTER
+  // ================================================================
+  function go(view, param){
+    currentView = view;
+    setActiveNav(view);
+    var c = $("#content");
+    if(view==="feed") c.innerHTML = viewFeed();
+    else if(view==="explore") c.innerHTML = viewExplore();
+    else if(view==="create") c.innerHTML = viewCreate();
+    else if(view==="squads") c.innerHTML = viewSquads();
+    else if(view==="profile") c.innerHTML = viewProfile(param || DB.me);
+    window.scrollTo(0,0);
+  }
+
+  // ================================================================
+  // FEED
+  // ================================================================
+  function viewFeed(){
+    var posts = DB.posts.slice().sort(function(a,b){ return b.created_at-a.created_at; });
+    if(!posts.length) return emptyState("No posts yet. Be the first to post!");
+    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 Latest from the squad</span></div>' + posts.map(postCard).join("");
+  }
+  function postCard(p){
+    var u = findUser(p.user_id); if(!u) return "";
+    var liked = isLiked(p.id);
+    return '<article class="post">'+
+      '<div class="ph">'+avatar(u,40)+'<div class="pu"><div class="nm" data-profile="'+u.id+'">'+esc(u.username)+'</div><div class="mt">'+esc(u.rank||"Bronze")+' · '+ago(p.created_at)+'</div></div></div>'+
+      '<div class="pm" data-dbl="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="Post" loading="lazy"><div class="burst" id="burst-'+p.id+'"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div>'+
+      '<div class="pa">'+
+        '<button class="act '+(liked?"lk":"")+'" data-like="'+p.id+'" id="lk-'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="'+(liked?"currentColor":"none")+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>'+
+        '<button class="act" data-comment="'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>'+
+        '<button class="act" data-share="'+p.id+'"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>'+
+      '</div>'+
+      '<div class="pb">'+
+        '<div class="pl" id="cnt-'+p.id+'">'+p.like_count.toLocaleString()+' likes</div>'+
+        '<div class="pc"><span class="un" data-profile="'+u.id+'">'+esc(u.username)+'</span>'+esc(p.caption||"")+'</div>'+
+        (p.comment_count>0?'<div class="pcl" data-comment="'+p.id+'">View all '+p.comment_count+' comments</div>':'')+
+      '</div>'+
+    '</article>';
+  }
+
+  // ================================================================
+  // EXPLORE
+  // ================================================================
+  function viewExplore(){
+    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count-a.like_count; });
+    var players = DB.users.filter(function(u){ return u.id!==DB.me; });
+    return '<div class="hdr"><h2>Explore</h2></div>'+
+      '<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="searchInput" placeholder="Search players..."></div>'+
+      '<div class="egrid">'+posts.map(function(p){
+        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"><div class="ov"><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'+p.like_count+'</div><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'+p.comment_count+'</div></div></div>';
+      }).join("")+'</div>'+
+      '<h3 class="stitle">Players to follow</h3>'+
+      '<div class="pgrid" id="pgrid">'+players.map(playerCard).join("")+'</div>';
+  }
+  function playerCard(u){
+    var fg = isFollow(u.id);
+    return '<div class="pcard">'+avatar(u,56)+'<div class="nm" data-profile="'+u.id+'">'+esc(u.username)+'</div><div class="rk">'+esc(u.rank||"Bronze")+'</div><button class="fbtn '+(fg?"fg":"")+'" data-follow="'+u.id+'">'+(fg?"Following":"Follow")+'</button></div>';
+  }
+
+  // ================================================================
+  // CREATE
+  // ================================================================
+  function viewCreate(){
+    pendingImg = null;
+    return '<div class="hdr"><h2>Create Post</h2></div>'+
+      '<div class="ccard">'+
+        '<div class="upload" id="uploadArea"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><p>Upload a screenshot or clip</p><span>Click to browse · JPG/PNG</span></div>'+
+        '<input type="file" id="fileInput" accept="image/*" style="display:none">'+
+        '<div id="prevWrap"></div>'+
+        '<textarea class="cap" id="capInput" placeholder="Write a caption... #FreeFire #Booyah"></textarea>'+
+        '<button class="btn grad" id="shareBtn">Share Post</button>'+
+      '</div>';
+  }
+
+  // ================================================================
+  // SQUADS
+  // ================================================================
+  function viewSquads(){
+    var colors = ["#ff3b30","#ff6b00","#a855f7","#22c55e"];
+    return '<div class="hdr"><h2>Squads</h2></div>'+
+      DB.squads.map(function(s,idx){
+        var owner = findUser(s.owner_id);
+        var c = colors[idx % colors.length];
+        return '<div class="scard"><div class="sico" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'55">'+esc(s.name[0])+'</div><div class="sinfo"><h3>'+esc(s.name)+'</h3><p>'+esc(s.description||"")+' · by '+esc(owner?owner.username:"?")+'</p></div></div>';
+      }).join("")+
+      emptyState("Squad creation coming soon");
+  }
+
+  // ================================================================
+  // PROFILE (with Edit button)
+  // ================================================================
+  function viewProfile(uid){
+    var u = findUser(uid); if(!u) return emptyState("User not found");
+    var isMe = u.id===DB.me;
+    var myPosts = DB.posts.filter(function(p){return p.user_id===u.id;}).sort(function(a,b){return b.created_at-a.created_at;});
+    var followers=0, following=0;
+    DB.follows.forEach(function(f){ if(f.following_id===u.id)followers++; if(f.follower_id===u.id)following++; });
+    var fg = isFollow(u.id);
+
+    var avatarContent = u.avatar_url
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc((u.display_name||u.username||"?")[0].toUpperCase());
+
+    return '<div class="phead">'+
+        '<div class="pav" style="width:96px;height:96px"><div class="av-in" style="width:92px;height:92px;font-size:32px">'+avatarContent+'</div></div>'+
+        '<div class="pinfo"><h2>'+esc(u.username)+'</h2><span class="rbadge grad">'+esc(u.rank||"Bronze")+'</span><div class="bio">'+esc(u.bio||"")+'</div>'+
+        '<div class="pstats"><div class="pstat"><div class="n">'+myPosts.length+'</div><div class="l">Posts</div></div><div class="pstat"><div class="n">'+followers+'</div><div class="l">Followers</div></div><div class="pstat"><div class="n">'+following+'</div><div class="l">Following</div></div></div></div>'+
+        (isMe
+          ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>'
+          : '<button class="btn grad" style="width:auto;padding:8px 20px;margin-top:12px" data-follow="'+u.id+'">'+(fg?"Following":"Follow")+'</button>')+
+      '</div>'+
+      '<div class="ptabs"><div class="ptab">Posts</div></div>'+
+      (myPosts.length ? '<div class="pgrid2">'+myPosts.map(function(p){
+        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"></div>';
+      }).join("")+'</div>' : emptyState("No posts yet"));
+  }
+
+  // ================================================================
+  // EDIT PROFILE
+  // ================================================================
+  function openEditProfile(){
+    var u = findUser(DB.me); if(!u) return;
+    pendingAvatar = null;
+    $("#editUsername").value = u.username || "";
+    $("#editDisplay").value = u.display_name || "";
+    $("#editBio").value = u.bio || "";
+    $("#editRank").value = u.rank || "Bronze";
+    $("#editErr").textContent = "";
+    // avatar preview
+    var inEl = $("#editAvatarIn");
+    if(u.avatar_url){
+      inEl.innerHTML = '<img src="'+esc(u.avatar_url)+'" alt="">';
+    } else {
+      inEl.textContent = (u.display_name||u.username||"?").toUpperCase()[0];
+    }
+    $("#editModal").classList.add("on");
+  }
+
+  function closeEditProfile(){
+    $("#editModal").classList.remove("on");
+    pendingAvatar = null;
+  }
+
+  function onAvatarChange(e){
+    var f = e.target.files[0]; if(!f) return;
+    if(f.size > 2 * 1024 * 1024) return toast("Image too large (max 2MB)");
+    var r = new FileReader();
+    r.onload = function(ev){
+      pendingAvatar = ev.target.result;
+      $("#editAvatarIn").innerHTML = '<img src="'+pendingAvatar+'" alt="">';
+    };
+    r.readAsDataURL(f);
+  }
+
+  function saveProfile(){
+    var u = findUser(DB.me); if(!u) return;
+    var newUsername = ($("#editUsername").value||"").trim().toLowerCase().replace(/\s/g,"");
+    var newDisplay = ($("#editDisplay").value||"").trim();
+    var newBio = ($("#editBio").value||"").trim();
+    var newRank = $("#editRank").value;
+    var errEl = $("#editErr");
+    errEl.textContent = "";
+
+    if(newUsername.length < 3) return errEl.textContent = "Username needs 3+ characters.";
+    // Check uniqueness (excluding self)
+    for(var i=0;i<DB.users.length;i++){
+      if(DB.users[i].id !== u.id && DB.users[i].username === newUsername){
+        return errEl.textContent = "Username already taken.";
+      }
+    }
+    if(!newDisplay) return errEl.textContent = "Display name can't be empty.";
+
+    u.username = newUsername;
+    u.display_name = newDisplay;
+    u.bio = newBio;
+    u.rank = newRank;
+    if(pendingAvatar) u.avatar_url = pendingAvatar;
+
+    save();
+    closeEditProfile();
+    toast("Profile updated ✅", true);
+    // Refresh current view
+    go("profile", u.id);
+  }
+
+  // ================================================================
+  // INTERACTIONS
+  // ================================================================
+  function doLike(pid){
+    var post = findPost(pid); if(!post) return;
+    var idx = -1;
+    for(var i=0;i<DB.likes.length;i++){ if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me){ idx=i; break; } }
+    if(idx===-1){ DB.likes.push({post_id:pid, user_id:DB.me}); post.like_count++; }
+    else { DB.likes.splice(idx,1); post.like_count=Math.max(0, post.like_count-1); }
+    save();
+    var btn = document.getElementById("lk-"+pid);
+    var cnt = document.getElementById("cnt-"+pid);
+    var nowLiked = isLiked(pid);
+    if(btn){ btn.classList.toggle("lk", nowLiked); var sv=btn.querySelector("svg"); if(sv) sv.setAttribute("fill", nowLiked?"currentColor":"none"); }
+    if(cnt) cnt.textContent = post.like_count.toLocaleString()+" likes";
+  }
+  function doDouble(pid){
+    if(!isLiked(pid)) doLike(pid);
+    var b = document.getElementById("burst-"+pid);
+    if(b){ b.classList.remove("go"); void b.offsetWidth; b.classList.add("go"); }
+  }
+  function doFollow(uid, btn){
+    var idx = -1;
+    for(var i=0;i<DB.follows.length;i++){ if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid){ idx=i; break; } }
+    if(idx===-1){ DB.follows.push({follower_id:DB.me, following_id:uid}); toast("Following", true); }
+    else { DB.follows.splice(idx,1); toast("Unfollowed"); }
+    save();
+    var fg = isFollow(uid);
+    if(btn){ btn.textContent = fg?"Following":"Follow"; btn.classList.toggle("fg", fg); }
+    if(currentView==="profile") go("profile", uid);
+    if(currentView==="explore") go("explore");
+  }
+  function doShare(pid){
+    var url = location.href.split("#")[0]+"#post-"+pid;
+    if(navigator.share){ navigator.share({title:"OLD FREE FIRE",url:url}).catch(function(){}); }
+    else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){toast("Link copied!",true);}).catch(function(){toast("Copy failed");}); }
+    else { toast("Share: "+url); }
+  }
+
+  // ================================================================
+  // COMMENTS
+  // ================================================================
+  function openComments(pid){
+    activePost = pid;
+    renderComments();
+    $("#bd").classList.add("on");
+    $("#drawer").classList.add("on");
+    setTimeout(function(){ var i=$("#cInput"); if(i)i.focus(); },300);
+  }
+  function closeComments(){
+    activePost = null;
+    $("#bd").classList.remove("on");
+    $("#drawer").classList.remove("on");
+  }
+  function renderComments(){
+    var list = $("#cList");
+    var cs = DB.comments.filter(function(c){ return c.post_id===activePost; }).sort(function(a,b){return a.created_at-b.created_at;});
+    if(!cs.length){ list.innerHTML = '<div class="empty" style="padding:30px 0"><p>No comments yet. Be the first!</p></div>'; return; }
+    list.innerHTML = cs.map(function(c){
+      var u = findUser(c.user_id); if(!u) return "";
+      return '<div class="cmt">'+avatar(u,32)+'<div class="cmt-c"><span class="cn" data-profile="'+u.id+'">'+esc(u.username)+'</span>'+esc(c.content)+'<div class="cm">'+ago(c.created_at)+'</div></div></div>';
+    }).join("");
+  }
+  function sendComment(){
+    var input = $("#cInput");
+    var txt = (input.value||"").trim();
+    if(!txt || !activePost) return;
+    DB.comments.push({id:"c"+Date.now(), user_id:DB.me, post_id:activePost, content:txt, created_at:Date.now()});
+    var p = findPost(activePost); if(p) p.comment_count++;
+    input.value = "";
+    save();
+    renderComments();
+    if(currentView==="feed") go("feed");
+    else if(currentView==="explore") go("explore");
+  }
+
+  // ================================================================
+  // FILE UPLOAD (post)
+  // ================================================================
+  function onFileChange(e){
+    var f = e.target.files[0]; if(!f) return;
+    var r = new FileReader();
+    r.onload = function(ev){
+      pendingImg = ev.target.result;
+      var w = $("#prevWrap");
+      if(w) w.innerHTML = '<img src="'+pendingImg+'" class="prev" alt="Preview">';
+    };
+    r.readAsDataURL(f);
+  }
+  function submitPost(){
+    if(!pendingImg) return toast("Please upload an image first");
+    var cap = ($("#capInput") && $("#capInput").value || "").trim();
+    DB.posts.push({id:"p"+Date.now(), user_id:DB.me, media_url:pendingImg, caption:cap, like_count:0, comment_count:0, created_at:Date.now()});
+    save();
+    toast("Post shared! 🔥", true);
+    go("feed");
+  }
+
+  // ================================================================
+  // GLOBAL EVENT DELEGATION
+  // ================================================================
+  function bindGlobal(){
+    // Tabs
+    $$(".tab").forEach(function(t){
+      t.onclick = function(){ setAuthMode(this.getAttribute("data-mode")); };
+    });
+    // Auth submit
+    $("#submitBtn").onclick = submitAuth;
+    ["li-user","li-pass","rg-user","rg-name"].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.addEventListener("keydown", function(e){ if(e.key==="Enter") submitAuth(); });
+    });
+    // Logout
+    $("#logoutBtn").onclick = logout;
+    // Drawer close
+    $("#closeDrawer").onclick = closeComments;
+    $("#bd").onclick = closeComments;
+    $("#sendC").onclick = sendComment;
+    $("#cInput").addEventListener("keydown", function(e){ if(e.key==="Enter") sendComment(); });
+
+    // Edit profile modal bindings
+    $("#closeEdit").onclick = closeEditProfile;
+    $("#cancelEdit").onclick = closeEditProfile;
+    $("#saveEdit").onclick = saveProfile;
+    $("#changeAvatarBtn").onclick = function(){ $("#avatarFile").click(); };
+    $("#editAvatar").onclick = function(){ $("#avatarFile").click(); };
+    $("#avatarFile").addEventListener("change", onAvatarChange);
+    $("#editModal").addEventListener("click", function(e){ if(e.target.id==="editModal") closeEditProfile(); });
+
+    // Global click delegation
+    document.body.addEventListener("click", function(e){
+      var t;
+      t = e.target.closest("[data-edit-profile]");
+      if(t) return openEditProfile();
+      t = e.target.closest("[data-like]");
+      if(t) return doLike(t.getAttribute("data-like"));
+      t = e.target.closest("[data-comment]");
+      if(t) return openComments(t.getAttribute("data-comment"));
+      t = e.target.closest("[data-share]");
+      if(t) return doShare(t.getAttribute("data-share"));
+      t = e.target.closest("[data-follow]");
+      if(t) return doFollow(t.getAttribute("data-follow"), t);
+      t = e.target.closest("[data-profile]");
+      if(t) return go("profile", t.getAttribute("data-profile"));
+      if(e.target.closest("#uploadArea")){ var fi=$("#fileInput"); if(fi) fi.click(); return; }
+      if(e.target.closest("#shareBtn")) return submitPost();
+    });
+
+    // Double-tap
+    document.body.addEventListener("dblclick", function(e){
+      var t = e.target.closest("[data-dbl]");
+      if(t) doDouble(t.getAttribute("data-dbl"));
+    });
+
+    // File change
+    document.body.addEventListener("change", function(e){
+      if(e.target.id==="fileInput") onFileChange(e);
+    });
+
+    // Search
+    document.body.addEventListener("input", function(e){
+      if(e.target.id==="searchInput"){
+        var q = e.target.value.toLowerCase();
+        var players = DB.users.filter(function(u){ return u.id!==DB.me && (u.username.indexOf(q)>=0 || (u.display_name||"").toLowerCase().indexOf(q)>=0); });
+        var g = $("#pgrid");
+        if(g) g.innerHTML = players.length ? players.map(playerCard).join("") : '<p style="color:var(--muted);font-size:13px">No players found.</p>';
+      }
+    });
+  }
+
+  // ================================================================
+  // BOOT
+  // ================================================================
+  function boot(){
+    try{
+      load();
+      setAuthMode("login");
+      bindGlobal();
+      if(DB.me && findUser(DB.me)) enterApp();
+    }catch(err){
+      console.error("BOOT ERROR:", err);
+      document.body.innerHTML = '<div style="padding:30px;color:#ff3b30;font-family:monospace"><h2>Startup error</h2><pre>'+esc(err && err.stack || err)+'</pre></div>';
+    }
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+})();
+</script>
+</body>
+</html>
