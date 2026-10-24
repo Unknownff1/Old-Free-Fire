@@ -46,7 +46,7 @@ img{display:block;max-width:100%}
 .brand{padding:22px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
 .brand h1{font-size:12px;letter-spacing:1.5px}
 .brand p{font-size:9px;color:var(--muted);letter-spacing:1px;margin-top:2px}
-.nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
 .nav-item{display:flex;align-items:center;gap:11px;padding:12px;border-radius:11px;font-size:14px;font-weight:500;transition:.15s;cursor:pointer;border-left:2px solid transparent}
 .nav-item:hover{background:var(--hover)}
 .nav-item.on{background:var(--hover);color:var(--accent);border-left-color:var(--accent)}
@@ -59,6 +59,7 @@ img{display:block;max-width:100%}
 .hdr h2{font-size:22px;font-weight:800}
 .hdr .sub{font-size:12px;color:var(--muted)}
 
+/* POST */
 .post{background:var(--elev);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:18px;animation:up .35s}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .ph{display:flex;align-items:center;gap:12px;padding:14px 16px}
@@ -89,10 +90,29 @@ img{display:block;max-width:100%}
 .pcl{font-size:13px;color:var(--muted);margin-top:8px;cursor:pointer;display:inline-block}
 .pcl:hover{color:var(--text)}
 
+/* SEARCH */
 .search{position:relative;margin-bottom:18px}
-.search input{width:100%;background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 14px 12px 40px;color:var(--text);font-size:14px;outline:none}
+.search input{width:100%;background:var(--elev);border:1px solid var(--border);border-radius:12px;padding:14px 14px 14px 46px;color:var(--text);font-size:15px;outline:none;transition:.2s}
 .search input:focus{border-color:var(--accent)}
-.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);padding:4px;display:none}
+.search-clear:hover{color:var(--text)}
+.search-clear.on{display:block}
+
+.stitle{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:20px 0 12px}
+.ulist{display:flex;flex-direction:column;gap:8px}
+.ucard{display:flex;align-items:center;gap:14px;background:var(--elev);border:1px solid var(--border);border-radius:14px;padding:14px 16px;transition:.2s;cursor:pointer}
+.ucard:hover{border-color:var(--accent)}
+.ucard .av{margin:0}
+.uinfo{flex:1;min-width:0}
+.uinfo .nm{font-weight:600;font-size:14px;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uinfo .un{font-size:12px;color:var(--accent);margin-bottom:4px}
+.uinfo .bio{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fbtn{padding:8px 18px;border-radius:9px;font-size:12px;font-weight:700;background:var(--accent);color:white;flex-shrink:0;transition:.15s;white-space:nowrap}
+.fbtn:hover{opacity:.85}
+.fbtn.fg{background:var(--hover);color:var(--muted);border:1px solid var(--border)}
+.fbtn.self{background:var(--border);color:var(--muted);cursor:default}
+
 .egrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
 .eitem{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--elev)}
 .eitem img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
@@ -101,6 +121,7 @@ img{display:block;max-width:100%}
 .eitem:hover .ov{opacity:1}
 .eov{display:flex;align-items:center;gap:5px}
 
+/* CREATE */
 .ccard{background:var(--elev);border:1px solid var(--border);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px}
 .upload{border:2px dashed var(--border);border-radius:13px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
 .upload:hover{border-color:var(--accent);background:var(--hover)}
@@ -111,6 +132,7 @@ img{display:block;max-width:100%}
 .cap{width:100%;background:var(--hover);border:1px solid var(--border);border-radius:11px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;resize:vertical;min-height:80px}
 .cap:focus{border-color:var(--accent)}
 
+/* PROFILE */
 .phead{display:flex;align-items:center;gap:22px;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:18px;flex-wrap:wrap}
 .pav{border-radius:50%;padding:3px;background:linear-gradient(135deg,#ff3b30,#ff6b00);flex-shrink:0;overflow:hidden}
 .pav .av-in{font-size:32px}
@@ -119,7 +141,7 @@ img{display:block;max-width:100%}
 .rbadge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:8px;color:#fff}
 .pinfo .bio{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
 .pstats{display:flex;gap:22px}
-.pstat{text-align:center}
+.pstat{text-align:center;cursor:pointer}
 .pstat .n{font-weight:700;font-size:16px}
 .pstat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
 .ptabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:18px}
@@ -128,10 +150,11 @@ img{display:block;max-width:100%}
 .edit-btn{padding:8px 18px;border-radius:9px;font-size:13px;font-weight:700;background:var(--hover);border:1px solid var(--border);transition:.15s;margin-top:10px}
 .edit-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
 .empty svg{margin-bottom:12px;opacity:.5}
 .empty p{font-size:14px}
 
+/* DRAWER */
 .bd{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none}
 .bd.on{display:block}
 .drawer{position:fixed;bottom:0;left:0;right:0;z-index:201;background:var(--elev);border-top-left-radius:20px;border-top-right-radius:20px;max-height:75vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s}
@@ -152,13 +175,30 @@ img{display:block;max-width:100%}
 .dinput input:focus{border-color:var(--accent)}
 .dinput button{background:var(--accent);color:#fff;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 
-.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;display:none;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+/* MODAL */
+.modal-bd{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
 .modal-bd.on{display:flex}
-.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;animation:mIn .25s ease;margin:auto}
-@keyframes mIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--elev);z-index:1}
-.modal-head h3{font-size:16px;font-weight:700}
-.modal-body{padding:20px;display:flex;flex-direction:column;gap:16px}
+.modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;margin:auto;overflow:hidden;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+.mhead{height:100px;background:linear-gradient(135deg,#ff3b30,#ff6b00);position:relative}
+.mclose{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.5);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:white}
+.mbody{padding:0 24px 24px;text-align:center;margin-top:-50px}
+.mbody .av{margin:0 auto 12px;border:4px solid var(--elev)}
+.mbody .av-in{border-width:2px}
+.mname{font-size:20px;font-weight:800;margin-bottom:4px}
+.muname{font-size:13px;color:var(--accent);margin-bottom:10px}
+.mgaming{display:inline-block;background:var(--hover);border:1px solid var(--border);border-radius:8px;padding:4px 12px;font-size:11px;color:var(--muted);margin:4px 4px 12px}
+.mbio{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:16px;padding:0 8px}
+.mstats{display:flex;justify-content:center;gap:32px;margin-bottom:18px}
+.mstat .n{font-weight:800;font-size:18px}
+.mstat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.mfollow{width:100%;padding:12px;border-radius:11px;font-size:14px;font-weight:700;transition:.15s}
+
+/* EDIT MODAL */
+.edit-modal{background:var(--elev);border:1px solid var(--border);border-radius:20px;width:100%;max-width:440px;max-height:90vh;overflow-y:auto;margin:auto}
+.edit-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--elev);z-index:1}
+.edit-head h3{font-size:16px;font-weight:700}
+.edit-body{padding:20px;display:flex;flex-direction:column;gap:16px}
 .avatar-edit{display:flex;flex-direction:column;align-items:center;gap:10px}
 .avatar-edit .av{width:96px;height:96px;cursor:pointer;position:relative}
 .avatar-edit .av-in{font-size:32px}
@@ -169,9 +209,10 @@ img{display:block;max-width:100%}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
 .field textarea{resize:vertical;min-height:70px}
 .field select{cursor:pointer}
-.modal-foot{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--elev)}
-.modal-foot .btn{flex:1}
+.edit-foot{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--elev)}
+.edit-foot .btn{flex:1}
 
+/* TOAST */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--elev);border:1px solid var(--border);border-radius:11px;padding:12px 20px;font-size:13px;font-weight:600;z-index:500;transition:transform .3s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:90vw}
 .toast.on{transform:translateX(-50%) translateY(0)}
 .toast.acc{border-color:var(--accent)}
@@ -182,7 +223,7 @@ img{display:block;max-width:100%}
   .main{margin-left:0;padding-bottom:76px}
   .container{padding:16px 12px}
   .botnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:50;background:var(--elev);border-top:1px solid var(--border);padding-bottom:env(safe-area-inset-bottom)}
-  .botnav .nav-item{flex:1;flex-direction:column;padding:8px 4px;gap:3px;border-left:none;border-top:2px solid transparent;border-radius:0;font-size:9px;justify-content:center}
+  .botnav .nav-item{flex:1;flex-direction:column;padding:8px 4px;gap:3px;border-left:none;border-top:2px solid transparent;border-radius:0;font-size:9px;justify-content:center;align-items:center}
   .botnav .nav-item.on{border-top-color:var(--accent);border-left:none;background:transparent}
   .botnav .nav-item:hover{background:transparent}
   .phead{gap:16px}
@@ -217,6 +258,10 @@ img{display:block;max-width:100%}
         <label>Display Name</label>
         <input type="text" id="rg-name" placeholder="Pro Gamer" autocomplete="name">
       </div>
+      <div data-field="register" style="display:none">
+        <label>Gaming UID (optional)</label>
+        <input type="text" id="rg-uid" placeholder="123456789">
+      </div>
       <div>
         <label>Email</label>
         <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
@@ -229,7 +274,7 @@ img{display:block;max-width:100%}
       <p class="msg" id="msg"></p>
       <button class="btn grad" id="submitBtn">Sign In</button>
     </div>
-    <div class="hint">First time? Click <b>Create Account</b> above</div>
+    <div class="hint">Demo accounts: <b>king@demo.com</b> / <b>pass</b> · <b>sniper@demo.com</b> / <b>pass</b></div>
   </div>
 </div>
 
@@ -265,13 +310,21 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<!-- EDIT MODAL -->
-<div class="modal-bd" id="editModal">
+<!-- PUBLIC PROFILE MODAL -->
+<div class="modal-bd" id="profileModal">
   <div class="modal">
-    <div class="modal-head"><h3>Edit Profile</h3>
-      <button id="closeEdit"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <div class="mhead"><button class="mclose" id="profileClose"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mbody" id="profileBody"></div>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal-bd" id="editModal">
+  <div class="edit-modal">
+    <div class="edit-head"><h3>Edit Profile</h3>
+      <button id="editClose"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <div class="modal-body">
+    <div class="edit-body">
       <div class="avatar-edit">
         <div class="av" id="editAvatar" style="width:96px;height:96px">
           <div class="av-in" id="editAvatarIn" style="width:92px;height:92px;font-size:32px"></div>
@@ -283,6 +336,8 @@ img{display:block;max-width:100%}
       <div class="field"><label>Username</label><input type="text" id="editUsername"></div>
       <div class="field"><label>Display Name</label><input type="text" id="editDisplay"></div>
       <div class="field"><label>Bio</label><textarea id="editBio"></textarea></div>
+      <div class="field"><label>Gaming UID</label><input type="text" id="editUid" placeholder="123456789"></div>
+      <div class="field"><label>Guild Name</label><input type="text" id="editGuild" placeholder="Fire Nation"></div>
       <div class="field"><label>Rank</label>
         <select id="editRank">
           <option>Bronze</option><option>Silver</option><option>Gold</option><option>Platinum</option>
@@ -291,9 +346,9 @@ img{display:block;max-width:100%}
       </div>
       <p class="err" id="editErr"></p>
     </div>
-    <div class="modal-foot">
-      <button class="btn sec" id="cancelEdit">Cancel</button>
-      <button class="btn grad" id="saveEdit">Save Changes</button>
+    <div class="edit-foot">
+      <button class="btn sec" id="editCancel">Cancel</button>
+      <button class="btn grad" id="editSave">Save Changes</button>
     </div>
   </div>
 </div>
@@ -304,46 +359,28 @@ img{display:block;max-width:100%}
 (function(){
   "use strict";
 
-  // ============================================================
-  // SAFE STORAGE (works even if localStorage is blocked)
-  // ============================================================
+  // ---------- safe storage ----------
   var memStore = {};
   var storage = {
-    get: function(k){
-      try { return localStorage.getItem(k); }
-      catch(e){ return memStore[k] || null; }
-    },
-    set: function(k,v){
-      try { localStorage.setItem(k,v); }
-      catch(e){ memStore[k]=v; }
-    }
+    get: function(k){ try{return localStorage.getItem(k);}catch(e){return memStore[k]||null;} },
+    set: function(k,v){ try{localStorage.setItem(k,v);}catch(e){memStore[k]=v;} }
   };
 
-  // ============================================================
-  // STATE
-  // ============================================================
-  var DB = {
-    users: [],     // { id, username, display_name, email, password, avatar_url, bio, rank }
-    posts: [],     // { id, user_id, media_url, caption, like_count, comment_count, created_at }
-    likes: [],     // { user_id, post_id }
-    comments: [],  // { id, user_id, post_id, content, created_at }
-    me: null       // current user id
-  };
+  // ---------- state ----------
+  var DB = { users: [], posts: [], likes: [], comments: [], follows: [], me: null };
   var authMode = "login";
   var currentView = "feed";
   var activePost = null;
   var pendingImg = null;
   var pendingAvatar = null;
+  var currentModalUser = null;
+  var searchTimeout = null;
 
-  // ============================================================
-  // PERSISTENCE
-  // ============================================================
-  function save(){
-    try { storage.set("off_data_v5", JSON.stringify(DB)); } catch(e){}
-  }
+  // ---------- persistence ----------
+  function save(){ try{ storage.set("off_data_v6", JSON.stringify(DB)); }catch(e){} }
   function load(){
     try {
-      var raw = storage.get("off_data_v5");
+      var raw = storage.get("off_data_v6");
       if (raw) {
         var p = JSON.parse(raw);
         if (p.users && p.users.length) {
@@ -351,6 +388,7 @@ img{display:block;max-width:100%}
           DB.posts = p.posts || [];
           DB.likes = p.likes || [];
           DB.comments = p.comments || [];
+          DB.follows = p.follows || [];
           DB.me = p.me || null;
           return;
         }
@@ -359,15 +397,14 @@ img{display:block;max-width:100%}
     seed();
   }
 
-  // ============================================================
-  // SEED (only first time)
-  // ============================================================
+  // ---------- seed ----------
   function seed(){
     var now = Date.now();
     DB.users = [
-      { id:"u1", email:"king@demo.com", password:"pass", username:"booyah_king", display_name:"Booyah King", avatar_url:null, bio:"Headshot machine 🔥", rank:"Grandmaster" },
-      { id:"u2", email:"sniper@demo.com", password:"pass", username:"chrono_sniper", display_name:"Chrono Sniper", avatar_url:null, bio:"Sniping from the shadows 🎯", rank:"Heroic" },
-      { id:"u3", email:"panda@demo.com", password:"pass", username:"fire_panda", display_name:"Fire Panda", avatar_url:null, bio:"Rushing with the squad 💥", rank:"Diamond" }
+      { id:"u1", email:"king@demo.com", password:"pass", username:"booyah_king", display_name:"Booyah King", avatar_url:null, bio:"Headshot machine 🔥", rank:"Grandmaster", gaming_uid:"111111111", guild_name:"Fire Nation", created_at: now-86400000*30 },
+      { id:"u2", email:"sniper@demo.com", password:"pass", username:"chrono_sniper", display_name:"Chrono Sniper", avatar_url:null, bio:"Sniping from the shadows 🎯", rank:"Heroic", gaming_uid:"222222222", guild_name:"Shadow Assassins", created_at: now-86400000*20 },
+      { id:"u3", email:"panda@demo.com", password:"pass", username:"fire_panda", display_name:"Fire Panda", avatar_url:null, bio:"Rushing with the squad 💥", rank:"Diamond", gaming_uid:"333333333", guild_name:"Booyah Bros", created_at: now-86400000*10 },
+      { id:"u4", email:"fury@demo.com", password:"pass", username:"shadow_fury", display_name:"Shadow Fury", avatar_url:null, bio:"Clutch or bust 🏆", rank:"Master", gaming_uid:"444444444", guild_name:"Elite Warriors", created_at: now-86400000*5 }
     ];
     function img(q){ return "https://images.unsplash.com/"+q+"?w=800&auto=format&fit=crop"; }
     DB.posts = [
@@ -379,13 +416,15 @@ img{display:block;max-width:100%}
       { id:"c1", user_id:"u2", post_id:"p1", content:"Insane play bro! 🔥", created_at:now-3000000 }
     ];
     DB.likes = [];
+    DB.follows = [
+      { follower_id:"u1", following_id:"u2" },
+      { follower_id:"u2", following_id:"u1" }
+    ];
     DB.me = null;
     save();
   }
 
-  // ============================================================
-  // HELPERS
-  // ============================================================
+  // ---------- helpers ----------
   function $(s){ return document.querySelector(s); }
   function $$(s){ return document.querySelectorAll(s); }
   function findUser(id){ for(var i=0;i<DB.users.length;i++) if(DB.users[i].id===id) return DB.users[i]; return null; }
@@ -396,6 +435,9 @@ img{display:block;max-width:100%}
   function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];}); }
   function ago(ts){ var s=Math.floor((Date.now()-ts)/1000); if(s<60)return s+"s"; if(s<3600)return Math.floor(s/60)+"m"; if(s<86400)return Math.floor(s/3600)+"h"; if(s<604800)return Math.floor(s/86400)+"d"; return new Date(ts).toLocaleDateString(); }
   function isLiked(pid){ for(var i=0;i<DB.likes.length;i++) if(DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) return true; return false; }
+  function isFollowing(uid){ for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid) return true; return false; }
+  function followerCount(uid){ var c=0; for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].following_id===uid) c++; return c; }
+  function followingCount(uid){ var c=0; for(var i=0;i<DB.follows.length;i++) if(DB.follows[i].follower_id===uid) c++; return c; }
   function avatar(u,size){
     size=size||40;
     var inner = (u && u.avatar_url)
@@ -411,12 +453,10 @@ img{display:block;max-width:100%}
     t._tm=setTimeout(function(){t.classList.remove("on");},2400);
   }
   function emptyState(msg){
-    return '<div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><p>'+esc(msg)+'</p></div>';
+    return '<div class="empty"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>'+esc(msg)+'</p></div>';
   }
 
-  // ============================================================
-  // AUTH
-  // ============================================================
+  // ---------- AUTH ----------
   function setAuthMode(mode){
     authMode = mode;
     $$(".tab").forEach(function(t){ t.classList.toggle("on", t.getAttribute("data-mode")===mode); });
@@ -430,7 +470,6 @@ img{display:block;max-width:100%}
     var email = ($("#email").value||"").trim().toLowerCase();
     var pass  = $("#pass").value||"";
     var errEl = $("#err"); errEl.textContent = "";
-    var msgEl = $("#msg"); msgEl.textContent = "";
 
     if (authMode === "login") {
       if (!email) return errEl.textContent = "Enter your email.";
@@ -445,10 +484,11 @@ img{display:block;max-width:100%}
     } else {
       var username = ($("#rg-user").value||"").trim().toLowerCase().replace(/\s/g,"");
       var display  = ($("#rg-name").value||"").trim();
+      var uid      = ($("#rg-uid").value||"").trim();
       if (username.length < 3) return errEl.textContent = "Username needs 3+ characters.";
       if (!display) return errEl.textContent = "Enter a display name.";
       if (!email) return errEl.textContent = "Enter your email.";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errEl.textContent = "Enter a valid email address.";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errEl.textContent = "Enter a valid email.";
       if (pass.length < 4) return errEl.textContent = "Password needs 4+ characters.";
       if (findByEmail(email)) return errEl.textContent = "This email is already registered. Try Sign In.";
       if (findByName(username)) return errEl.textContent = "Username already taken.";
@@ -461,7 +501,10 @@ img{display:block;max-width:100%}
         display_name: display,
         avatar_url: null,
         bio: "New Free Fire player 🔥",
-        rank: "Bronze"
+        rank: "Bronze",
+        gaming_uid: uid || null,
+        guild_name: null,
+        created_at: Date.now()
       };
       DB.users.push(newUser);
       DB.me = newUser.id;
@@ -487,18 +530,18 @@ img{display:block;max-width:100%}
     $("#pass").value = "";
     $("#rg-user").value = "";
     $("#rg-name").value = "";
+    $("#rg-uid").value = "";
     setAuthMode("login");
     toast("Signed out");
   }
 
-  // ============================================================
-  // NAV
-  // ============================================================
+  // ---------- NAV ----------
   function renderNav(){
     var items = [
       {id:"feed", label:"Home", icon:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
-      {id:"explore", label:"Explore", icon:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
-      {id:"create", label:"Create", icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'},
+      {id:"search", label:"Search", icon:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
+      {id:"explore", label:"Explore", icon:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>'},
+      {id:"create", label:"Create", icon:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'},
       {id:"profile", label:"Profile", icon:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'}
     ];
     function svg(p){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'; }
@@ -513,28 +556,28 @@ img{display:block;max-width:100%}
     $$("[data-nav]").forEach(function(el){ el.classList.toggle("on", el.getAttribute("data-nav")===id); });
   }
 
-  // ============================================================
-  // ROUTER
-  // ============================================================
+  // ---------- ROUTER ----------
   function go(view, param){
     currentView = view;
     setActiveNav(view);
     var c = $("#content");
     if (view==="feed") c.innerHTML = viewFeed();
+    else if (view==="search") c.innerHTML = viewSearch();
     else if (view==="explore") c.innerHTML = viewExplore();
     else if (view==="create") c.innerHTML = viewCreate();
     else if (view==="profile") c.innerHTML = viewProfile(param || DB.me);
     bindProfileClicks();
     window.scrollTo(0,0);
+    if (view === "search") {
+      setTimeout(function(){ var s=$("#searchInput"); if(s) s.focus(); }, 100);
+    }
   }
 
-  // ============================================================
-  // FEED (GLOBAL — shows all users' posts)
-  // ============================================================
+  // ---------- FEED ----------
   function viewFeed(){
     var posts = DB.posts.slice().sort(function(a,b){ return b.created_at - a.created_at; });
     if (!posts.length) return emptyState("No posts yet. Be the first to share!");
-    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 Global feed · '+posts.length+' posts</span></div>' + posts.map(postCard).join("");
+    return '<div class="hdr"><h2>Home</h2><span class="sub">🔥 '+posts.length+' posts</span></div>' + posts.map(postCard).join("");
   }
 
   function postCard(p){
@@ -556,26 +599,145 @@ img{display:block;max-width:100%}
     '</article>';
   }
 
-  // ============================================================
-  // EXPLORE
-  // ============================================================
-  function viewExplore(){
-    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count - a.like_count; });
-    var others = DB.users.filter(function(u){ return u.id !== DB.me; });
-    return '<div class="hdr"><h2>Explore</h2></div>'+
-      '<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="searchInput" placeholder="Search players..."></div>'+
-      (posts.length ? '<div class="egrid">'+posts.map(function(p){
-        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"><div class="ov"><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'+p.like_count+'</div><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'+p.comment_count+'</div></div></div>';
-      }).join("")+'</div>' : emptyState("No public posts yet"))+
-      '<h3 style="font-size:15px;font-weight:700;margin:22px 0 12px">Players</h3>'+
-      '<div class="egrid" id="pgrid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">'+others.map(function(u){
-        return '<div style="background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center"><div style="display:flex;justify-content:center;margin-bottom:10px">'+avatar(u,56)+'</div><div style="font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer" data-profile="'+u.id+'">'+esc(u.username)+'</div><div style="font-size:11px;color:var(--muted)">'+esc(u.rank||"Bronze")+'</div></div>';
-      }).join("")+'</div>';
+  // ---------- SEARCH ----------
+  function viewSearch(){
+    return '<div class="hdr"><h2>Search Players</h2></div>'+
+      '<div class="search">'+
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>'+
+        '<input type="text" id="searchInput" placeholder="Search by username or display name..." autocomplete="off">'+
+        '<button class="search-clear" id="searchClear"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'+
+      '</div>'+
+      '<div id="searchResults"></div>';
   }
 
-  // ============================================================
-  // CREATE
-  // ============================================================
+  function renderSearchResults(query){
+    var area = $("#searchResults"); if (!area) return;
+    var q = (query||"").toLowerCase().trim();
+    var users = DB.users.filter(function(u){
+      if (u.id === DB.me) return false;
+      if (!q) return true;
+      return u.username.toLowerCase().indexOf(q) >= 0 ||
+             (u.display_name||"").toLowerCase().indexOf(q) >= 0;
+    });
+    // sort: recently joined first
+    users.sort(function(a,b){ return (b.created_at||0) - (a.created_at||0); });
+
+    if (!users.length) {
+      area.innerHTML = emptyState(q ? 'No players match "'+q+'"' : "No other players yet");
+      return;
+    }
+
+    var heading = q ? users.length + ' result' + (users.length>1?'s':'') + ' for "' + esc(q) + '"' : 'Discover Players · Recently Joined';
+    area.innerHTML = '<div class="stitle">'+heading+'</div>'+
+      '<div class="ulist">' + users.map(userRow).join("") + '</div>';
+    bindUserRows();
+  }
+
+  function userRow(u){
+    var following = isFollowing(u.id);
+    return '<div class="ucard" data-user-id="'+u.id+'">'+
+      avatar(u, 52) +
+      '<div class="uinfo">'+
+        '<div class="nm">'+esc(u.display_name || u.username)+'</div>'+
+        '<div class="un">@'+esc(u.username)+'</div>'+
+        '<div class="bio">'+esc(u.bio || "Free Fire player")+'</div>'+
+      '</div>'+
+      '<button class="fbtn '+(following?"fg":"")+'" data-follow-btn="'+u.id+'">'+(following?"Following":"Follow")+'</button>'+
+    '</div>';
+  }
+
+  function bindUserRows(){
+    $$("[data-user-id]").forEach(function(el){
+      el.onclick = function(e){
+        if (e.target.closest("[data-follow-btn]")) return;
+        openProfileModal(el.getAttribute("data-user-id"));
+      };
+    });
+    $$("[data-follow-btn]").forEach(function(btn){
+      btn.onclick = function(e){
+        e.stopPropagation();
+        toggleFollow(btn.getAttribute("data-follow-btn"), btn);
+      };
+    });
+  }
+
+  // ---------- FOLLOW ----------
+  function toggleFollow(uid, btn){
+    if (uid === DB.me) return toast("You can't follow yourself", "acc");
+    var idx = -1;
+    for (var i=0; i<DB.follows.length; i++){
+      if (DB.follows[i].follower_id===DB.me && DB.follows[i].following_id===uid){ idx=i; break; }
+    }
+    if (idx === -1) {
+      DB.follows.push({ follower_id: DB.me, following_id: uid });
+      toast("Following!", "ok");
+    } else {
+      DB.follows.splice(idx, 1);
+      toast("Unfollowed");
+    }
+    save();
+    var nowFollowing = isFollowing(uid);
+    if (btn) {
+      btn.textContent = nowFollowing ? "Following" : "Follow";
+      btn.classList.toggle("fg", nowFollowing);
+    }
+    // refresh open profile modal if it's the same user
+    if (currentModalUser && currentModalUser.id === uid) openProfileModal(uid);
+    // refresh profile page stats if viewing that user
+    if (currentView === "profile") {
+      var phead = document.querySelector(".phead");
+      if (phead) go("profile", uid);
+    }
+  }
+
+  // ---------- PUBLIC PROFILE MODAL ----------
+  function openProfileModal(uid){
+    var u = findUser(uid); if (!u) return;
+    currentModalUser = u;
+    var isMe = uid === DB.me;
+    var following = isFollowing(uid);
+    var postsCount = DB.posts.filter(function(p){ return p.user_id === uid; }).length;
+    var avContent = u.avatar_url
+      ? '<img src="'+esc(u.avatar_url)+'" alt="">'
+      : esc((u.display_name||u.username||"?").toUpperCase()[0]);
+
+    $("#profileBody").innerHTML =
+      '<div class="av" style="width:100px;height:100px"><div class="av-in" style="width:96px;height:96px;font-size:36px">'+avContent+'</div></div>'+
+      '<div class="mname">'+esc(u.display_name || u.username)+'</div>'+
+      '<div class="muname">@'+esc(u.username)+'</div>'+
+      (u.gaming_uid ? '<div class="mgaming">🎮 UID: '+esc(u.gaming_uid)+'</div>' : '')+
+      (u.guild_name ? '<div class="mgaming">🏆 '+esc(u.guild_name)+'</div>' : '')+
+      '<div class="mbio">'+esc(u.bio || "This player hasn't added a bio yet.")+'</div>'+
+      '<div class="mstats">'+
+        '<div class="mstat"><div class="n">'+postsCount+'</div><div class="l">Posts</div></div>'+
+        '<div class="mstat"><div class="n">'+followerCount(uid)+'</div><div class="l">Followers</div></div>'+
+        '<div class="mstat"><div class="n">'+followingCount(uid)+'</div><div class="l">Following</div></div>'+
+      '</div>'+
+      (isMe
+        ? '<button class="mfollow grad" disabled style="opacity:.5;color:white">This is you</button>'
+        : '<button class="mfollow '+(following?"fbtn fg":"grad")+'" id="modalFollowBtn">'+(following?"Following":"Follow")+'</button>');
+
+    $("#profileModal").classList.add("on");
+
+    var mf = document.getElementById("modalFollowBtn");
+    if (mf) mf.onclick = function(){ toggleFollow(uid, mf); };
+  }
+
+  function closeProfileModal(){
+    $("#profileModal").classList.remove("on");
+    currentModalUser = null;
+  }
+
+  // ---------- EXPLORE ----------
+  function viewExplore(){
+    var posts = DB.posts.slice().sort(function(a,b){ return b.like_count - a.like_count; });
+    return '<div class="hdr"><h2>Explore</h2></div>'+
+      (posts.length ? '<div class="egrid">'+posts.map(function(p){
+        return '<div class="eitem" data-comment="'+p.id+'"><img src="'+esc(p.media_url)+'" alt="" loading="lazy"><div class="ov"><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'+p.like_count+'</div><div class="eov"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'+p.comment_count+'</div></div></div>';
+      }).join("")+'</div>' : emptyState("No posts yet"));
+  }
+
+  // ---------- CREATE ----------
   function viewCreate(){
     pendingImg = null;
     return '<div class="hdr"><h2>Create Post</h2></div>'+
@@ -584,7 +746,7 @@ img{display:block;max-width:100%}
         '<input type="file" id="fileInput" accept="image/*" style="display:none">'+
         '<div id="prevWrap"></div>'+
         '<textarea class="cap" id="capInput" placeholder="Write a caption... #FreeFire #Booyah"></textarea>'+
-        '<button class="btn grad" id="shareBtn">Share to Global Feed</button>'+
+        '<button class="btn grad" id="shareBtn">Share Post</button>'+
       '</div>';
   }
 
@@ -613,26 +775,38 @@ img{display:block;max-width:100%}
       created_at: Date.now()
     });
     save();
-    toast("Post shared to global feed! 🔥", "ok");
+    toast("Post shared! 🔥", "ok");
     go("feed");
   }
 
-  // ============================================================
-  // PROFILE
-  // ============================================================
+  // ---------- PROFILE ----------
   function viewProfile(uid){
     var u = findUser(uid); if (!u) return emptyState("User not found");
     var isMe = u.id === DB.me;
     var userPosts = DB.posts.filter(function(p){ return p.user_id === u.id; }).sort(function(a,b){ return b.created_at - a.created_at; });
+    var followers = followerCount(u.id);
+    var following = followingCount(u.id);
     var avContent = u.avatar_url
       ? '<img src="'+esc(u.avatar_url)+'" alt="">'
       : esc((u.display_name||u.username||"?").toUpperCase()[0]);
+    var followingUser = isFollowing(u.id);
 
     return '<div class="phead">'+
         '<div class="pav" style="width:96px;height:96px"><div class="av-in" style="width:92px;height:92px;font-size:32px">'+avContent+'</div></div>'+
-        '<div class="pinfo"><h2>'+esc(u.username)+'</h2><span class="rbadge grad">'+esc(u.rank||"Bronze")+'</span><div class="bio">'+esc(u.bio||"")+'</div>'+
-        '<div class="pstats"><div class="pstat"><div class="n">'+userPosts.length+'</div><div class="l">Posts</div></div><div class="pstat"><div class="n">0</div><div class="l">Followers</div></div><div class="pstat"><div class="n">0</div><div class="l">Following</div></div></div></div>'+
-        (isMe ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>' : '')+
+        '<div class="pinfo"><h2>'+esc(u.username)+'</h2>'+
+          '<span class="rbadge grad">'+esc(u.rank||"Bronze")+'</span>'+
+          (u.gaming_uid ? '<div style="font-size:11px;color:var(--muted);margin-bottom:6px">🎮 UID: '+esc(u.gaming_uid)+'</div>' : '')+
+          (u.guild_name ? '<div style="font-size:11px;color:var(--muted);margin-bottom:6px">🏆 '+esc(u.guild_name)+'</div>' : '')+
+          '<div class="bio">'+esc(u.bio||"")+'</div>'+
+          '<div class="pstats">'+
+            '<div class="pstat"><div class="n">'+userPosts.length+'</div><div class="l">Posts</div></div>'+
+            '<div class="pstat"><div class="n">'+followers+'</div><div class="l">Followers</div></div>'+
+            '<div class="pstat"><div class="n">'+following+'</div><div class="l">Following</div></div>'+
+          '</div>'+
+        '</div>'+
+        (isMe
+          ? '<button class="edit-btn" data-edit-profile="1">✏️ Edit Profile</button>'
+          : '<button class="fbtn '+(followingUser?"fg":"")+'" style="padding:10px 22px;font-size:13px" data-follow-btn="'+u.id+'">'+(followingUser?"Following":"Follow")+'</button>')+
       '</div>'+
       '<div class="ptabs"><div class="ptab">Posts</div></div>'+
       (userPosts.length ? '<div class="pgrid2">'+userPosts.map(function(p){
@@ -640,15 +814,15 @@ img{display:block;max-width:100%}
       }).join("")+'</div>' : emptyState("No posts yet"));
   }
 
-  // ============================================================
-  // EDIT PROFILE
-  // ============================================================
+  // ---------- EDIT PROFILE ----------
   function openEditProfile(){
     var u = me(); if (!u) return;
     pendingAvatar = null;
     $("#editUsername").value = u.username || "";
     $("#editDisplay").value = u.display_name || "";
     $("#editBio").value = u.bio || "";
+    $("#editUid").value = u.gaming_uid || "";
+    $("#editGuild").value = u.guild_name || "";
     $("#editRank").value = u.rank || "Bronze";
     $("#editErr").textContent = "";
     var inEl = $("#editAvatarIn");
@@ -656,10 +830,7 @@ img{display:block;max-width:100%}
     else inEl.textContent = ((u.display_name||u.username||"?")).toUpperCase()[0];
     $("#editModal").classList.add("on");
   }
-  function closeEditProfile(){
-    $("#editModal").classList.remove("on");
-    pendingAvatar = null;
-  }
+  function closeEditProfile(){ $("#editModal").classList.remove("on"); pendingAvatar = null; }
   function onAvatarChange(e){
     var f = e.target.files[0]; if (!f) return;
     if (f.size > 2 * 1024 * 1024) { toast("Image too large (max 2MB)", "acc"); return; }
@@ -675,6 +846,8 @@ img{display:block;max-width:100%}
     var newUsername = ($("#editUsername").value||"").trim().toLowerCase().replace(/\s/g,"");
     var newDisplay  = ($("#editDisplay").value||"").trim();
     var newBio      = ($("#editBio").value||"").trim();
+    var newUid      = ($("#editUid").value||"").trim();
+    var newGuild    = ($("#editGuild").value||"").trim();
     var newRank     = $("#editRank").value;
     var errEl = $("#editErr"); errEl.textContent = "";
 
@@ -689,6 +862,8 @@ img{display:block;max-width:100%}
     u.username = newUsername;
     u.display_name = newDisplay;
     u.bio = newBio;
+    u.gaming_uid = newUid || null;
+    u.guild_name = newGuild || null;
     u.rank = newRank;
     if (pendingAvatar) u.avatar_url = pendingAvatar;
     save();
@@ -697,30 +872,20 @@ img{display:block;max-width:100%}
     go("profile", u.id);
   }
 
-  // ============================================================
-  // LIKE / SHARE
-  // ============================================================
+  // ---------- LIKE / SHARE ----------
   function doLike(pid){
     var post = findPost(pid); if (!post) return;
     var idx = -1;
     for (var i=0; i<DB.likes.length; i++){
-      if (DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me) { idx=i; break; }
+      if (DB.likes[i].post_id===pid && DB.likes[i].user_id===DB.me){ idx=i; break; }
     }
-    if (idx === -1){
-      DB.likes.push({ user_id: DB.me, post_id: pid });
-      post.like_count++;
-    } else {
-      DB.likes.splice(idx, 1);
-      post.like_count = Math.max(0, post.like_count - 1);
-    }
+    if (idx === -1){ DB.likes.push({ user_id: DB.me, post_id: pid }); post.like_count++; }
+    else { DB.likes.splice(idx,1); post.like_count = Math.max(0, post.like_count-1); }
     save();
     var btn = document.getElementById("lk-"+pid);
     var cnt = document.getElementById("cnt-"+pid);
     var nowLiked = isLiked(pid);
-    if (btn) {
-      btn.classList.toggle("lk", nowLiked);
-      btn.querySelector("svg").setAttribute("fill", nowLiked ? "currentColor" : "none");
-    }
+    if (btn) { btn.classList.toggle("lk", nowLiked); btn.querySelector("svg").setAttribute("fill", nowLiked?"currentColor":"none"); }
     if (cnt) cnt.textContent = post.like_count.toLocaleString() + " likes";
   }
 
@@ -737,9 +902,7 @@ img{display:block;max-width:100%}
     else toast("Post link: " + url);
   }
 
-  // ============================================================
-  // COMMENTS
-  // ============================================================
+  // ---------- COMMENTS ----------
   function openComments(pid){
     activePost = pid;
     renderComments();
@@ -766,13 +929,7 @@ img{display:block;max-width:100%}
     var input = $("#cInput");
     var txt = (input.value||"").trim();
     if (!txt || !activePost) return;
-    DB.comments.push({
-      id: "c" + Date.now(),
-      user_id: DB.me,
-      post_id: activePost,
-      content: txt,
-      created_at: Date.now()
-    });
+    DB.comments.push({ id:"c"+Date.now(), user_id: DB.me, post_id: activePost, content: txt, created_at: Date.now() });
     var post = findPost(activePost);
     if (post) post.comment_count++;
     input.value = "";
@@ -781,9 +938,7 @@ img{display:block;max-width:100%}
     if (currentView === "feed") go("feed");
   }
 
-  // ============================================================
-  // BINDING
-  // ============================================================
+  // ---------- BINDING ----------
   function bindProfileClicks(){
     $$("[data-profile]").forEach(function(el){
       el.onclick = function(){ go("profile", el.getAttribute("data-profile")); };
@@ -804,14 +959,20 @@ img{display:block;max-width:100%}
     $("#sendC").onclick = sendComment;
     $("#cInput").addEventListener("keydown", function(e){ if (e.key==="Enter") sendComment(); });
 
-    $("#closeEdit").onclick = closeEditProfile;
-    $("#cancelEdit").onclick = closeEditProfile;
-    $("#saveEdit").onclick = saveProfile;
+    // Profile modal
+    $("#profileClose").onclick = closeProfileModal;
+    $("#profileModal").addEventListener("click", function(e){ if (e.target.id==="profileModal") closeProfileModal(); });
+
+    // Edit modal
+    $("#editClose").onclick = closeEditProfile;
+    $("#editCancel").onclick = closeEditProfile;
+    $("#editSave").onclick = saveProfile;
     $("#changeAvatarBtn").onclick = function(){ $("#avatarFile").click(); };
     $("#editAvatar").onclick = function(){ $("#avatarFile").click(); };
     $("#avatarFile").addEventListener("change", onAvatarChange);
     $("#editModal").addEventListener("click", function(e){ if (e.target.id==="editModal") closeEditProfile(); });
 
+    // Global click delegation
     document.body.addEventListener("click", function(e){
       var t;
       if ((t = e.target.closest("[data-edit-profile]"))) return openEditProfile();
@@ -821,6 +982,10 @@ img{display:block;max-width:100%}
       if ((t = e.target.closest("[data-profile]"))) return go("profile", t.getAttribute("data-profile"));
       if (e.target.closest("#uploadArea")) { var fi=$("#fileInput"); if (fi) fi.click(); return; }
       if (e.target.closest("#shareBtn")) return submitPost();
+      if (e.target.closest("#searchClear")) {
+        var s=$("#searchInput"); if(s){s.value=""; s.focus(); renderSearchResults(""); $("#searchClear").classList.remove("on"); }
+        return;
+      }
     });
 
     document.body.addEventListener("dblclick", function(e){
@@ -834,22 +999,15 @@ img{display:block;max-width:100%}
 
     document.body.addEventListener("input", function(e){
       if (e.target.id === "searchInput") {
-        var q = e.target.value.toLowerCase().trim();
-        var others = DB.users.filter(function(u){
-          return u.id !== DB.me && (u.username.indexOf(q)>=0 || (u.display_name||"").toLowerCase().indexOf(q)>=0);
-        });
-        var g = $("#pgrid");
-        if (g) g.innerHTML = others.length ? others.map(function(u){
-          return '<div style="background:var(--elev);border:1px solid var(--border);border-radius:13px;padding:16px;text-align:center"><div style="display:flex;justify-content:center;margin-bottom:10px">'+avatar(u,56)+'</div><div style="font-weight:600;font-size:14px;margin-bottom:2px;cursor:pointer" data-profile="'+u.id+'">'+esc(u.username)+'</div><div style="font-size:11px;color:var(--muted)">'+esc(u.rank||"Bronze")+'</div></div>';
-        }).join("") : '<p style="color:var(--muted);font-size:13px;grid-column:1/-1">No players found.</p>';
-        bindProfileClicks();
+        var q = e.target.value;
+        $("#searchClear").classList.toggle("on", q.length > 0);
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function(){ renderSearchResults(q); }, 200);
       }
     });
   }
 
-  // ============================================================
-  // BOOT
-  // ============================================================
+  // ---------- BOOT ----------
   function boot(){
     try {
       load();
